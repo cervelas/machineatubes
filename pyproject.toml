@@ -1,0 +1,16 @@
+[project]
+name = "machineatubes"
+version = "1.0.0"
+authors = [
+    {name = "Borel Clément", email = "borelclement@pm.me"},
+]
+description = "La Machine à Tubes"
+requires-python = ">=3.8"
+dependencies = [
+    "rtmidi2",
+    "pywebview",
+]
+[tool.setuptools]
+packages = ["machineatubes"]
+[project.scripts]
+mat = "machineatubes.machineatubes:main"

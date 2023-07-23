@@ -1,0 +1,350 @@
+{
+    "name": "jesuisnulle4",
+    "tempo": 120,
+    "song": {
+        "P1": {
+            "type": "notes",
+            "channel": 1,
+            "notes": [
+                {
+                    "beat": 4,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 64,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 68,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 72,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 76,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 100,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 104,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 108,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 112,
+                    "note": 72,
+                    "duration": 4
+                },
+                {
+                    "beat": 116,
+                    "note": 12,
+                    "duration": 4
+                }
+            ]
+        },
+        "Pn": {
+            "type": "notes",
+            "channel": 4,
+            "notes": [
+                {
+                    "beat": 8,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 12,
+                    "note": 27,
+                    "duration": 4
+                },
+                {
+                    "beat": 16,
+                    "note": 26,
+                    "duration": 4
+                },
+                {
+                    "beat": 20,
+                    "note": 25,
+                    "duration": 4
+                },
+                {
+                    "beat": 24,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 28,
+                    "note": 27,
+                    "duration": 4
+                },
+                {
+                    "beat": 32,
+                    "note": 26,
+                    "duration": 4
+                },
+                {
+                    "beat": 36,
+                    "note": 25,
+                    "duration": 4
+                },
+                {
+                    "beat": 40,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 44,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 48,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 52,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 56,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 60,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 64,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 68,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 72,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 76,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 80,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 84,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 88,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 92,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 96,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 100,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 104,
+                    "note": 28,
+                    "duration": 4
+                },
+                {
+                    "beat": 108,
+                    "note": 29,
+                    "duration": 4
+                },
+                {
+                    "beat": 112,
+                    "note": 29,
+                    "duration": 4
+                }
+            ]
+        },
+        "P6": {
+            "type": "notes",
+            "channel": 6,
+            "notes": [
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 12,
+                    "duration": 4
+                },
+                {
+                    "beat": 44,
+                    "note": 12,
+                    "duration": 4
+                }
+            ]
+        },
+        "P8": {
+            "type": "notes",
+            "channel": 8,
+            "notes": [
+                {
+                    "beat": 40,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 44,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 48,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 52,
+                    "note": 41,
+                    "duration": 4
+                },
+                {
+                    "beat": 56,
+                    "note": 41,
+                    "duration": 4
+                },
+                {
+                    "beat": 60,
+                    "note": 41,
+                    "duration": 4
+                },
+                {
+                    "beat": 80,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 84,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 88,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 92,
+                    "note": 40,
+                    "duration": 4
+                },
+                {
+                    "beat": 96,
+                    "note": 41,
+                    "duration": 4
+                }
+            ]
+        },
+        "P9": {
+            "type": "notes",
+            "channel": 9,
+            "notes": [
+                {
+                    "beat": 4,
+                    "note": 60,
+                    "duration": 4
+                },
+                {
+                    "beat": 8,
+                    "note": 49,
+                    "duration": 4
+                },
+                {
+                    "beat": 64,
+                    "note": 48,
+                    "duration": 4
+                },
+                {
+                    "beat": 100,
+                    "note": 48,
+                    "duration": 4
+                }
+            ]
+        },
+        "videos": {
+            "type": "video",
+            "triggers": [
+                { "beat": 0, "file": "/static/examples/flower.webm", "position": "topleft" },
+                { "beat": 10, "file": "/examples/flower.webm", "position": "topright" },
+                { "beat": 30, "file": "/flower.webm", "position": "botright" },
+                { "beat": 40, "file": "/flower.webm", "position": "botleft" }
+            ]
+        }
+    }
+}
