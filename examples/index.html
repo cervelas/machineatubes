@@ -1,0 +1,192 @@
+<html>
+    <head>
+        <title>La Machine a Tubes</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+        }
+        .playcontainer {
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .playcontainer .column {
+            flex-basis: 50%;
+            height: 50%;
+            /*border: 1px solid #666;
+            box-sizing: border-box;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;*/
+        }
+        
+        .playcontainer .column video{
+            max-width: 100%;
+        }
+
+        .playcontainer .column:nth-child(1) {
+            background: #5c9;
+        }
+        .playcontainer .column:nth-child(2) {
+            background: #fb0;
+        }
+        .playcontainer .column:nth-child(3) {
+            background: #39f;
+        }
+        .playcontainer  .column:nth-child(4) {
+            background: #f33;
+        }
+
+        .debug{
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+            overflow: auto;
+            width: 100vw;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 10px;
+            font-family: monospace;
+            font-weight: bold;
+            z-index: 10000;
+        }
+
+        .ready{
+            position: absolute;
+            overflow: hidden;
+            bottom: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            z-index: 1000;
+            background-color: black;
+            display: none;
+            color: white;
+            font-size: 48;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+        }
+
+        .lyrics{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            font-size: 43px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: white;
+
+        }
+
+    </style>
+    </head>
+    <body>
+        <div class="ready" id="ready">
+            <div>Press space to play</div>
+        </div>
+        <div class="debug" id="debug">
+            Press "L" to load a song<br>
+            Press "F" to go fullscreen<br>
+            Press Escape, "q", or Backspace to quit
+        </div>
+        <div class="playcontainer">
+            <div class="column" id="topleft" >
+                <video muted></video>
+            </div>
+            <div class="column" id="topright" >
+                <video muted></video>
+            </div>
+            <div class="column lyrics" id="botleft">
+                Bienvenue
+            </div>
+            <div class="column" id="botright">
+                <video  muted></video>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        let debug = document.querySelector("#debug");
+        let ready = document.querySelector("#ready");
+
+        debug.style.display = "block";
+
+        var log = function(txt){
+            debug.style.display = "block";
+            d = new Date();
+            debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
+        }
+
+        var playvid = function(source, pos){
+            log("playing " + source + " @ " + pos)
+            vid = document.querySelector("#" + pos + " video");
+            
+            vid.src = source;
+            vid.play();
+            vid.style.display = "block";
+            console.log("playing " + source);
+            
+        };
+        
+        
+        var displaylyrics = function(text, pos){
+            log("display lyrics " + text + " @ " + pos)
+            console.log("display " + text + " @ " + pos);
+            lyrics = document.querySelector("#" + pos);
+            lyrics.innerHTML = text;
+        };
+
+        var preloadvid = function(source){
+            log("preloading " + source)
+            var preloadLink = document.createElement("link");
+            preloadLink.href = source;
+            preloadLink.rel = "prefetch";
+            preloadLink.as = "video";
+            document.head.appendChild(preloadLink);
+        };
+
+        const vids = document.querySelectorAll('.playcontainer video');
+        vids.forEach(function(v){
+            v.onended = function(e) {
+                v.style.display = "none";
+            };
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key == 'Escape' || event.key == 'Backspace' || event.key == 'q') {
+                window.pywebview.api.close()
+            }
+            if (event.key == 'f' || event.key == 'F') {
+                window.pywebview.api.fullscreen()
+            }
+            if (event.key == 'l' || event.key == 'L') {
+                window.pywebview.api.load_score_file()
+                log("loading file...");
+                ready.style.display = "flex";
+            }
+            if (event.key == 'd' || event.key == 'D') {
+                if(debug.style.display == "block")
+                    debug.style.display = "none";
+                else
+                    debug.style.display = "block";
+            }
+            if (event.key == ' ' || event.key == 'Space') {
+                ready.style.display = "none";
+                window.pywebview.api.play()
+            }
+        });
+    </script>
+</html>
