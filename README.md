@@ -46,14 +46,15 @@ options:
   -h, --help     show this help message and exit
   -v, --verbose  Verbose Mode
   --midiout {0}  Output Midi Device Number, Default is 0 (Microsoft GS Wavetable Synth 0)
-
+                 Available MIDI Devices:
                  0: Microsoft GS Wavetable Synth 0
+
   --no-ui        do not start UI
   --file FILE    No-UI Only: File to play (json or xml)
   --out OUT      No-UI Only: Export to json
   --bpm BPM      No-UI Only: BPM Override
   -np, --noplay  No-UI Only: Wait enter for play
-  
+
 ```
 
 Hints:
