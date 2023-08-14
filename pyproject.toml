@@ -13,4 +13,4 @@ dependencies = [
 [tool.setuptools]
 packages = ["machineatubes"]
 [project.scripts]
-mat = "machineatubes.machineatubes:main"
+mat = "machineatubes.main:main"

@@ -17,15 +17,16 @@ def initsleep():
     t = time.perf_counter()
 
 def nanosleep(s):
-    ''' high precision sleep timer, self-correct with drift detection '''
+    ''' high precision sleep timer with drift correction '''
     global t
     first = True
     while time.perf_counter() - t < s:
         first = False
         continue
+
     if first:
         print("WARNING: timer drifted %ss" % s)
-    t2 = time.perf_counter()
+    t2 = time.perf_counter() if not first else time.perf_counter() + s
     t = t2
 
 class Tube():
@@ -42,6 +43,7 @@ class Tube():
         self.start_time = 0
         self.time_signature = 0
         self.divisions = 16
+        self.playing = False
 
     def duration(self):
         '''
@@ -66,6 +68,11 @@ class Tube():
         self.notes.update( { beat+note.duration: notes + [ note ] } )
 
     def videonote(self, beat, note):
+        note.beat = beat
+        notes = self.notes.get(beat, [])
+        self.notes.update( { beat: notes + [ note ] } )
+
+    def lyricsnote(self, beat, note):
         note.beat = beat
         notes = self.notes.get(beat, [])
         self.notes.update( { beat: notes + [ note ] } )
@@ -99,9 +106,10 @@ class Tube():
     def play(self, window=False, verbose=False):
         initsleep()
         self.start_time = time.perf_counter()
+        self.playing = True
         for b, notes in self.notes.items():
             if abort.is_set():
-                print("aborting...")
+                print("aborting play...")
                 break
             for note in notes:
                 note.play(b, verbose)
@@ -113,6 +121,7 @@ class Tube():
             nanosleep( ( 60 / self.bpm ) )
         print("")
         print("END")
+        self.playing = False
 
 class Note():
     def play(self, i, verbose=False):
@@ -155,9 +164,27 @@ class VideoNote():
         self.file = file
         self.beat = 0
         self.position = position
+        if VideoNote.window:
+            VideoNote.window.evaluate_js("preloadvid('%s')" % (self.file))
 
     def play(self, i, verbose=False):
         if i == self.beat:
-            print("play %s" % self.file)
-            VideoNote.window.evaluate_js("playvid('%s','%s')" % (self.file, self.position))
+            if VideoNote.window:
+                print("play %s" % self.file)
+                VideoNote.window.evaluate_js("playvid('%s','%s')" % (self.file, self.position))
+            
+class LyricsNote():
+
+    window = False
+
+    def __init__(self, lyrics, position = None) -> None:
+        self.lyrics = lyrics
+        self.beat = 0
+        self.position = position or "botleft"
+
+    def play(self, i, verbose=False):
+        if i == self.beat:
+            if LyricsNote.window:
+                print("show lyrics: %s" % self.lyrics)
+                LyricsNote.window.evaluate_js("displaylyrics('%s','%s')" % (self.lyrics, self.position))
             

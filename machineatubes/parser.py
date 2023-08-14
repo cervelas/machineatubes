@@ -2,28 +2,34 @@
 import xml.etree.ElementTree as ET
 import json
 
-from machineatubes.tube import Tube, MidiNote, VideoNote
+from machineatubes.tube import Tube, MidiNote, VideoNote, LyricsNote
 
-def parseJSON2Score(jsonfile, verbose=False):
+def parseFile2Score(filepath, verbose=False):
+    if filepath.endswith(".xml"):
+        xml = ET.parse(filepath)
+        print("Load Music XML File %s" % filepath)
+        return parseMXML2Score(xml, verbose)
+    elif filepath.endswith(".json"):
+        with open(filepath, 'r') as f:
+            struct = json.load(f)
+        print("Loaded JSON MAT File %s" % filepath)
+        return parseJSON2Score(struct, verbose)
+
+def parseJSON2Score(payload, verbose=False):
     '''
     Parse XML file to SCore structure
     '''
 
-    struct = {}
-
-    with open(jsonfile, 'r') as f:
-        struct = json.load(f)
-
     score = Tube()
     
-    score.bpm = int(struct.get("tempo", 120))
+    score.bpm = int(payload.get("tempo", 120))
 
     score.beat_time = 4
     score.beat_type = 4
 
     max_length = 0
 
-    for name, part in struct.get("song").items():
+    for name, part in payload.get("song").items():
         score.parts[name] = { 
             "name": name,
             "type": part.get("type"),
@@ -70,17 +76,31 @@ def parseJSON2Score(jsonfile, verbose=False):
                             VideoNote(note["file"],
                                 position=note["position"])
                             )
+        elif part["type"] == "lyrics":
+            
+            notes = part.get("lyrics", [])
+
+            for note in notes:
+                
+                b = int(note["beat"])
+
+                if b > max_length:
+                    max_length = b
+
+                score.lyricsnote( b, 
+                            LyricsNote(note["text"],
+                                position=note.get("position"))
+                            )
     score.measures = int(max_length / score.beat_type) + 1
 
     return score
 
 
-def parseMXML2Score(mxmlfile, verbose=False):
+def parseMXML2Score(xml, verbose=False):
     '''
     Parse XML file to SCore structure
     '''
-    tree = ET.parse(mxmlfile)
-    root = tree.getroot()
+    root = xml.getroot()
 
     score = Tube()
 
@@ -130,7 +150,8 @@ def parseMXML2Score(mxmlfile, verbose=False):
                                         note.find('./pitch/octave').text ]
                                     ),
                                     duration=duration,
-                                    channel=midi_channel)
+                                    channel=midi_channel
+                                    )
                     score.midinote( offset, n )
                 offset += duration
         

@@ -4,7 +4,7 @@
     "song": {
         "P1": {
             "type": "notes",
-            "channel": 1,
+            "channel": 2,
             "notes": [
                 {
                     "beat": 4,
@@ -60,7 +60,7 @@
         },
         "Pn": {
             "type": "notes",
-            "channel": 4,
+            "channel": 1,
             "notes": [
                 {
                     "beat": 8,
@@ -201,7 +201,7 @@
         },
         "P6": {
             "type": "notes",
-            "channel": 6,
+            "channel": 4,
             "notes": [
                 {
                     "beat": 8,
@@ -340,10 +340,23 @@
         "videos": {
             "type": "video",
             "triggers": [
-                { "beat": 0, "file": "/static/examples/flower.webm", "position": "topleft" },
-                { "beat": 10, "file": "/examples/flower.webm", "position": "topright" },
-                { "beat": 30, "file": "/flower.webm", "position": "botright" },
-                { "beat": 40, "file": "/flower.webm", "position": "botleft" }
+                { "beat": 0, "file": "examples/bear.webm", "position": "topleft" },
+                { "beat": 8, "file": "examples/flower.webm", "position": "topright" },
+                { "beat": 24, "file": "examples/timelapse.webm", "position": "botright" },
+                { "beat": 40, "file": "examples/lights.webm", "position": "topright" }
+            ]
+        },
+        "lyrics": {
+            "type": "lyrics",
+            "lyrics": [
+                { "beat": 0, "text": "Lorem ipsum dolor sit amet" },
+                { "beat": 8, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
+                { "beat": 24, "text": "voluptate velit esse cillum dolore eu fugiat nulla" },
+                { "beat": 40, "text": "qui officia deserunt mollit anim id est laborum" },
+                { "beat": 44, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
+                { "beat": 48, "text": "voluptate velit esse cillum dolore eu fugiat nulla" },
+                { "beat": 52, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
+                { "beat": 56, "text": "voluptate velit esse cillum dolore eu fugiat nulla" }
             ]
         }
     }
