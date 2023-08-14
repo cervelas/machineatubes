@@ -6,7 +6,7 @@ Software for the Machine A Tubes project
 ## Requirements
 
 - Python version 3.10 with pip
-- Something to play Midi (Windows: Wavetable Synth is integrated, Mac: https://github.com/notahat/simplesynth ??)
+- Something to play Midi like Ableton or (Windows: Wavetable Synth is integrated, Mac: https://github.com/notahat/simplesynth ??)
 
 ## Installation
 
@@ -46,7 +46,7 @@ options:
   -h, --help     show this help message and exit
   --file FILE    File to play (json or xml)
   --out OUT      Export to json
-  --bpm BPM      BPM
+  --bpm BPM      force BPM play
   -v, --verbose  Verbose Mode
   -np, --noplay  Wait enter for play
   --no-ui        do not start UI
@@ -57,11 +57,15 @@ options:
 Clément Borel
 ```
 
+Hints:
+
+- `--midiout` give you on what device it can and will send the midi notes, first device is default.
+
 ## API Usage
 
 The http server expose `http://localhost:23456/play` endpoint.
 
-it accept ONLY a json file by POST method :
+it accept ONLY a json file by POST method, just put the raw json in the payload:
 
 `> curl -i -H "Content-Type: application/json" -X POST -d '{"some":"json", "random": "file"}' http://localhost:23456/play`
 

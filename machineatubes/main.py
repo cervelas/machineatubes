@@ -34,16 +34,17 @@ parser = argparse.ArgumentParser(
                     epilog='Clément Borel',
                     formatter_class=argparse.RawTextHelpFormatter)
 
-parser.add_argument('--file', help="File to play (json or xml)")
-
-parser.add_argument('--out', type=str, help="Export to json")
-
-parser.add_argument('--bpm', type=int, help="BPM")
-
-parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
-parser.add_argument('-np', '--noplay', action="store_true", help="Wait enter for play")
+parser.add_argument('--file', help="No-UI Only: File to play (json or xml)")
 
 parser.add_argument('--no-ui', action="store_true", help="do not start UI")
+
+parser.add_argument('--out', type=str, help="No-UI Only: Export to json")
+
+parser.add_argument('--bpm', type=int, help="No-UI Only: BPM Override")
+
+parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
+parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wait enter for play")
+
 
 if len(midi_outs) == 0:
     exit("Aborted, No midi device found !")
@@ -114,6 +115,9 @@ def playsong():
     return 200
 
 def main():
+    '''
+    Entry Point
+    '''
     out.open_port(args.midiout)
 
     print("Will play on %s" % midi_outs[args.midiout])
