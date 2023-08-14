@@ -2,6 +2,12 @@
 
 Software for the Machine A Tubes project
 
+
+## Requirements
+
+- Python version 3.10 with pip
+- Something to play Midi (Windows: Wavetable Synth is integrated, Mac: https://github.com/notahat/simplesynth ??)
+
 ## Installation
 
 Install Python.
@@ -15,6 +21,8 @@ pip install -e .
 ```
 
 The media used by a song shall be present in the `example` folder.
+
+This is temporary, as this need to be more flexible.
 
 ## Usage
 
@@ -48,6 +56,14 @@ options:
 
 Clément Borel
 ```
+
+## API Usage
+
+The http server expose `http://localhost:23456/play` endpoint.
+
+it accept ONLY a json file by POST method :
+
+`> curl -i -H "Content-Type: application/json" -X POST -d '{"some":"json", "random": "file"}' http://localhost:23456/play`
 
 ## Contributing
 

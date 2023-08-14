@@ -12,18 +12,17 @@ from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
 from machineatubes.tube import out, Tube, VideoNote, abort, LyricsNote
 
- 
 def handler(signum, frame):
-    msg = "Ctrl-c was pressed. Exiting..."
+    '''
+    Handle system interrupt
+    '''
+    print("Ctrl-c was pressed. Exiting...")
     abort.set()
     exit(0)
  
 signal.signal(signal.SIGINT, handler)
 
 DEFAULT_DEVICE = 0
-
-#############################
-# ARGUMENTS & GLOBAL VARS
 
 window = False
 
@@ -57,7 +56,7 @@ parser.add_argument('--midiout', type=int,
 
 args = parser.parse_args()
 
-class Api:
+class Machine:
     def __init__(self):
         self.win = False
         self.tubes = [] 
@@ -79,7 +78,6 @@ class Api:
         self.win.evaluate_js("log('%s')" % txt)
 
     def load_tube(self, payload):
-        
         self.tubes.append(parseJSON2Score(payload, args.verbose))
 
         t = self.tubes[-1]
@@ -101,13 +99,16 @@ class Api:
             self.tubes.append(parseFile2Score(result[0]))
             self.log("loaded file " + result[0])
 
-api = Api()
+machine = Machine()
 
 @server.route('/play', methods=['POST'])
 def playsong():
+    '''
+    This will load a song when a post request is received
+    '''
     print("received tube " + str(request.json))
     try:
-        api.load_tube(request.json)
+        machine.load_tube(request.json)
     except Exception as e:
         return "Parsing error : " + str(e), 500
     return 200
@@ -144,8 +145,8 @@ def main():
     else:
         screens = webview.screens
         print('Available screens are: ' + str(screens))
-        window = webview.create_window('La Machine à Tubes', server, js_api=api, width=1600, height=1200, http_port=23456)
-        api.win = window
+        window = webview.create_window('La Machine à Tubes', server, js_api=machine, width=1600, height=1200, http_port=23456)
+        machine.win = window
         VideoNote.window = window
         LyricsNote.window = window
         webview.start(http_port=23456, debug=True, private_mode=False)
