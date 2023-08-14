@@ -40,17 +40,20 @@ Call for help:
 > mat -h
 usage: MachineaTubes [-h] [--file FILE] [--out OUT] [--bpm BPM] [-v] [-np] [--no-ui] [--midiout {0}]
 
+La Machine a Tube
+
 options:
   -h, --help     show this help message and exit
-  --file FILE    No-UI Only: File to play (json or xml)
-  --no-ui        do not start UI
-  --out OUT      No-UI Only: Export to json
-  --bpm BPM      No-UI Only: BPM Override
   -v, --verbose  Verbose Mode
-  -np, --noplay  No-UI Only: Wait enter for play
   --midiout {0}  Output Midi Device Number, Default is 0 (Microsoft GS Wavetable Synth 0)
 
                  0: Microsoft GS Wavetable Synth 0
+  --no-ui        do not start UI
+  --file FILE    No-UI Only: File to play (json or xml)
+  --out OUT      No-UI Only: Export to json
+  --bpm BPM      No-UI Only: BPM Override
+  -np, --noplay  No-UI Only: Wait enter for play
+  
 ```
 
 Hints:

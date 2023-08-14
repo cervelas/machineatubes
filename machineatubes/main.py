@@ -34,17 +34,7 @@ parser = argparse.ArgumentParser(
                     epilog='Clément Borel',
                     formatter_class=argparse.RawTextHelpFormatter)
 
-parser.add_argument('--file', help="No-UI Only: File to play (json or xml)")
-
-parser.add_argument('--no-ui', action="store_true", help="do not start UI")
-
-parser.add_argument('--out', type=str, help="No-UI Only: Export to json")
-
-parser.add_argument('--bpm', type=int, help="No-UI Only: BPM Override")
-
 parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
-parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wait enter for play")
-
 
 if len(midi_outs) == 0:
     exit("Aborted, No midi device found !")
@@ -52,8 +42,21 @@ if len(midi_outs) == 0:
 parser.add_argument('--midiout', type=int,
                     default=DEFAULT_DEVICE,
                     choices=[ i for i, o in enumerate(midi_outs) ], 
-                    help="Output Midi Device Number, Default is 0 (%s)\n\n%s" % (midi_outs[0], 
+                    help="Output Midi Device Number, Default is 0 (%s)\nAvailable MIDI Devices:\n%s\n\n" % (midi_outs[0], 
                             "\n".join([ "%s: %s" % (i, o) for i, o in enumerate(midi_outs) ])))  
+
+
+parser.add_argument('--no-ui', action="store_true", help="do not start UI")
+
+parser.add_argument('--file', help="No-UI Only: File to play (json or xml)")
+
+parser.add_argument('--out', type=str, help="No-UI Only: Export to json")
+
+parser.add_argument('--bpm', type=int, help="No-UI Only: BPM Override")
+
+parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wait enter for play")
+
+
 
 args = parser.parse_args()
 
