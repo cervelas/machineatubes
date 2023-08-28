@@ -1,0 +1,51 @@
+{
+	"name": "Émerveillement Naïf",
+	"tempo": 120,
+	"song": {
+		"P1": {
+			"type": "Settings and autotune",
+			"channel": 1,
+			"notes": [{
+				"beat": 0,
+				"note": 24,
+				"duration": 4
+			}, {
+				"beat": 216,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 220,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 224,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 228,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 232,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 236,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 240,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 244,
+				"note": 60,
+				"duration": 4
+			}, {
+				"beat": 256,
+				"note": 24,
+				"duration": 4
+			}]
+		}
+	}
+}
