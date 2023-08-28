@@ -4,14 +4,14 @@
 	"ambiance": "Triste",
 	"style": "16beat",
 	"prenom": "Bastien",
-	"numero": 28,
+	"numero": 37,
 	"song": {
 		"settings and autotune": {
 			"type": "notes",
 			"channel": 1,
 			"notes": [{
 				"beat": 0,
-				"note": 24,
+				"note": 12,
 				"duration": 4
 			}, {
 				"beat": 208,
@@ -19,7 +19,7 @@
 				"duration": 4
 			}, {
 				"beat": 248,
-				"note": 24,
+				"note": 12,
 				"duration": 4
 			}]
 		},
@@ -28,15 +28,15 @@
 			"channel": 2,
 			"notes": [{
 				"beat": 0,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 4,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 8,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 12,
@@ -44,15 +44,15 @@
 				"duration": 4
 			}, {
 				"beat": 16,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 20,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 24,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 28,
@@ -60,15 +60,15 @@
 				"duration": 4
 			}, {
 				"beat": 32,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 36,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 40,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 44,
@@ -76,15 +76,15 @@
 				"duration": 4
 			}, {
 				"beat": 48,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 52,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 56,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 60,
@@ -92,15 +92,15 @@
 				"duration": 4
 			}, {
 				"beat": 64,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 68,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 72,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 76,
@@ -108,15 +108,15 @@
 				"duration": 4
 			}, {
 				"beat": 80,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 84,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 88,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 92,
@@ -124,15 +124,15 @@
 				"duration": 4
 			}, {
 				"beat": 96,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 100,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 104,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 108,
@@ -140,15 +140,15 @@
 				"duration": 4
 			}, {
 				"beat": 112,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 116,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 120,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 124,
@@ -156,15 +156,15 @@
 				"duration": 4
 			}, {
 				"beat": 128,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 132,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 136,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 140,
@@ -172,15 +172,15 @@
 				"duration": 4
 			}, {
 				"beat": 144,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 148,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 152,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 156,
@@ -188,15 +188,15 @@
 				"duration": 4
 			}, {
 				"beat": 160,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 164,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 168,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 172,
@@ -204,15 +204,15 @@
 				"duration": 4
 			}, {
 				"beat": 176,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 180,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 184,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 188,
@@ -220,15 +220,15 @@
 				"duration": 4
 			}, {
 				"beat": 192,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 196,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 200,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 204,
@@ -236,15 +236,15 @@
 				"duration": 4
 			}, {
 				"beat": 208,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 212,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 216,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 220,
@@ -252,15 +252,15 @@
 				"duration": 4
 			}, {
 				"beat": 224,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 228,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}, {
 				"beat": 232,
-				"note": 76,
+				"note": 73,
 				"duration": 4
 			}, {
 				"beat": 236,
@@ -268,13 +268,18 @@
 				"duration": 4
 			}, {
 				"beat": 240,
-				"note": 74,
+				"note": 75,
 				"duration": 4
 			}, {
 				"beat": 244,
-				"note": 77,
+				"note": 72,
 				"duration": 4
 			}]
+		},
+		"drums": {
+			"type": "notes",
+			"channel": 6,
+			"notes": []
 		},
 		"lyrics": {
 			"type": "lyrics",
