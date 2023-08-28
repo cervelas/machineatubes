@@ -123,6 +123,10 @@ class Tube():
         print("END")
         self.playing = False
 
+    def aplay(self, window=False, verbose=False):
+        t = threading.Thread(target=self.play, args=(window,verbose))
+        t.start()
+
 class Note():
     def play(self, i, verbose=False):
         raise NotImplementedError()

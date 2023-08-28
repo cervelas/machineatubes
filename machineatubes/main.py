@@ -75,7 +75,7 @@ class Machine:
 
     def play(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
-            self.tubes[0].play(self.win, args.verbose)
+            self.tubes[0].aplay(self.win, args.verbose)
             self.tubes.pop(0)
 
     def log(self, txt):
