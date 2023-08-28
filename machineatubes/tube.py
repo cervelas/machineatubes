@@ -1,6 +1,7 @@
 import time
 import json
 import threading
+import pprint
 
 import rtmidi2 as rm
 
@@ -9,6 +10,8 @@ abort = threading.Event()
 out = rm.MidiOut() # we may need more than one
 
 notes2midi = { rm.midi2note(i): i for i in range(-255, 255) }
+
+# pprint.pprint(notes2midi) show me all your notes
 
 t = time.perf_counter()
 
@@ -31,8 +34,10 @@ def nanosleep(s):
 
 class Tube():
 
-    def __init__(self) -> None:
-        self.name = ""
+    window = False
+
+    def __init__(self, name="noname") -> None:
+        self.name = name
         self.notes = {}
         self.beat_time = 4
         self.beat_type = 4
@@ -44,6 +49,7 @@ class Tube():
         self.time_signature = 0
         self.divisions = 16
         self.playing = False
+        self.infos = {}
 
     def duration(self):
         '''
@@ -104,6 +110,9 @@ class Tube():
             json.dump(json_dict, f, indent=4)
 
     def play(self, window=False, verbose=False):
+        if Tube.window:
+            Tube.window.evaluate_js("displayinfos('%s','%s','%s','%s','%s')" % 
+                                    (self.name, self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
         initsleep()
         self.start_time = time.perf_counter()
         self.playing = True
@@ -164,10 +173,10 @@ class VideoNote():
 
     window = False
 
-    def __init__(self, file, position) -> None:
+    def __init__(self, file, position=None) -> None:
         self.file = file
         self.beat = 0
-        self.position = position
+        self.position = position or "video"
         if VideoNote.window:
             VideoNote.window.evaluate_js("preloadvid('%s')" % (self.file))
 
@@ -184,7 +193,7 @@ class LyricsNote():
     def __init__(self, lyrics, position = None) -> None:
         self.lyrics = lyrics
         self.beat = 0
-        self.position = position or "botleft"
+        self.position = position or "paroles"
 
     def play(self, i, verbose=False):
         if i == self.beat:

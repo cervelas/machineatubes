@@ -56,8 +56,6 @@ parser.add_argument('--bpm', type=int, help="No-UI Only: BPM Override")
 
 parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wait enter for play")
 
-
-
 args = parser.parse_args()
 
 class Machine:
@@ -102,6 +100,8 @@ class Machine:
         if result:
             self.tubes.append(parseFile2Score(result[0]))
             self.log("loaded file " + result[0])
+
+            self.play()
 
 machine = Machine()
 
@@ -154,6 +154,7 @@ def main():
         print('Available screens are: ' + str(screens))
         window = webview.create_window('La Machine à Tubes', server, js_api=machine, width=1600, height=1200, http_port=23456)
         machine.win = window
+        Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
         webview.start(http_port=23456, debug=True, private_mode=False)

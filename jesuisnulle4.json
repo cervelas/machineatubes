@@ -1,6 +1,10 @@
 {
     "name": "jesuisnulle4",
     "tempo": 120,
+    "ambiance": "mystérieuse",
+    "style": "POP",
+    "prenom": "Prénom",
+    "numero": "57",
     "song": {
         "P1": {
             "type": "notes",
@@ -340,10 +344,10 @@
         "videos": {
             "type": "video",
             "triggers": [
-                { "beat": 0, "file": "examples/bear.webm", "position": "topleft" },
-                { "beat": 8, "file": "examples/flower.webm", "position": "topright" },
-                { "beat": 24, "file": "examples/timelapse.webm", "position": "botright" },
-                { "beat": 40, "file": "examples/lights.webm", "position": "topright" }
+                { "beat": 0, "file": "examples/bear.webm"},
+                { "beat": 8, "file": "examples/flower.webm"},
+                { "beat": 24, "file": "examples/timelapse.webm"},
+                { "beat": 40, "file": "examples/lights.webm"}
             ]
         },
         "lyrics": {
@@ -358,6 +362,17 @@
                 { "beat": 52, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
                 { "beat": 56, "text": "voluptate velit esse cillum dolore eu fugiat nulla" }
             ]
+        },
+        "infos": {
+            "type": "infos",
+            "infos": [
+                { "ambiance": "mystérieuse" },
+                { "tempo": "lent 60bpm" },
+                { "style": "POP" },
+                { "prenom": "Prénom" },
+                { "numero": "57" }
+            ]
         }
+
     }
 }

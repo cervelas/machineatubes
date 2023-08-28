@@ -3,11 +3,15 @@
 	"tempo": 120,
 	"song": {
 		"P1": {
-			"type": "Settings and autotune",
+			"type": "notes",
 			"channel": 1,
 			"notes": [{
 				"beat": 0,
 				"note": 24,
+				"duration": 4
+			}, {
+				"beat": 4,
+				"note": 60,
 				"duration": 4
 			}, {
 				"beat": 216,

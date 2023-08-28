@@ -1,6 +1,7 @@
 
 import xml.etree.ElementTree as ET
 import json
+import pprint
 
 from machineatubes.tube import Tube, MidiNote, VideoNote, LyricsNote
 
@@ -10,7 +11,7 @@ def parseFile2Score(filepath, verbose=False):
         print("Load Music XML File %s" % filepath)
         return parseMXML2Score(xml, verbose)
     elif filepath.endswith(".json"):
-        with open(filepath, 'r') as f:
+        with open(filepath, 'r', encoding='utf-8-sig') as f:
             struct = json.load(f)
         print("Loaded JSON MAT File %s" % filepath)
         return parseJSON2Score(struct, verbose)
@@ -20,7 +21,7 @@ def parseJSON2Score(payload, verbose=False):
     Parse XML file to SCore structure
     '''
 
-    score = Tube()
+    score = Tube(payload.get("name", "noname"))
     
     score.bpm = int(payload.get("tempo", 120))
 
@@ -28,6 +29,16 @@ def parseJSON2Score(payload, verbose=False):
     score.beat_type = 4
 
     max_length = 0
+
+    score.infos = {
+        "name": payload.get("name"),
+        "ambiance": payload.get("ambiance"),
+        "style": payload.get("style"),
+        "prenom": payload.get("prenom"),
+        "numero": payload.get("numero"),
+    }
+    
+    pprint.pprint(score.infos)
 
     for name, part in payload.get("song").items():
         score.parts[name] = { 
@@ -74,7 +85,7 @@ def parseJSON2Score(payload, verbose=False):
 
                 score.videonote( b, 
                             VideoNote(note["file"],
-                                position=note["position"])
+                                position=note.get("position", False))
                             )
         elif part["type"] == "lyrics":
             
@@ -87,10 +98,10 @@ def parseJSON2Score(payload, verbose=False):
                 if b > max_length:
                     max_length = b
 
-                score.lyricsnote( b, 
-                            LyricsNote(note["text"],
-                                position=note.get("position"))
-                            )
+                score.lyricsnote(b, LyricsNote(note["text"],
+                                position=note.get("position", False)))
+
+
     score.measures = int(max_length / score.beat_type) + 1
 
     return score
@@ -98,7 +109,7 @@ def parseJSON2Score(payload, verbose=False):
 
 def parseMXML2Score(xml, verbose=False):
     '''
-    Parse XML file to SCore structure
+    Parse XML file to Score structure
     '''
     root = xml.getroot()
 
