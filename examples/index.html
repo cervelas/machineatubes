@@ -151,10 +151,10 @@
     </head>
     <body>
         <div class="debug" id="debug">
-            Machine à Tube 0.1dev<br>
+            Machine à Tube 0.2dev<br>
             1. Press L to load a song<br>
             2. Press F to go fullscreen<br>
-            3. Press P to play<br>
+            3. Press P to play / S to stop<br>
             4. Press D to toggle this<br>
             <br>
             Quit: Escape or "q"
@@ -191,7 +191,6 @@
         debug.style.display = "block";
 
         var log = function(txt){
-            debug.style.display = "block";
             d = new Date();
             debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
         }
@@ -248,6 +247,10 @@
             }
             if (event.key == 'l' || event.key == 'L') {
                 window.pywebview.api.load_score_file()
+                
+            }
+            if (event.key == 's' || event.key == 'S') {
+                window.pywebview.api.stop()
                 
             }
             if (event.key == 'd' || event.key == 'D') {

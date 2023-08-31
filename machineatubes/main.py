@@ -66,10 +66,13 @@ class Machine:
         self.autoplay = False
 
     def close(self):
-        abort.set()
+        self.stop()
         time.sleep(0.5)
         self.win.destroy()
     
+    def stop(self):
+        abort.set()
+
     def fullscreen(self):
         if self.fullscreen_xoffset != 0:
             self.win.move(self.fullscreen_xoffset, 0)
@@ -81,7 +84,9 @@ class Machine:
 
     def play(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
+            abort.clear()
             self.tubes[0].aplay(self.win, args.verbose)
+        if len(self.tubes) > 1:
             self.tubes.pop(0)
 
     def log(self, txt):
@@ -102,7 +107,7 @@ class Machine:
             self.log("%s BPM" % t.bpm)
             self.log("%s measures" % t.measures)
             self.log("duration %s s" % t.duration())
-        self.log("Received a song " + t.name)
+        self.log("Received the song %s !" % t.name)
         self.log("Press P to play")
 
     def load_score_file(self):
@@ -168,6 +173,7 @@ def main():
         if len(screens) > 1 :
             machine.fullscreen_xoffset = screens[0].width + 400
         window = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
+        #ctrlwindow = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
         machine.win = window
         Tube.window = window
         VideoNote.window = window

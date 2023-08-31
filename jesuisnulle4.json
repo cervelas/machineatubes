@@ -353,11 +353,11 @@
         "lyrics": {
             "type": "lyrics",
             "lyrics": [
-                { "beat": 0, "text": "Lorem ipsum dolor sit amet" },
-                { "beat": 8, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
-                { "beat": 24, "text": "voluptate velit esse cillum dolore eu fugiat nulla" },
-                { "beat": 40, "text": "qui officia deserunt mollit anim id est laborum" },
-                { "beat": 44, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
+                { "beat": 0, "text": "Lorem ipsum do'lor sit amet" },
+                { "beat": 8, "text": "quis nostrud' exercitation ullamco laboris nisi ut aliquip ex" },
+                { "beat": 24, "text": "voluptate 'velit esse cillum dolore eu fugiat nulla" },
+                { "beat": 40, "text": "qui officia 'deserunt mollit anim id est laborum" },
+                { "beat": 44, "text": "quis nostru'd exercitation ullamco laboris nisi ut aliquip ex" },
                 { "beat": 48, "text": "voluptate velit esse cillum dolore eu fugiat nulla" },
                 { "beat": 52, "text": "quis nostrud exercitation ullamco laboris nisi ut aliquip ex" },
                 { "beat": 56, "text": "voluptate velit esse cillum dolore eu fugiat nulla" }

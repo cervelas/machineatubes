@@ -146,7 +146,7 @@ class Tube():
 
     def play(self, window=False, verbose=False):
         if Tube.window:
-            Tube.window.evaluate_js("displayinfos('%s','%s','%s','%s','%s')" % 
+            Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
         # send bpm control
         out.send_noteon(0, bpm2midi[self.bpm], 127)
@@ -244,4 +244,4 @@ class LyricsNote():
         if i == self.beat:
             if LyricsNote.window:
                 print("show lyrics: %s" % self.lyrics)
-                LyricsNote.window.evaluate_js("displaylyrics('%s','%s')" % (self.lyrics, self.position))
+                LyricsNote.window.evaluate_js('displaylyrics("%s","%s")' % (self.lyrics, self.position))
