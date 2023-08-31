@@ -2,6 +2,8 @@ import time
 import json
 import threading
 import pprint
+import random
+from pathlib import Path, PurePosixPath
 
 import rtmidi2 as rm
 
@@ -11,9 +13,41 @@ out = rm.MidiOut() # we may need more than one
 
 notes2midi = { rm.midi2note(i): i for i in range(-255, 255) }
 
+bpm2midi = {
+    80: 13,
+    90: 14,
+    100: 15,
+    110: 16,
+    120: 17,
+    130: 18,
+    140: 19,
+    150: 20,
+}
+
+song_structure = {
+    "intro": (0, 24, 4),
+    "couplet": (24, 48, 4),
+    "refrain": (48, 60, 4),
+    "couplet": (84, 108, 4),
+    "solo": (108, 128, 4),
+    "refrain": (128, 152, 4)
+}
+
 # pprint.pprint(notes2midi) show me all your notes
 
 t = time.perf_counter()
+
+videospath = Path(__file__).parent / '..' / 'examples' / 'videos'
+relpath = Path(__file__).parent / '..'
+
+print(videospath)
+
+vext = 'webm'
+
+def getvideos():
+    return {
+        n: [ str(PurePosixPath(v.relative_to(relpath))) for v in (videospath / n).glob('*.' + vext) ] for n, _ in song_structure.items()
+    }
 
 def initsleep():
     global t
@@ -50,6 +84,7 @@ class Tube():
         self.divisions = 16
         self.playing = False
         self.infos = {}
+        self.mix_videos()
 
     def duration(self):
         '''
@@ -113,6 +148,10 @@ class Tube():
         if Tube.window:
             Tube.window.evaluate_js("displayinfos('%s','%s','%s','%s','%s')" % 
                                     (self.name, self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
+        # send bpm control
+        out.send_noteon(0, bpm2midi[self.bpm], 127)
+        time.sleep(0.1)
+        out.send_noteoff(0, bpm2midi[self.bpm])
         initsleep()
         self.start_time = time.perf_counter()
         self.playing = True
@@ -125,16 +164,22 @@ class Tube():
             if verbose:
                 if len(notes) == 0:
                     print(b)
-            else:
-                print( self.progress(b), end='\r' )
             nanosleep( ( 60 / self.bpm ) )
-        print("")
         print("END")
         self.playing = False
 
     def aplay(self, window=False, verbose=False):
         t = threading.Thread(target=self.play, args=(window,verbose))
         t.start()
+
+    def mix_videos(self):
+        videos = getvideos()
+        print(videos)
+        offset = 0
+        for name, rng in song_structure.items():
+            for b in range(rng[0], rng[1], rng[2]):
+                v = VideoNote(file=random.choice(videos[name]))
+                self.videonote(b, v)
 
 class Note():
     def play(self, i, verbose=False):
@@ -185,7 +230,7 @@ class VideoNote():
             if VideoNote.window:
                 print("play %s" % self.file)
                 VideoNote.window.evaluate_js("playvid('%s','%s')" % (self.file, self.position))
-            
+
 class LyricsNote():
 
     window = False
@@ -200,4 +245,3 @@ class LyricsNote():
             if LyricsNote.window:
                 print("show lyrics: %s" % self.lyrics)
                 LyricsNote.window.evaluate_js("displaylyrics('%s','%s')" % (self.lyrics, self.position))
-            

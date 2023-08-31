@@ -116,14 +116,15 @@
         .debug{
             display: flex;
             position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 50px;
+            top: 0;
+            left: 50%;
+            height: 50vh;
             overflow: auto;
-            width: 100vw;
+            padding: 5px;
+            width: 50vw;
             background: rgba(0,0,0,0.7);
             color: white;
-            font-size: 10px;
+            font-size: 16px;
             font-family: monospace;
             font-weight: bold;
             z-index: 10000;
@@ -150,9 +151,13 @@
     </head>
     <body>
         <div class="debug" id="debug">
-            Press "L" to load a song<br>
-            Press "F" to go fullscreen<br>
-            Press Escape, "q", or Backspace to quit
+            Machine à Tube 0.1dev<br>
+            1. Press L to load a song<br>
+            2. Press F to go fullscreen<br>
+            3. Press P to play<br>
+            4. Press D to toggle this<br>
+            <br>
+            Quit: Escape or "q"
         </div>
         <div class="playcontainer">
             <div class="screen" id="paroles" >
@@ -251,7 +256,7 @@
                 else
                     debug.style.display = "block";
             }
-            if (event.key == ' ' || event.key == 'Space') {
+            if (event.key == 'p' || event.key == 'P' || event.key == 'Space') {
                 window.pywebview.api.play()
             }
         });

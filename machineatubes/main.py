@@ -62,6 +62,8 @@ class Machine:
     def __init__(self):
         self.win = False
         self.tubes = [] 
+        self.fullscreen_xoffset = 0
+        self.autoplay = False
 
     def close(self):
         abort.set()
@@ -69,6 +71,12 @@ class Machine:
         self.win.destroy()
     
     def fullscreen(self):
+        if self.fullscreen_xoffset != 0:
+            self.win.move(self.fullscreen_xoffset, 0)
+        self.win.toggle_fullscreen()
+        time.sleep(0.2)
+        self.win.toggle_fullscreen()
+        time.sleep(0.2)
         self.win.toggle_fullscreen()
 
     def play(self):
@@ -83,14 +91,19 @@ class Machine:
         self.tubes.append(parseJSON2Score(payload, args.verbose))
 
         t = self.tubes[-1]
-        self.log("parts:")
-        for k, v in t.parts.items():
-            self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
         
-        self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
-        self.log("%s BPM" % t.bpm)
-        self.log("%s measures" % t.measures)
-        self.log("duration %s s" % t.duration())
+        if args.verbose:
+            self.log("parts:")
+            for k, v in t.parts.items():
+                self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
+            
+            
+            self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
+            self.log("%s BPM" % t.bpm)
+            self.log("%s measures" % t.measures)
+            self.log("duration %s s" % t.duration())
+        self.log("Received a song " + t.name)
+        self.log("Press P to play")
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
@@ -100,7 +113,8 @@ class Machine:
         if result:
             self.tubes.append(parseFile2Score(result[0]))
             self.log("loaded file " + result[0])
-
+        
+        if self.autoplay:
             self.play()
 
 machine = Machine()
@@ -151,8 +165,9 @@ def main():
         score.play()
     else:
         screens = webview.screens
-        print('Available screens are: ' + str(screens))
-        window = webview.create_window('La Machine à Tubes', server, js_api=machine, width=1600, height=1200, http_port=23456)
+        if len(screens) > 1 :
+            machine.fullscreen_xoffset = screens[0].width + 400
+        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
         machine.win = window
         Tube.window = window
         VideoNote.window = window

@@ -87,6 +87,7 @@ def parseJSON2Score(payload, verbose=False):
                             VideoNote(note["file"],
                                 position=note.get("position", False))
                             )
+                
         elif part["type"] == "lyrics":
             
             notes = part.get("lyrics", [])
