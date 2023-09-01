@@ -24,6 +24,7 @@ bpm2midi = {
     150: 20,
 }
 
+
 song_structure = {
     "intro": (0, 24, 4),
     "couplet": (24, 48, 4),
