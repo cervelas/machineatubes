@@ -62,7 +62,7 @@ class Machine:
     def __init__(self):
         self.win = False
         self.tubes = [] 
-        self.fullscreen_xoffset = 0
+        self.screens = None
         self.autoplay = False
 
     def close(self):
@@ -74,13 +74,9 @@ class Machine:
         abort.set()
 
     def fullscreen(self):
-        if self.fullscreen_xoffset != 0:
-            self.win.move(self.fullscreen_xoffset, 0)
-        self.win.toggle_fullscreen()
-        time.sleep(0.2)
-        self.win.toggle_fullscreen()
-        time.sleep(0.2)
-        self.win.toggle_fullscreen()
+        if self.screens:
+            self.win.move(self.screens[0].width-10, -10)
+            self.win.resize(self.screens[1].width+20, self.screens[1].height)
 
     def play(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
@@ -171,8 +167,8 @@ def main():
     else:
         screens = webview.screens
         if len(screens) > 1 :
-            machine.fullscreen_xoffset = screens[0].width + 400
-        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
+            machine.screens = screens
+        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456, frameless=True)
         #ctrlwindow = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
         machine.win = window
         Tube.window = window

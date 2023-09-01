@@ -25,20 +25,23 @@ bpm2midi = {
 }
 
 
-song_structure = {
-    "intro": (0, 24, 4),
-    "couplet": (24, 48, 4),
-    "refrain": (48, 60, 4),
-    "couplet": (84, 108, 4),
-    "solo": (108, 128, 4),
-    "refrain": (128, 152, 4)
-}
+song_structure = [
+    ("intro", 0, 31, 8),
+    ("couplet", 32, 63, 8),
+    ("refrain", 64, 95, 8),
+    ("intro", 96, 111, 8),
+    ("couplet", 112, 143, 8),
+    ("refrain", 144, 175, 8),
+    ("solo", 176, 207, 8),
+    ("refrain", 208, 239, 8),
+    ("intro", 240, 248, 8),
+]
 
 # pprint.pprint(notes2midi) show me all your notes
 
 t = time.perf_counter()
 
-videospath = Path(__file__).parent / '..' / 'examples' / 'videos'
+videospath = Path(__file__).parent / '..' / 'machine' / 'videos'
 relpath = Path(__file__).parent / '..'
 
 print(videospath)
@@ -47,7 +50,7 @@ vext = 'webm'
 
 def getvideos():
     return {
-        n: [ str(PurePosixPath(v.relative_to(relpath))) for v in (videospath / n).glob('*.' + vext) ] for n, _ in song_structure.items()
+        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / v[0]).glob('*.' + vext) ] for v in song_structure
     }
 
 def initsleep():
@@ -85,7 +88,7 @@ class Tube():
         self.divisions = 16
         self.playing = False
         self.infos = {}
-        self.mix_videos()
+        #self.mix_videos()
 
     def duration(self):
         '''
@@ -145,14 +148,17 @@ class Tube():
         with open(file, 'w') as f:
             json.dump(json_dict, f, indent=4)
 
+    def playintro(self):
+        #jouer video d'intro
+        pass
+
     def play(self, window=False, verbose=False):
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
         # send bpm control
-        out.send_noteon(0, bpm2midi[self.bpm], 127)
-        time.sleep(0.1)
-        out.send_noteoff(0, bpm2midi[self.bpm])
+        self.setbpm()
+        self.stop()
         initsleep()
         self.start_time = time.perf_counter()
         self.playing = True
@@ -167,7 +173,18 @@ class Tube():
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
         print("END")
+        self.stop()
         self.playing = False
+
+    def setbpm(self):
+        out.send_noteon(0, bpm2midi[self.bpm], 127)
+        time.sleep(0.1)
+        out.send_noteoff(0, bpm2midi[self.bpm])
+
+    def stop(self):
+        out.send_noteon(0, 12, 127)
+        time.sleep(0.05)
+        out.send_noteoff(0, 12)
 
     def aplay(self, window=False, verbose=False):
         t = threading.Thread(target=self.play, args=(window,verbose))
@@ -176,11 +193,11 @@ class Tube():
     def mix_videos(self):
         videos = getvideos()
         print(videos)
-        offset = 0
-        for name, rng in song_structure.items():
-            for b in range(rng[0], rng[1], rng[2]):
-                v = VideoNote(file=random.choice(videos[name]))
-                self.videonote(b, v)
+        for v in song_structure:
+            for b in range(v[1], v[2], v[3]):
+                print("add videonote %s %s" % (b, v[0]))
+                vid = VideoNote(file=random.choice(videos[v[0]]))
+                self.videonote(b, vid)
 
 class Note():
     def play(self, i, verbose=False):
