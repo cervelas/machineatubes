@@ -94,7 +94,7 @@ def parseJSON2Score(payload, verbose=False):
 
             for note in notes:
                 
-                b = int(note["beat"])
+                b = int(note["beat"]) - 4
 
                 if b > max_length:
                     max_length = b
