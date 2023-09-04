@@ -26,8 +26,6 @@ include "json_init.php";
 
 $url = 'http://localhost:23456/play';
 
-echo $json;
-
 $json = json_encode(json_decode($json));
 
 if(json_last_error() > 0){
