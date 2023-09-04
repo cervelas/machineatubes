@@ -4,14 +4,23 @@ import pprint
 import argparse
 import webview 
 import threading
-import rtmidi2 as rm
+import platform
 
+import rtmidi2 as rm
 from flask import render_template, request
 
 from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
 from machineatubes.tube import out, Tube, VideoNote, abort, LyricsNote
 
+def is_win():
+    return platform.system() == 'Windows'
+
+def is_mac():
+    return platform.system() == 'Darwin'
+
+screens = webview.screens
+    
 def handler(signum, frame):
     '''
     Handle system interrupt
@@ -62,7 +71,6 @@ class Machine:
     def __init__(self):
         self.win = False
         self.tubes = [] 
-        self.screens = None
         self.autoplay = False
 
     def close(self):
@@ -74,9 +82,16 @@ class Machine:
         abort.set()
 
     def fullscreen(self):
-        if self.screens:
-            self.win.move(self.screens[0].width-10, -10)
-            self.win.resize(self.screens[1].width+20, self.screens[1].height)
+        if is_mac():
+            self.win.resize(screens[1].width, screens[1].height)
+            self.win.move(screens[0].width, 0)
+        if is_win():
+            self.win.move(screens[1].width + 500, 0)
+            self.win.toggle_fullscreen()
+            time.sleep(0.2)
+            self.win.toggle_fullscreen()
+            time.sleep(0.2)
+            self.win.toggle_fullscreen()
 
     def play(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
@@ -165,16 +180,14 @@ def main():
 
         score.play()
     else:
-        screens = webview.screens
-        if len(screens) > 1 :
-            machine.screens = screens
-        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456, frameless=True)
+        print(screens)
+        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=1000, height=700, http_port=23456, frameless=is_mac())
         #ctrlwindow = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
         machine.win = window
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(http_port=23456, debug=True, private_mode=False)
+        webview.start(http_port=23456, debug=True, private_mode=False, gui="cef")
 
 if __name__ == "__main__":
     main()

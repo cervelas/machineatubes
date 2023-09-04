@@ -13,6 +13,13 @@ out = rm.MidiOut() # we may need more than one
 
 notes2midi = { rm.midi2note(i): i for i in range(-255, 255) }
 
+# generate php array for notes
+'''print("$midi_equiv = array(")
+for k, v in notes2midi.items():
+    print('"%s" => %s,' % (k, v))
+print(");")
+exit(0)'''
+
 bpm2midi = {
     80: 13,
     90: 14,
@@ -46,7 +53,7 @@ relpath = Path(__file__).parent / '..'
 
 print(videospath)
 
-vext = 'webm'
+vext = 'mp4'
 
 def getvideos():
     return {
@@ -88,7 +95,6 @@ class Tube():
         self.divisions = 16
         self.playing = False
         self.infos = {}
-        #self.mix_videos()
 
     def duration(self):
         '''

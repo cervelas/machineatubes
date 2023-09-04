@@ -105,6 +105,8 @@ def parseJSON2Score(payload, verbose=False):
 
     score.measures = int(max_length / score.beat_type) + 1
 
+    score.mix_videos()
+
     return score
 
 
@@ -169,5 +171,7 @@ def parseMXML2Score(xml, verbose=False):
         
         if score.measures < number:
             score.measures = number
+
+    score.mix_videos()
 
     return score

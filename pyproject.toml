@@ -9,6 +9,7 @@ requires-python = ">=3.8"
 dependencies = [
     "rtmidi2",
     "pywebview",
+    "flask",
 ]
 [tool.setuptools]
 packages = ["machineatubes"]

@@ -159,7 +159,7 @@
             <br>
             Quit: Escape or "q"
         </div>
-        <div class="playcontainer">
+        <div class="playcontainer pywebview-drag-region">
             <div class="screen" id="paroles" >
                 Paroles
             </div>
@@ -179,7 +179,6 @@
                 </div>
             </div>
             <div class="screen" id="video">
-                <video muted></video>
             </div>
         </div>
     </body>
@@ -187,6 +186,7 @@
 
         let debug = document.querySelector("#debug");
         let ready = document.querySelector("#ready");
+        let video = document.querySelector("#video");
 
         debug.style.display = "block";
 
@@ -195,16 +195,6 @@
             debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
         }
 
-        var playvid = function(source, pos){
-            log("playing " + source + " @ " + pos)
-            vid = document.querySelector("#" + pos + " video");
-            
-            vid.src = source;
-            vid.play();
-            vid.style.display = "block";
-            console.log("playing " + source);
-        };
-        
         var displaylyrics = function(text, pos){
             log("display lyrics " + text + " @ " + pos)
             console.log("display " + text + " @ " + pos);
@@ -223,20 +213,39 @@
         };
 
         var preloadvid = function(source){
-            log("preloading " + source)
-            var preloadLink = document.createElement("link");
-            preloadLink.href = source;
-            preloadLink.rel = "prefetch";
-            preloadLink.as = "video";
-            document.head.appendChild(preloadLink);
+            if(document.querySelector("video[src='" + source + "']") == null){
+                console.log("loading " + source);
+                let vid = document.createElement("video");
+                vid.preload = "auto";
+                vid.src = source;
+                vid.muted = true;
+                vid.addEventListener("ended", function(e){
+                    vid.style.display = "none";
+                });
+                /*vid.addEventListener("canplaythrough", function(e){
+                    console.log("I can play " + source);
+                });*/
+                vid.load();
+                vid.style.display="none";
+                video.appendChild(vid);
+                console.log("loaded " + source);
+            }
         };
 
-        const vids = document.querySelectorAll('.playcontainer video');
-        vids.forEach(function(v){
-            v.onended = function(e) {
+        var playvid = function(source, pos){
+            vids.forEach(function(v){
                 v.style.display = "none";
-            };
-        });
+            });
+            if(source = "") return;
+            const vids = document.querySelectorAll('video');
+            let vid = document.querySelector("video[src='" + source + "']");
+            vid.load();
+            vid.currentTime = 0;
+            vid.style.display = "block";
+            vid.play();
+            console.log("playing " + source);
+        };
+
 
         document.addEventListener('keydown', (event) => {
             if (event.key == 'Escape' || event.key == 'Backspace' || event.key == 'q') {
