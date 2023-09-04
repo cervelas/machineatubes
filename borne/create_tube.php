@@ -19,8 +19,37 @@ foreach($chords as $chord_arr){
     $chords_pitch[$chord] = $midi_tube->getChordPitch($chords_equiv[$chord]['step'], $chords_equiv[$chord]['do_alter'], $chords_equiv[$chord]['octave']);
 }
 
+$json = "";
+
 include "song_format.php";
 include "json_init.php";
+
+$url = 'http://localhost:23456/play';
+
+echo $json;
+
+$json = json_encode(json_decode($json));
+
+if(json_last_error() > 0){
+    echo "ERROR in JSON: " . json_last_error_msg();
+    var_dump($json);
+}
+
+// use key 'http' even if you send the request to https://...
+$options = [
+    'http' => [
+        'header'=>  "Content-Type: application/json\r\n" .
+                "Accept: application/json\r\n",
+        'method' => 'POST',
+        'content' => $json,
+    ],
+];
+
+$context = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+if ($result === false) {
+    throw new \Exception('SENDING SONG ERROR');
+}
 
 /*
 if (!file_exists('audio/'.$directory)){

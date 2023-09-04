@@ -21,7 +21,6 @@ include_once('lyrics.php');
 $json .= '}
 }';
 
-echo $json;
 
 
 
