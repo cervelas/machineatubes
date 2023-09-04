@@ -1,7 +1,7 @@
 <?php
 namespace Classes;
 
-if($_SERVER['SERVER_NAME'] == 'localhost'){
+if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
     define('DB_HOST','localhost');
     define('DB_USER','root');
     define('DB_PASSWORD', 'root');
@@ -13,8 +13,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
     define('DB_USER' , 'tammara');
     define('DB_PASSWORD' , 'LaMachine2022.');
     define('DB_NAME' , 'fuzzy');
-
 }
+
 class Database
 {
 
