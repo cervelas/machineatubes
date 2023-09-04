@@ -1,0 +1,65 @@
+@font-face {
+    font-family: "Alaska Expanded";
+    src: url("font/Alaska-ExpandedExtraBold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+body{
+    padding:0 0;
+    margin:0 0;
+    background-color:#199BB2;
+    color:#fff;
+    font-family: "Alaska Expanded", "Arial Black", sans-serif;
+    text-align: center;
+}
+
+#init_form{
+    padding:20vh 2vw 2vh 2vh;
+}
+
+input{
+    display:block;
+    font-family: "Alaska Expanded", "Arial Black", sans-serif;
+    font-size:2em;
+    padding: 0.5vh 0.5vw;
+    margin: 0.8vh auto;
+}
+
+.submit_init{
+    display:block;
+    margin-top:3vh;
+    font-family: "Alaska Expanded", "Arial Black", sans-serif;
+    font-size:2em;
+    padding: 0.5vh 0.5vw;
+}
+.submit_init:link, .submit_init:visited, .submit_init:hover, .submit_init:active{
+    color:#fff;
+}
+
+div.image_choices{
+    display:block;
+    padding: 0.5vh 0.5vw;
+    margin: 0.8vh;
+}
+
+div.image_choices img{
+    display:inline-block;
+    max-width:20vw;
+    margin: 1vh 0.5vw;
+}
+
+#loading{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+#loading video{
+    object-fit: cover;
+}
+
+#song{
+    padding:10vh 2vw 2vh 2vw;
+    font-size:1.5em;
+}
