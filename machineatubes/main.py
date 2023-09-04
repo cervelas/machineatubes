@@ -144,8 +144,8 @@ def playsong():
     try:
         machine.load_tube(request.json)
     except Exception as e:
-        return "Parsing error : " + str(e), 500
-    return 200
+        return "{ 'status': 'Parsing error : %s' }" + e, 500
+    return "{ 'status': 'success' }", 200
 
 def main():
     '''
