@@ -2,6 +2,8 @@
 namespace Classes;
 
 require_once 'Machine.php';
+require_once 'midiequiv.php';
+
 class Tube extends Machine
 {
     public function insertChoices($song_mood, $song_tempo, $song_style, $song_addons){
@@ -51,16 +53,18 @@ class Tube extends Machine
 
     public function getChordPitch($step, $do_alter, $octave){
         $octave++;
-        $sql = "SELECT pitch FROM midi_equiv WHERE step='$step' ";
-        if($do_alter == 1){
-            $sql .= "AND do_alter=$do_alter ";
-        }else{
-            $sql .= "AND do_alter NOT LIKE 1 ";
-        }
-        $sql .= "AND octave=$octave";
+        $note = $step;
 
-        if($res = $this->query($sql)){
-            return $res[0]['pitch'];
+        if($do_alter == 1){
+            if($note == "B") $note .= "b";
+            else $note .= "#";
+        }
+        
+        $note .= $octave;
+        if(array_key_exists($note, MIDIEQUIV)){
+            return MIDIEQUIV[$note];
+        }else{
+            throw new \Exception('Cannot find midi equiv for ' . $note);
         }
     }
 
