@@ -70,6 +70,7 @@ args = parser.parse_args()
 class Machine:
     def __init__(self):
         self.win = False
+        self.ctrlwin = False
         self.tubes = [] 
         self.autoplay = False
 
@@ -77,11 +78,13 @@ class Machine:
         self.stop()
         time.sleep(0.5)
         self.win.destroy()
+        self.ctrlwin.destroy()
     
     def stop(self):
         abort.set()
 
-    def fullscreen(self):
+    def start(self):
+        self.win.show()
         if is_mac():
             self.win.resize(screens[1].width, screens[1].height)
             self.win.move(screens[0].width, 0)
@@ -101,7 +104,7 @@ class Machine:
             self.tubes.pop(0)
 
     def log(self, txt):
-        self.win.evaluate_js("log('%s')" % txt)
+        self.ctrlwin.evaluate_js("log('%s')" % txt)
 
     def load_tube(self, payload):
         self.tubes.append(parseJSON2Score(payload, args.verbose))
@@ -113,7 +116,6 @@ class Machine:
             for k, v in t.parts.items():
                 self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
             
-            
             self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
             self.log("%s BPM" % t.bpm)
             self.log("%s measures" % t.measures)
@@ -124,12 +126,23 @@ class Machine:
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
 
-        result = self.win.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
+        result = self.ctrlwin.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
         
         if result:
             self.tubes.append(parseFile2Score(result[0]))
             self.log("loaded file " + result[0])
+            t = self.tubes[-1]
         
+            if args.verbose:
+                self.log("parts:")
+                for k, v in t.parts.items():
+                    self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
+                
+                self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
+                self.log("%s BPM" % t.bpm)
+                self.log("%s measures" % t.measures)
+                self.log("duration %s s" % t.duration())
+            self.log("Press P to play")
         if self.autoplay:
             self.play()
 
@@ -146,6 +159,11 @@ def playsong():
     except Exception as e:
         return "{ 'status': 'Parsing error : %s' }" + e, 500
     return "{ 'status': 'success' }", 200
+
+def webview_cb():
+    machine.win.hide()
+    time.sleep(2)
+    machine.start()
 
 def main():
     '''
@@ -181,13 +199,14 @@ def main():
         score.play()
     else:
         print(screens)
-        window = webview.create_window('Machine à Tubes', server, js_api=machine, width=1000, height=700, http_port=23456, frameless=is_mac())
-        #ctrlwindow = webview.create_window('Machine à Tubes', server, js_api=machine, width=800, height=600, http_port=23456)
+        window = webview.create_window('Machine à Tubes', server, width=1000, height=700, http_port=23456, frameless=is_mac(), focus=False)
+        ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
         machine.win = window
+        machine.ctrlwin = ctrlwindow
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(http_port=23456, debug=True, private_mode=False, gui="cef")
+        webview.start(webview_cb, http_port=23456, debug=True, private_mode=False, gui="cef")
 
 if __name__ == "__main__":
     main()

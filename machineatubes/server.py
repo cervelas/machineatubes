@@ -19,8 +19,15 @@ def add_header(response):
 '''
 
 @server.route('/')
-def landing():
+def machine():
     """
     Render index.html. Initialization is performed asynchronously in initialize() function
     """
-    return render_template('index.html')
+    return render_template('machine.html')
+
+@server.route('/ctrl')
+def ctrl():
+    """
+    Render index.html. Initialization is performed asynchronously in initialize() function
+    """
+    return render_template('ctrl.html')

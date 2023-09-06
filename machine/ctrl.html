@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>MAT Control Panel</title>
+        <meta charset="UTF-8">
+    <style>
+        
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            /*font-stretch: 30%;*/
+            height: 100vh;
+            width: 100vw;
+            margin: 0px;
+            overflow: hidden;
+            background-color: #AAF9D9;
+            border: 5px solid #5000FF;
+            padding: 5px;
+            
+        }
+
+        .debug{
+            height: calc( 100vh - 50px );
+            overflow: auto;
+            padding: 5px;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 16px;
+            font-family: monospace;
+            z-index: 10000;
+        }
+
+        .ctrl{
+            display: flex;
+            text-align: center;
+            align-content: center;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        button{
+            font-size: 16px;
+            font-weight: bold;
+            color: #5000FF;
+            background-color: #AAF9D9;
+            border: 2px solid #5000FF;
+        }
+
+    </style>
+    </head>
+    <body class="pywebview-drag-region">
+        <div class="ctrl">
+                <button type="button" id="show">show</button> 
+                <button type="button" id="load">Load [L]</button>
+                <button type="button" id="play">Play [P]</button>
+                <button type="button" id="stop">Stop [S]</button>
+                <button type="button" id="close">Close [Q]</button>
+        </div>
+        <div class="debug" id="debug">
+            welcome to Machine A Tube !
+        </div>
+    </body>
+    <script>
+
+        
+        let debug = document.querySelector("#debug");
+
+        var log = function(txt){
+            d = new Date();
+            debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
+        }
+
+        document.addEventListener('click', (event) => {
+
+            if (event.target.matches("button")){
+                log("pressed " + event.target.id);
+                if (event.target.id == "close"){
+                    window.pywebview.api.close();
+                }
+                if (event.target.id == "show"){
+                    window.pywebview.api.show();
+                }
+                if (event.target.id == "load") {
+                    window.pywebview.api.load_score_file();
+                }
+                if (event.target.id == "stop") {
+                    window.pywebview.api.stop();
+                }
+                if (event.target.id == "play") {
+                    window.pywebview.api.play();
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key == 'Escape' || event.key == 'Backspace' || event.key == 'q') {
+                window.pywebview.api.close()
+            }
+            if (event.key == 'f' || event.key == 'F') {
+                window.pywebview.api.show()
+            }
+            if (event.key == 'l' || event.key == 'L') {
+                window.pywebview.api.load_score_file()
+            }
+            if (event.key == 's' || event.key == 'S') {
+                window.pywebview.api.stop()
+            }
+            if (event.key == 'p' || event.key == 'P' || event.key == 'Space') {
+                window.pywebview.api.play()
+            }
+        });
+    </script>
+</html>

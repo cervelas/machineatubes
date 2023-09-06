@@ -27,18 +27,6 @@
             font-size: 3vw;
             overflow: hidden;
         }
-
-        .column {
-            flex-basis: 50%;
-            height: 50%;
-            /*border: 1px solid #666;
-            box-sizing: border-box;
-            display: flex;
-            text-align: center;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;*/
-        }
         
         .screen{
             position: absolute;
@@ -150,15 +138,6 @@
     </style>
     </head>
     <body>
-        <div class="debug" id="debug">
-            Machine à Tube 0.2dev<br>
-            1. Press L to load a song<br>
-            2. Press F to go fullscreen<br>
-            3. Press P to play / S to stop<br>
-            4. Press D to toggle this<br>
-            <br>
-            Quit: Escape or "q"
-        </div>
         <div class="playcontainer pywebview-drag-region">
             <div class="screen" id="paroles" >
                 Paroles
@@ -179,24 +158,15 @@
                 </div>
             </div>
             <div class="screen" id="video">
+            
             </div>
         </div>
     </body>
     <script>
 
-        let debug = document.querySelector("#debug");
-        let ready = document.querySelector("#ready");
         let video = document.querySelector("#video");
 
-        debug.style.display = "block";
-
-        var log = function(txt){
-            d = new Date();
-            debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
-        }
-
         var displaylyrics = function(text, pos){
-            log("display lyrics " + text + " @ " + pos)
             console.log("display " + text + " @ " + pos);
             lyrics = document.querySelector("#" + pos);
             lyrics.innerHTML = text;
@@ -232,12 +202,12 @@
             }
         };
 
-        var playvid = function(source, pos){
+        var playvid = function(source){
+            if(source == "") return;
+            const vids = document.querySelectorAll('video');
             vids.forEach(function(v){
                 v.style.display = "none";
             });
-            if(source = "") return;
-            const vids = document.querySelectorAll('video');
             let vid = document.querySelector("video[src='" + source + "']");
             vid.load();
             vid.currentTime = 0;
@@ -246,31 +216,5 @@
             console.log("playing " + source);
         };
 
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key == 'Escape' || event.key == 'Backspace' || event.key == 'q') {
-                window.pywebview.api.close()
-            }
-            if (event.key == 'f' || event.key == 'F') {
-                window.pywebview.api.fullscreen()
-            }
-            if (event.key == 'l' || event.key == 'L') {
-                window.pywebview.api.load_score_file()
-                
-            }
-            if (event.key == 's' || event.key == 'S') {
-                window.pywebview.api.stop()
-                
-            }
-            if (event.key == 'd' || event.key == 'D') {
-                if(debug.style.display == "block")
-                    debug.style.display = "none";
-                else
-                    debug.style.display = "block";
-            }
-            if (event.key == 'p' || event.key == 'P' || event.key == 'Space') {
-                window.pywebview.api.play()
-            }
-        });
     </script>
 </html>

@@ -252,8 +252,8 @@ class VideoNote():
     def play(self, i, verbose=False):
         if i == self.beat:
             if VideoNote.window:
+                VideoNote.window.evaluate_js('playvid("%s","%s")' % (self.file, self.position))
                 print("play %s" % self.file)
-                VideoNote.window.evaluate_js("playvid('%s','%s')" % (self.file, self.position))
 
 class LyricsNote():
 
