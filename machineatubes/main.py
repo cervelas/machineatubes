@@ -13,6 +13,9 @@ from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
 from machineatubes.tube import out, Tube, VideoNote, abort, LyricsNote
 
+
+close = threading.Event()
+
 def is_win():
     return platform.system() == 'Windows'
 
@@ -75,26 +78,24 @@ class Machine:
         self.autoplay = False
 
     def close(self):
-        self.stop()
-        time.sleep(0.5)
-        self.win.destroy()
-        self.ctrlwin.destroy()
-    
+        close.set()
+
     def stop(self):
         abort.set()
 
     def start(self):
         self.win.show()
-        if is_mac():
-            self.win.resize(screens[1].width, screens[1].height)
-            self.win.move(screens[0].width, 0)
-        if is_win():
-            self.win.move(screens[1].width + 500, 0)
-            self.win.toggle_fullscreen()
-            time.sleep(0.2)
-            self.win.toggle_fullscreen()
-            time.sleep(0.2)
-            self.win.toggle_fullscreen()
+        if len(screens) > 1:
+            if is_mac():
+                self.win.resize(screens[1].width, screens[1].height)
+                self.win.move(screens[0].width, 0)
+            if is_win():
+                self.win.move(screens[1].width + 500, 0)
+                self.win.toggle_fullscreen()
+                time.sleep(0.2)
+                self.win.toggle_fullscreen()
+                time.sleep(0.2)
+                self.win.toggle_fullscreen()
 
     def play(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
@@ -164,6 +165,12 @@ def webview_cb():
     machine.win.hide()
     time.sleep(2)
     machine.start()
+    while not close.wait(1):
+        pass
+    machine.stop()
+    time.sleep(0.1)
+    machine.win.destroy()
+    machine.ctrlwin.destroy()
 
 def main():
     '''
@@ -200,13 +207,16 @@ def main():
     else:
         print(screens)
         window = webview.create_window('Machine à Tubes', server, width=1000, height=700, http_port=23456, frameless=is_mac(), focus=False)
+        
         ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
+
         machine.win = window
         machine.ctrlwin = ctrlwindow
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
         webview.start(webview_cb, http_port=23456, debug=True, private_mode=False, gui="cef")
+        exit(0)
 
 if __name__ == "__main__":
     main()

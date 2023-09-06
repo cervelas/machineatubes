@@ -6,10 +6,9 @@
         
         @font-face {
             font-family: 'Nippo-Variable';
-            src: url('machine/fonts/Nippo-Variable.woff2') format('woff2'),
-            url('machine/fonts/Nippo-Variable.woff') format('woff'),
-            url('machine/fonts/Nippo-Variable.ttf') format('truetype');
-            font-weight: 200 700;
+            src: url('fonts/Nippo-Variable.woff2') format('woff2');
+            /* src: url('machine/fonts/Nippo-Variable.woff2') format('woff2'); */
+            font-weight: 200 400 500 700;
             font-display: swap;
             font-style: normal;
         }
@@ -26,6 +25,11 @@
             margin: 0;
             font-size: 3vw;
             overflow: hidden;
+        }
+
+        img{
+            max-width: 100%;
+            max-height: 100%;
         }
         
         .screen{
@@ -59,7 +63,7 @@
             left: 50%;
             display: flex;
             text-align: center;
-            justify-content: center;
+            justify-content: space-between;
             align-content: center;
             flex-direction: column;
             color: #AAF9D9;
@@ -69,7 +73,24 @@
 
         #titre #grostitre{
             font-size: 1.2em;
+            line-height: 1em;
             transform: scaleX(0.6);
+        }
+
+        #titre #infoprenom{
+            font-size: 0.6em;
+        }
+        
+        #titre .headertitre{
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6em;
+            height: 5vh;
+        }
+
+        #titre .footer{
+            text-align: right;
+            height: 5vh;
         }
 
         
@@ -89,7 +110,6 @@
             max-height: 100%;
         }
 
-        
         #infos{
             display: flex;
             text-align: center;
@@ -99,42 +119,59 @@
             color: #5000FF;
             background-color: #AAF9D9;
             border: 10px solid #5000FF;
+            padding: 3vh;
         }
 
-        .debug{
-            display: flex;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            height: 50vh;
-            overflow: auto;
-            padding: 5px;
-            width: 50vw;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            font-size: 16px;
-            font-family: monospace;
-            font-weight: bold;
-            z-index: 10000;
+        #infos .header{
+            background-color: #5000FF;
+            color: #AAF9D9;
+            line-height: 70%;
         }
 
-        .ready{
+        #infos .header::before{
+            content: "⬝";
             position: absolute;
-            overflow: hidden;
+            left: 8%;
+        }
+
+        #infos .header::after{
+            content: "⬝";
+            position: absolute;
+            right: 8%;
+            transform: translate(0, -100%);
+        }
+
+        #infos .header span{
+            display: block;
+            font-size: 0.6em;
+            transform: scaleX(0.7);
+        }
+
+        #infos .info{
+            line-height: 1em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 0.8em;
+            font-weight: 700;
+            border: 3px solid #5000FF;
+        }
+
+        #infos .info span{
+            display: block;
+            transform: scaleX(0.7);
+        }
+
+        #infos .footer{
+            position: absolute;
             bottom: 0;
             left: 0;
-            height: 100vh;
-            width: 100vw;
-            z-index: 1000;
-            background-color: black;
-            display: none;
-            color: white;
-            font-size: 48;
+            right: 0;
             text-align: center;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
+            display: block;
+            font-size: 0.3em;
         }
+
+            
     </style>
     </head>
     <body>
@@ -143,19 +180,27 @@
                 Paroles
             </div>
             <div class="screen vertical" id="infos" >
-                <div>
-                    <div id="infologo">LOGO</div>
-                    <div id="infotitre">Titre</div>
-                    <div id="infoambiance">Ambiance</div>
-                    <div id="infobpm">BPM</div>
-                    <div id="infostyle">Style</div>
-                </div>
+                    <div id="infologo"><img src="logoinfos.jpg"></div>
+                    <div class="header"><span>>Titre</span></div>
+                    <div class="info"><span id="infotitre">Titre  Lorem Ipsum Dolor Sit Amet</span></div>
+                    
+                    <div class="header"><span>>Ambiance</span></div>
+                    <div  class="info"><span id="infoambiance">Ambiance</span></div>
+                    
+                    <div class="header"><span>>Tempo</span></div>
+                    <div  class="info"><span id="infobpm">BPM</span></div>
+                    
+                    <div class="header"><span>>Style</span></div>
+                    <div class="info"><span  id="infostyle">STYLE</span></div>
+                    <div class="footer">MY NAME IS FUZZY</div>
             </div>
             <div class="screen" id="titre">
-                <div>
-                    <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
-                    <div id="infoprenom">prenom</div>
-                </div>
+                    <div class="headertitre"><img src="logotitre.jpg"><div id="numtube">CHANSON #47</div></div>
+                    <div>
+                        <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
+                        <div id="infoprenom">pour prenom</div>
+                    </div>
+                    <div class="footer"><img src="footertitle.jpg"></div>
             </div>
             <div class="screen" id="video">
             
@@ -179,7 +224,7 @@
             document.querySelector("#infoambiance").innerHTML = ambiance
             document.querySelector("#infostyle").innerHTML = style
             document.querySelector("#infobpm").innerHTML = bpm
-            document.querySelector("#infoprenom").innerHTML = prenom
+            document.querySelector("#infoprenom").innerHTML = "pour " + prenom
         };
 
         var preloadvid = function(source){
