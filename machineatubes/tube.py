@@ -48,8 +48,8 @@ song_structure = [
 
 t = time.perf_counter()
 
-videospath = Path(__file__).parent / '..' / 'machine' / 'videos'
-relpath = Path(__file__).parent / '..'
+videospath = Path(__file__).parent / '..' / 'ui' / 'assets' / 'videos'
+relpath = Path(__file__).parent / '..' / 'ui'
 
 print(videospath)
 
