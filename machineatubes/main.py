@@ -7,7 +7,7 @@ import threading
 import platform
 
 import rtmidi2 as rm
-from flask import render_template, request
+from flask import Flask, render_template, request
 
 from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
@@ -149,6 +149,11 @@ class Machine:
 
 machine = Machine()
 
+
+from flask import Flask, render_template
+
+import webview
+
 @server.route('/play', methods=['POST'])
 def playsong():
     '''
@@ -158,8 +163,9 @@ def playsong():
     try:
         machine.load_tube(request.json)
     except Exception as e:
-        return "{ 'status': 'Parsing error : %s' }" + e, 500
-    return "{ 'status': 'success' }", 200
+        print("Error on RX: %s" % e)
+        return "error", 500
+    return "success", 200
 
 def webview_cb():
     machine.win.hide()
@@ -169,6 +175,7 @@ def webview_cb():
         pass
     machine.stop()
     time.sleep(0.1)
+    # add check
     machine.win.destroy()
     machine.ctrlwin.destroy()
 

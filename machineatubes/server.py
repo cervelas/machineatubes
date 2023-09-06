@@ -1,14 +1,14 @@
 import json
-import os
+from pathlib import Path
 from functools import wraps
 
 from flask import Flask, render_template
 
 import webview
 
-gui_dir = os.path.join(os.path.dirname(__file__), '..', 'machine')  # development path
+base_dir = Path(__file__).parent.parent
 
-server = Flask(__name__, static_folder=gui_dir, template_folder=gui_dir)
+server = Flask(__name__, static_folder=base_dir / "ui" / "assets", template_folder=base_dir / "ui")
 server.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # disable caching
 
 '''
