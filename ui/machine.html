@@ -9,7 +9,6 @@
             /* src: url('fonts/Nippo-Variable.woff2') format('woff2'); */
             src: url('assets/fonts/Nippo-Variable.woff2') format('woff2');
             font-weight: 200 400 500 700;
-            font-display: swap;
             font-style: normal;
         }
         
@@ -74,7 +73,7 @@
         #titre #grostitre{
             font-size: 1.2em;
             line-height: 1em;
-            transform: scaleX(0.6);
+            transform: scaleX(0.5);
         }
 
         #titre #infoprenom{
@@ -118,13 +117,13 @@
             flex-direction: column;
             color: #5000FF;
             background-color: #AAF9D9;
-            border: 10px solid #5000FF;
             padding: 3vh;
         }
 
         #infos .header{
             background-color: #5000FF;
             color: #AAF9D9;
+            text-transform: uppercase;
             line-height: 70%;
         }
 
@@ -144,21 +143,23 @@
         #infos .header span{
             display: block;
             font-size: 0.6em;
-            transform: scaleX(0.7);
+            transform: scaleX(0.5);
         }
 
         #infos .info{
             line-height: 1em;
             padding-top: 10px;
             padding-bottom: 10px;
-            font-size: 0.8em;
+            font-size: 1em;
             font-weight: 700;
+            text-transform: uppercase;
             border: 3px solid #5000FF;
         }
 
         #infos .info span{
             display: block;
-            transform: scaleX(0.7);
+            width: 200%;
+            transform: scaleX(0.5) translate(-50%);
         }
 
         #infos .footer{
@@ -185,7 +186,7 @@
                     <div class="info"><span id="infotitre">Titre  Lorem Ipsum Dolor Sit Amet</span></div>
                     
                     <div class="header"><span>>Ambiance</span></div>
-                    <div  class="info"><span id="infoambiance">Ambiance</span></div>
+                    <div  class="info"><span id="infoambiance">Mystérieuse</span></div>
                     
                     <div class="header"><span>>Tempo</span></div>
                     <div  class="info"><span id="infobpm">BPM</span></div>
