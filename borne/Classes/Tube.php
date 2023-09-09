@@ -178,4 +178,17 @@ class Tube extends Machine
         return $lyrics;
     }
 
+        public function getToplineChannel($tonality){
+        $top_channel = [
+            'D' => 11,
+            'Ab' => 12,
+            'C' => 10
+        ];
+        return $top_channel[$tonality];
+    }
+
+    public function getToplinePitch(){
+        return rand(0,127);
+    }
+
 }
