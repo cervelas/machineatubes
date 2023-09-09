@@ -180,9 +180,9 @@ class Tube extends Machine
 
         public function getToplineChannel($tonality){
         $top_channel = [
-            'D' => 11,
-            'Ab' => 12,
-            'C' => 10
+            'D' => 10,
+            'Ab' => 11,
+            'C' => 9
         ];
         return $top_channel[$tonality];
     }
