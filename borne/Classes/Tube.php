@@ -191,4 +191,10 @@ class Tube extends Machine
         return rand(0,127);
     }
 
+     public function getStopTopline(){
+        $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
+        $results = $this->query($sql);
+        return $results[0];
+    }
+
 }
