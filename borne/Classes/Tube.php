@@ -188,7 +188,7 @@ class Tube extends Machine
     }
 
     public function getToplinePitch(){
-        return rand(0,127);
+        return rand(1,108);
     }
 
      public function getStopTopline(){
