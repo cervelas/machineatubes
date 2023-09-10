@@ -42,6 +42,12 @@ class Machine extends Database {
         shuffle($random);
         return $random;
     }
+
+    public function getAvailAddons(){
+        $addons = array('clap','hh','kick');
+        return $addons;
+    }
+    
 }
 
 
