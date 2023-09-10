@@ -25,7 +25,7 @@ $stop_arpeggiato = ['theme1', 'solo'];
 $go_topline = ['theme0','theme1','solo'];
 $stop_topline = ['text0', 'text2', 'text4'];
 $go_harmony = ['text1','text3'];
-$go_harmony = ['text2'];
+$stop_harmony = ['text2'];
 
 include_once 'addons.php';
 $avail_addons = $song_formats_tube->getAvailAddons();
