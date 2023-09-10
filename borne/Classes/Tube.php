@@ -138,6 +138,13 @@ class Tube extends Machine
         return $res[array_rand($res)];
     }
 
+    function getStopAddon($addon){
+        $addon_name_substr = 'STOP_ADDON_'.strtoupper($addon);
+        $sql = "SELECT * FROM midi_actions WHERE name LIKE '$addon_name_substr%'";
+        $res = $this->query($sql);
+        return $res[0];
+    }
+    
     public function getPrompt($tonality){
         $sql = "SELECT * FROM midi_prompts WHERE tonality='$tonality'";
         $results = $this->query($sql);
