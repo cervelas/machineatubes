@@ -23,12 +23,13 @@ $go_topline = ['theme0','theme1','solo'];
 $stop_topline = ['text0', 'text2', 'text4'];
 
 include_once 'addons.php';
-$go_clap = $random_addons['clap']['go'];
-$stop_clap = $random_addons['clap']['stop'];
-$go_hh = $random_addons['hh']['go'];
-$stop_hh = $random_addons['hh']['stop'];
-$go_kick = $random_addons['kick']['go'];
-$stop_kick = $random_addons['kick']['stop'];
+$avail_addons = $song_formats_tube->getAvailAddons();
+foreach($avail_addons as $addon_name){
+    $go_addon = 'go_'.$addon_name;
+    $stop_addon = 'stop_'.$addon_name;
+    $$go_addon = $random_addons[$addon_name]['go'];
+    $$stop_addon = $random_addons[$addon_name]['stop'];
+}
 
 $song_formats_tube = new Tube();
 $chp = $song_formats_tube->getChordProgression($chords);
