@@ -17,7 +17,7 @@ $stop_drums_note = $tube1->getStopDrums();
 $stop_arpeggiato_note = $tube1->getStopArpeggiato();
 $stop_topline_note = $tube1->getStopTopline();
 
-$measure = 0;
+$measure = 1;
 
 foreach($format as $section){
     $section_length = $general_lengths[$section];
