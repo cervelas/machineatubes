@@ -204,4 +204,10 @@ class Tube extends Machine
         return $results[0];
     }
 
+     public function getVoiceHarmony(){
+        $sql = "SELECT * FROM midi_actions WHERE name = 'VOICE_HARMONY'";
+        $results = $this->query($sql);
+        return $results[0];
+    }
+
 }
