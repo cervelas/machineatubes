@@ -19,10 +19,16 @@ $go_drums = ['theme0'];
 $stop_drums = ['text4'];
 $go_arpeggiato = ['text1', 'text3'];
 $stop_arpeggiato = ['theme1', 'solo'];
-$go_addons = ['text1', 'text3'];
-$stop_addons = ['text2', 'text4'];
 $go_topline = ['theme0','theme1','solo'];
 $stop_topline = ['text0', 'text2', 'text4'];
+
+include_once 'addons.php';
+$go_clap = $random_addons['clap']['go'];
+$stop_clap = $random_addons['clap']['stop'];
+$go_hh = $random_addons['hh']['go'];
+$stop_hh = $random_addons['hh']['stop'];
+$go_kick = $random_addons['kick']['go'];
+$stop_kick = $random_addons['kick']['stop'];
 
 $song_formats_tube = new Tube();
 $chp = $song_formats_tube->getChordProgression($chords);
