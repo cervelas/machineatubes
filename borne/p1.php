@@ -16,6 +16,7 @@ $json .= '"settings": {
 $stop_drums_note = $tube1->getStopDrums();
 $stop_arpeggiato_note = $tube1->getStopArpeggiato();
 $stop_topline_note = $tube1->getStopTopline();
+$harmony = $tube1->getVoiceHarmony();
 
 $measure = 1;
 
@@ -49,6 +50,15 @@ foreach($format as $section){
         },';
     }
 
+  if(in_array($section,$go_harmony) || in_array($section,$stop_harmony)){
+        $note_pitch = $tube1->getChordPitch($harmony['step'],$harmony['do_alter'],$harmony['octave']);
+        $json .= '{
+                "beat": '.($measure * 4).',
+                "note": '.$note_pitch.',
+                "duration": 4
+        },';
+    }
+  
    foreach($avail_addons as $addon_name){
         $stop_addon = 'stop_'.$addon_name;
         $stop_addon_note = 'stop_'.$addon_name.'_note';
