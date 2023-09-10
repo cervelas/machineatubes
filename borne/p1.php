@@ -49,6 +49,21 @@ foreach($format as $section){
         },';
     }
 
+   foreach($avail_addons as $addon_name){
+        $stop_addon = 'stop_'.$addon_name;
+        $stop_addon_note = 'stop_'.$addon_name.'_note';
+        $$stop_addon_note = $tube1->getStopAddon($addon_name);
+
+        if (in_array($section, $$stop_addon)) {
+            $note_pitch = $tube1->getChordPitch($$stop_addon_note['step'], $$stop_addon_note['do_alter'], $$stop_addon_note['octave']);
+            $json .= '{
+                "beat": ' . ($measure * 4) . ',
+                "note": ' . $note_pitch . ',
+                "duration": 4
+        },';
+        }
+    }
+
     $measure += $general_lengths[$section];
 }
 
