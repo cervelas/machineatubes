@@ -12,7 +12,7 @@ $general_lengths = [
     'text3'=>8,
     'text4'=>8,
     'solo' => 8,
-    'outro'=>2
+    'outro'=>4
 ];
 
 $song_formats_tube = new Tube();

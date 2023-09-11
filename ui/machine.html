@@ -218,14 +218,15 @@
             lyrics.innerHTML = text;
         };
         
-        var displayinfos = function(name, ambiance, style, bpm, prenom){
+        var displayinfos = function(name, numero, ambiance, style, bpm, prenom){
             console.log(prenom)
-            document.querySelector("#infotitre").innerHTML = name
-            document.querySelector("#grostitre").innerHTML = name
-            document.querySelector("#infoambiance").innerHTML = ambiance
-            document.querySelector("#infostyle").innerHTML = style
-            document.querySelector("#infobpm").innerHTML = bpm
-            document.querySelector("#infoprenom").innerHTML = "pour " + prenom
+            document.querySelector("#infotitre").innerHTML = name;
+            document.querySelector("#grostitre").innerHTML = name;
+            document.querySelector("#infoambiance").innerHTML = ambiance;
+            document.querySelector("#infostyle").innerHTML = style;
+            document.querySelector("#infobpm").innerHTML = bpm;
+            document.querySelector("#infoprenom").innerHTML = "pour " + prenom;
+            document.querySelector("#numtube").innerHTML = "Chanson #" + numero;
         };
 
         var preloadvid = function(source){
@@ -235,15 +236,17 @@
                 vid.preload = "auto";
                 vid.src = source;
                 vid.muted = true;
+                vid.loop = true;
                 vid.addEventListener("ended", function(e){
                     vid.style.display = "none";
                 });
                 /*vid.addEventListener("canplaythrough", function(e){
                     console.log("I can play " + source);
                 });*/
-                vid.load();
-                vid.style.display="none";
                 video.appendChild(vid);
+                vid.load();
+                vid.play();
+                vid.style.display="none";
                 console.log("loaded " + source);
             }
         };
@@ -255,10 +258,8 @@
                 v.style.display = "none";
             });
             let vid = document.querySelector("video[src='" + source + "']");
-            vid.load();
             vid.currentTime = 0;
             vid.style.display = "block";
-            vid.play();
             console.log("playing " + source);
         };
 

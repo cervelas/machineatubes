@@ -160,11 +160,11 @@ class Tube():
 
     def play(self, window=False, verbose=False):
         if Tube.window:
-            Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s")' % 
-                                    (self.name, self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
+            Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
+                                    (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
         # send bpm control
-        self.setbpm()
         self.stop()
+        self.setbpm()
         initsleep()
         self.start_time = time.perf_counter()
         self.playing = True
@@ -184,7 +184,7 @@ class Tube():
 
     def setbpm(self):
         out.send_noteon(0, bpm2midi[self.bpm], 127)
-        time.sleep(0.1)
+        time.sleep(0.2)
         out.send_noteoff(0, bpm2midi[self.bpm])
 
     def stop(self):
