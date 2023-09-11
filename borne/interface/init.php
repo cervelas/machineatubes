@@ -30,8 +30,8 @@ session_start();
     </div>
 
     <div id="song_tempo_div" class="image_choices" style="display: none;">
-        <img src="../imgs/tempo_80.jpg" onclick="javascript:submitInfo('song_tempo',80)" />
-        <img src="../imgs/tempo_100.jpg" onclick="javascript:submitInfo('song_tempo',100)" />
+        <img src="../imgs/tempo_80.jpg" onclick="javascript:submitInfo('song_tempo',95)" />
+        <img src="../imgs/tempo_100.jpg" onclick="javascript:submitInfo('song_tempo',108)" />
         <img src="../imgs/tempo_120.jpg" onclick="javascript:submitInfo('song_tempo',120)" />
         <img src="../imgs/tempo_140.jpg" onclick="javascript:submitInfo('song_tempo',140)" />
     </div>
