@@ -162,6 +162,7 @@ class Tube():
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
+            Tube.window.evaluate_js('wake()')
         # send bpm control
         self.stop()
         self.setbpm()
@@ -179,6 +180,7 @@ class Tube():
                 if len(notes) == 0:
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
+        Tube.window.evaluate_js('sleep()')
         print("END")
         self.stop()
         self.playing = False

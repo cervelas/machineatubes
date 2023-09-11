@@ -2,6 +2,12 @@
 - Faire un executable / facile à utiliser
 - Préparer download/streaming de la video générée depuis amazon
 - Préparer lecture de video d'intro, puis à la fin commencer le morceau
-- Préciser affichage :
-   - quand il y a personne
-   - fin d'un morceau
+- Sccenario :
+   - quand il y a personne, écran de veilles (images en alternance) partout (sauf écran video -> loop)
+   - Le début jingle video + intro dedicace perso sur écran video avec infos + titre, ecran parole toujours veilles
+     - il n'y aura peut-être pas de video ! prvoir un fallback (si ID égal)
+   - ensuite de nouveau jingle de début avec logo animé (+ fumée)
+   - ça commence
+   - Video d'outro (merci c'était super), infos reste, paroles en veille
+   - fin video, veille partout.
+   . si file d'attente, on attend 5 sec.
