@@ -1,7 +1,13 @@
-- OK Tempo selon fichier 
-    - 110: 16 120: 17 130: 18 .. etc .. de 80 à 150 sur channel 1
+- MAJ tempos
 - Faire un executable / facile à utiliser
-- OK Préparer un machin pour des vidéos selon moment dans la chanson (intro, refrain, couplet, etc...)
 - Préparer download/streaming de la video générée depuis amazon
-- OK Faire une liste de correspondance notes <-> midi
 - Préparer lecture de video d'intro, puis à la fin commencer le morceau
+- Sccenario :
+   - quand il y a personne, écran de veilles (images en alternance) partout (sauf écran video -> loop)
+   - Le début jingle video + intro dedicace perso sur écran video avec infos + titre, ecran parole toujours veilles
+     - il n'y aura peut-être pas de video ! prvoir un fallback (si ID égal)
+   - ensuite de nouveau jingle de début avec logo animé (+ fumée)
+   - ça commence
+   - Video d'outro (merci c'était super), infos reste, paroles en veille
+   - fin video, veille partout.
+   . si file d'attente, on attend 5 sec.

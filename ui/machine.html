@@ -5,19 +5,23 @@
     <style>
         
         @font-face {
-            font-family: 'Nippo-Variable';
-            /* src: url('fonts/Nippo-Variable.woff2') format('woff2'); */
-            src: url('assets/fonts/Nippo-Variable.woff2') format('woff2');
-            font-weight: 200 400 500 700;
+            font-family: 'NippDo-505';
+            src: url('assets/fonts/NipDo-wt505.woff2') format('woff2');
             font-style: normal;
         }
-        
+
+        @font-face {
+            font-family: 'NippDo-580';
+            src: url('assets/fonts/NipDo-wt580.woff2') format('woff2');
+            font-style: normal;
+        }
+ 
         *, *:before, *:after {
             box-sizing: border-box;
         }
 
         html, body {
-            font-family: 'Nippo-Variable';
+            font-family: 'NippDo-505';
             /*font-stretch: 30%;*/
             height: 100vh;
             width: 100vw;
@@ -143,7 +147,6 @@
         #infos .header span{
             display: block;
             font-size: 0.6em;
-            transform: scaleX(0.5);
         }
 
         #infos .info{
@@ -156,12 +159,6 @@
             border: 3px solid #5000FF;
         }
 
-        #infos .info span{
-            display: block;
-            width: 200%;
-            transform: scaleX(0.5) translate(-50%);
-        }
-
         #infos .footer{
             position: absolute;
             bottom: 0;
@@ -172,16 +169,39 @@
             font-size: 0.3em;
         }
 
+        .sleep{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #AAF9D9;
+            z-index: 10000;
+
+        }
+
+        .sleep img{
+            max-width: 50%;
+            max-height: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
             
     </style>
     </head>
     <body>
         <div class="playcontainer pywebview-drag-region">
             <div class="screen" id="paroles" >
+                <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                 Paroles
             </div>
             <div class="screen vertical" id="infos" >
-                    <div id="infologo"><img src="assets/img/logoinfos.jpg"></div>
+                    <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                    <!-- <div id="infologo"><img src="assets/img/logoinfos.jpg"></div> -->
+                    <div id="infonum">Chanson #57</div>
                     <div class="header"><span>>Titre</span></div>
                     <div class="info"><span id="infotitre">Titre  Lorem Ipsum Dolor Sit Amet</span></div>
                     
@@ -196,6 +216,7 @@
                     <div class="footer">MY NAME IS FUZZY</div>
             </div>
             <div class="screen" id="titre">
+                    <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                     <div class="headertitre"><img src="assets/img/logotitre.jpg"><div id="numtube">CHANSON #47</div></div>
                     <div>
                         <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
@@ -204,13 +225,35 @@
                     <div class="footer"><img src="assets/img/footertitle.jpg"></div>
             </div>
             <div class="screen" id="video">
-            
+                <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
             </div>
         </div>
     </body>
     <script>
 
         let video = document.querySelector("#video");
+
+        var sleep = function(){
+            const vids = document.querySelectorAll('.sleep');
+            vids.forEach(function(v){
+                v.style.display = "flex";
+            });
+        }
+
+        var wakeup = function(){
+            const vids = document.querySelectorAll('.sleep');
+            vids.forEach(function(v){
+                v.style.display = "none";
+            });
+        }
+
+        var gointro = function(){
+
+        }
+
+        var gooutro = function(){
+
+        }
 
         var displaylyrics = function(text, pos){
             console.log("display " + text + " @ " + pos);
@@ -227,6 +270,7 @@
             document.querySelector("#infobpm").innerHTML = bpm;
             document.querySelector("#infoprenom").innerHTML = "pour " + prenom;
             document.querySelector("#numtube").innerHTML = "Chanson #" + numero;
+            document.querySelector("#infonum").innerHTML = "Chanson #" + numero;
         };
 
         var preloadvid = function(source){
@@ -254,12 +298,12 @@
         var playvid = function(source){
             if(source == "") return;
             const vids = document.querySelectorAll('video');
-            vids.forEach(function(v){
-                v.style.display = "none";
-            });
             let vid = document.querySelector("video[src='" + source + "']");
             vid.currentTime = 0;
             vid.style.display = "block";
+            vids.forEach(function(v){
+                if(v!=vid) v.style.display = "none";
+            });
             console.log("playing " + source);
         };
 
