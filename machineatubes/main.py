@@ -11,7 +11,7 @@ from flask import Flask, render_template, request
 
 from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
-from machineatubes.tube import out, Tube, VideoNote, abort, LyricsNote
+from machineatubes.tube import out, Tube, VideoNote, abort, playsong, LyricsNote
 
 
 close = threading.Event()
@@ -70,6 +70,13 @@ parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wa
 
 args = parser.parse_args()
 
+class Machine2:
+
+    def play(self):
+        playsong.set()
+
+machineapi = Machine2()
+
 class Machine:
     def __init__(self):
         self.win = False
@@ -77,6 +84,7 @@ class Machine:
         self.tubes = [] 
         self.autoplay = False
         self.playing = False
+        
 
     def close(self):
         close.set()
@@ -105,15 +113,14 @@ class Machine:
     def __play(self):
         while len(self.tubes) > 0 and not abort.is_set():
             if len(self.tubes) > 0 and self.tubes[0].playing is False:
-                self.playing = True
                 abort.clear()
                 self.tubes[0].play(self.win, args.verbose)
-                if len(self.tubes > 1):
-                    self.tubes.pop(0)
-        self.playing = False
+                if len(self.tubes) == 1:
+                    break
+                self.tubes.pop(0)
 
     def play(self):
-        if self.playing is False:
+        if len(self.tubes) == 1:
             t = threading.Thread(target=self.__play)
             t.start()
 
@@ -178,7 +185,7 @@ def runplay():
 playsrv = threading.Thread(target=runplay, daemon=True)
 
 @playserver.route('/play', methods=['POST'])
-def playsong():
+def playtube():
     '''
     This will load a song when a post request is received
     '''
@@ -240,7 +247,7 @@ def main():
     else:
         print(screens)
 
-        window = webview.create_window('Machine à Tubes', server, width=1000, height=700, frameless=is_mac(), focus=False)
+        window = webview.create_window('Machine à Tubes', server, js_api=machineapi, width=1000, height=700, frameless=is_mac(), focus=False)
         
         ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
 

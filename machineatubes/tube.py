@@ -8,6 +8,7 @@ from pathlib import Path, PurePosixPath
 import rtmidi2 as rm
 
 abort = threading.Event()
+playsong = threading.Event()
 
 out = rm.MidiOut() # we may need more than one
 
@@ -21,14 +22,10 @@ print(");")
 exit(0)'''
 
 bpm2midi = {
-    80: 13,
-    90: 14,
-    100: 15,
-    110: 16,
-    120: 17,
-    130: 18,
-    140: 19,
-    150: 20,
+    95: 13,
+    108: 14,
+    120: 15,
+    140: 16,
 }
 
 
@@ -162,7 +159,12 @@ class Tube():
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-            Tube.window.evaluate_js('wake()')
+            Tube.window.evaluate_js('gointro()')
+            print("go intro")
+        
+        print("wait playsong")
+        playsong.wait(60)
+        print("playsong !")
         # send bpm control
         self.stop()
         self.setbpm()
@@ -180,7 +182,7 @@ class Tube():
                 if len(notes) == 0:
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
-        Tube.window.evaluate_js('sleep()')
+        Tube.window.evaluate_js('gooutro()')
         print("END")
         self.stop()
         self.playing = False
@@ -192,7 +194,7 @@ class Tube():
 
     def stop(self):
         out.send_noteon(0, 12, 127)
-        time.sleep(0.05)
+        time.sleep(0.2)
         out.send_noteoff(0, 12)
 
     def mix_videos(self):

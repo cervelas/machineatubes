@@ -22,6 +22,7 @@
 
         html, body {
             font-family: 'NippDo-505';
+            text-transform: uppercase;
             /*font-stretch: 30%;*/
             height: 100vh;
             width: 100vw;
@@ -50,7 +51,7 @@
             transform: rotate(-90deg) translate(-100%);
         }
 
-        #paroles{
+        .paroles{
             top: 50%;
             display: flex;
             text-align: center;
@@ -59,7 +60,10 @@
             flex-direction: column;
             color: #5000FF;
             background-color: #AAF9D9;
-            border: 10px solid #5000FF;
+        }
+
+        #paroles{
+            padding: 50px;
         }
 
         #titre{
@@ -71,13 +75,12 @@
             flex-direction: column;
             color: #AAF9D9;
             background-color: #5000FF;
-            border: 10px solid #AAF9D9;
         }
 
         #titre #grostitre{
+            font-family: 'NippDo-580';
             font-size: 1.2em;
             line-height: 1em;
-            transform: scaleX(0.5);
         }
 
         #titre #infoprenom{
@@ -96,7 +99,6 @@
             height: 5vh;
         }
 
-        
         #video{
             top: 50%;
             left: 50%;
@@ -119,15 +121,16 @@
             justify-content: center;
             align-content: center;
             flex-direction: column;
+            font-family: 'NippDo-580';
             color: #5000FF;
             background-color: #AAF9D9;
             padding: 3vh;
         }
 
         #infos .header{
+            font-family: 'NippDo-505';
             background-color: #5000FF;
             color: #AAF9D9;
-            text-transform: uppercase;
             line-height: 70%;
         }
 
@@ -135,13 +138,15 @@
             content: "⬝";
             position: absolute;
             left: 8%;
+            line-height: 1.1em;
         }
 
         #infos .header::after{
             content: "⬝";
             position: absolute;
             right: 8%;
-            transform: translate(0, -100%);
+            /*transform: translate(0, -100%);*/
+            line-height: 1.1em;
         }
 
         #infos .header span{
@@ -184,8 +189,6 @@
         }
 
         .sleep img{
-            max-width: 50%;
-            max-height: 50%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -194,25 +197,25 @@
     </head>
     <body>
         <div class="playcontainer pywebview-drag-region">
-            <div class="screen" id="paroles" >
+            <div class="screen paroles" >
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
-                Paroles
+                <div id="paroles">Paroles</div>
             </div>
             <div class="screen vertical" id="infos" >
                     <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                     <!-- <div id="infologo"><img src="assets/img/logoinfos.jpg"></div> -->
                     <div id="infonum">Chanson #57</div>
                     <div class="header"><span>>Titre</span></div>
-                    <div class="info"><span id="infotitre">Titre  Lorem Ipsum Dolor Sit Amet</span></div>
+                    <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
                     
-                    <div class="header"><span>>Ambiance</span></div>
-                    <div  class="info"><span id="infoambiance">Mystérieuse</span></div>
+                    <div class="header"><span>>Humeur</span></div>
+                    <div  class="info"><span id="infoambiance">Joyeuse</span></div>
                     
                     <div class="header"><span>>Tempo</span></div>
                     <div  class="info"><span id="infobpm">BPM</span></div>
                     
-                    <div class="header"><span>>Style</span></div>
-                    <div class="info"><span  id="infostyle">STYLE</span></div>
+                    <div class="header"><span>>Ambiance</span></div>
+                    <div class="info"><span  id="infostyle">Tropicale</span></div>
                     <div class="footer">MY NAME IS FUZZY</div>
             </div>
             <div class="screen" id="titre">
@@ -226,33 +229,61 @@
             </div>
             <div class="screen" id="video">
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                <div id="dedicacevideo" style="display: none;">INTRO DEDICACE</div>
+                <video id="introvideo" style="display:none;" src="assets/videos/machine/intro/intro.mp4"></video>
+                <video id="outrovideo" style="display:none;" src="assets/videos/machine/outro/outro.mp4"></video>
             </div>
         </div>
-    </body>
+    </body> 
     <script>
 
         let video = document.querySelector("#video");
+        let intro_video = document.querySelector("#introvideo");
+        let outro_video = document.querySelector("#outrovideo");
+        let dedi_video = document.querySelector("#dedicacevideo");
 
         var sleep = function(){
-            const vids = document.querySelectorAll('.sleep');
-            vids.forEach(function(v){
-                v.style.display = "flex";
+            const elems = document.querySelectorAll('.sleep');
+            elems.forEach(function(e){
+                e.style.display = "flex";
             });
         }
 
         var wakeup = function(){
-            const vids = document.querySelectorAll('.sleep');
-            vids.forEach(function(v){
-                v.style.display = "none";
+            const elems = document.querySelectorAll('.sleep');
+            elems.forEach(function(e){
+                e.style.display = "none";
             });
         }
 
         var gointro = function(){
-
+            wakeup()
+            intro_video.style.display = "block";
+            intro_video.play();
+            intro_video.addEventListener("ended", function(v){
+                intro_video.style.display = "none";
+                dedi_video.style.display = "block";
+                console.log("videoended")
+                setTimeout(() => {
+                    dedi_video.style.display = "none";
+                    console.log("super ended")
+                    window.pywebview.api.play();
+                }, 3000);
+            });
+            
         }
 
         var gooutro = function(){
-
+            const vids = document.querySelectorAll('video');
+            vids.forEach(function(v){
+                v.style.display = "none";
+            });
+            outro_video.style.display = "block";
+            outro_video.play();
+            outro_video.addEventListener("ended", function(v){
+                outro_video.style.display = "none";
+                sleep();
+            });
         }
 
         var displaylyrics = function(text, pos){
@@ -302,7 +333,7 @@
             vid.currentTime = 0;
             vid.style.display = "block";
             vids.forEach(function(v){
-                if(v!=vid) v.style.display = "none";
+                if(v !== vid) v.style.display = "none";
             });
             console.log("playing " + source);
         };
