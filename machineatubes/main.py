@@ -150,11 +150,18 @@ class Machine:
 machine = Machine()
 
 
-from flask import Flask, render_template
+from flask import Flask
 
 import webview
 
-@server.route('/play', methods=['POST'])
+playserver = Flask("playserver")
+
+def runplay():
+    playserver.run(host='0.0.0.0', port=23456)
+
+playsrv = threading.Thread(target=runplay, daemon=True)
+
+@playserver.route('/play', methods=['POST'])
 def playsong():
     '''
     This will load a song when a post request is received
@@ -162,10 +169,13 @@ def playsong():
     print("received tube " + str(request.json))
     try:
         machine.load_tube(request.json)
+        machine.play()
     except Exception as e:
         print("Error on RX: %s" % e)
         return "error", 500
     return "success", 200
+
+playsrv.start()
 
 def webview_cb():
     machine.win.hide()
@@ -213,7 +223,8 @@ def main():
         score.play()
     else:
         print(screens)
-        window = webview.create_window('Machine à Tubes', server, width=1000, height=700, http_port=23456, frameless=is_mac(), focus=False)
+
+        window = webview.create_window('Machine à Tubes', server, width=1000, height=700, frameless=is_mac(), focus=False)
         
         ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
 
@@ -222,7 +233,7 @@ def main():
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(webview_cb, http_port=23456, debug=True, private_mode=False, gui="cef")
+        webview.start(webview_cb, debug=True, private_mode=False, gui="cef")
         exit(0)
 
 if __name__ == "__main__":

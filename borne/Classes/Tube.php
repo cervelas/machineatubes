@@ -138,6 +138,13 @@ class Tube extends Machine
         return $res[array_rand($res)];
     }
 
+    function getStopAddon($addon){
+        $addon_name_substr = 'STOP_ADDON_'.strtoupper($addon);
+        $sql = "SELECT * FROM midi_actions WHERE name LIKE '$addon_name_substr%'";
+        $res = $this->query($sql);
+        return $res[0];
+    }
+    
     public function getPrompt($tonality){
         $sql = "SELECT * FROM midi_prompts WHERE tonality='$tonality'";
         $results = $this->query($sql);
@@ -193,6 +200,31 @@ class Tube extends Machine
 
      public function getStopTopline(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
+        $results = $this->query($sql);
+        return $results[0];
+    }
+
+        public function getToplineChannel($tonality){
+        $top_channel = [
+            'D' => 10,
+            'Ab' => 11,
+            'C' => 9
+        ];
+        return $top_channel[$tonality];
+    }
+
+    public function getToplinePitch(){
+        return rand(1,108);
+    }
+
+     public function getStopTopline(){
+        $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
+        $results = $this->query($sql);
+        return $results[0];
+    }
+
+     public function getVoiceHarmony(){
+        $sql = "SELECT * FROM midi_actions WHERE name = 'VOICE_HARMONY'";
         $results = $this->query($sql);
         return $results[0];
     }

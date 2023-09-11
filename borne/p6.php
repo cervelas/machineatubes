@@ -9,7 +9,6 @@ $json .= '"drums": {
                 ';
 
 $go_drums_note = $tube6->getGoDrums($song_style);
-$go_addons_note = $tube6->getAddons($song_addons);
 $measure = 1;
 
 foreach($format as $key=>$section) {
@@ -26,13 +25,19 @@ foreach($format as $key=>$section) {
         },';
     }
 
-    if (in_array($section, $go_addons)) {
-        $note_pitch_a = $tube6->getChordPitch($go_addons_note['step'], $go_addons_note['do_alter'], $go_addons_note['octave']);
-        $json .= '{
+    foreach($avail_addons as $addon_name){
+        $go_addon = 'go_'.$addon_name;
+        $go_addon_note = 'go_'.$addon_name.'_note';
+        $$go_addon_note = $tube6->getAddons($addon_name);
+
+        if (in_array($section, $$go_addon)) {
+            $note_pitch_a = $tube6->getChordPitch($$go_addon_note['step'], $$go_addon_note['do_alter'], $$go_addon_note['octave']);
+            $json .= '{
                 "beat": ' . ($measure * 4) . ',
                 "note": ' . $note_pitch_a . ',
                 "duration": 4
         },';
+        }
     }
 
     $measure += $general_lengths[$section];
