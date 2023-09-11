@@ -21,6 +21,8 @@ $go_arpeggiato = ['text1', 'text3'];
 $stop_arpeggiato = ['theme1', 'solo'];
 $go_addons = ['text1', 'text3'];
 $stop_addons = ['text2', 'text4'];
+$go_topline = ['theme0','theme1','solo'];
+$stop_topline = ['text0', 'text2', 'text4'];
 
 $song_formats_tube = new Tube();
 $chp = $song_formats_tube->getChordProgression($chords);

@@ -7,7 +7,7 @@ $json .= '"arpeggiato": {
                "channel": 5,
                "notes": [';
 
-$go_arpeggiato_note = $tube5->getGoDrums($song_style);
+//$go_arpeggiato_note = $tube5->getGoDrums($song_style);
 $measure = 1;
 $keys_used = array();
 

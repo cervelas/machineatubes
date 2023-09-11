@@ -52,7 +52,7 @@ class Tube extends Machine
     }
 
     public function getChordPitch($step, $do_alter, $octave){
-        $octave++;
+        //$octave++;
         $note = $step;
 
         if($do_alter == 1){
@@ -176,6 +176,25 @@ class Tube extends Machine
             $lyrics[$inner_arr[0]] = $inner_arr[1];
         }
         return $lyrics;
+    }
+    
+    public function getToplineChannel($tonality){
+        $top_channel = [
+            'D' => 10,
+            'Ab' => 11,
+            'C' => 9
+        ];
+        return $top_channel[$tonality];
+    }
+
+    public function getToplinePitch(){
+        return rand(1,108);
+    }
+
+     public function getStopTopline(){
+        $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
+        $results = $this->query($sql);
+        return $results[0];
     }
 
 }
