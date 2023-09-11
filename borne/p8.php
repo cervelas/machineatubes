@@ -22,8 +22,8 @@ foreach($format as $key=>$section){
 
             $chord = $chords_per_part[$section][$x];
             $note_autotune = $tube8->getAutotune($song_mood, $chord);
-            $chord_equiv = $tuben->getChordEquiv($song_mood,$chords_style,$chord);
-            $note_pitch = $tuben->getChordPitch($chord_equiv['step'],$chord_equiv['do_alter'],$chord_equiv['octave']);
+            $chord_equiv = $tube8->getChordEquiv($song_mood,$chords_style,$chord);
+            $note_pitch = $tube8->getChordPitch($chord_equiv['step'],$chord_equiv['do_alter'],$chord_equiv['octave']);
 
             $json .= '{
                 "beat": '.($measure * 4).',
