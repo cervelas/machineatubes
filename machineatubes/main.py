@@ -76,12 +76,10 @@ class Machine:
         self.ctrlwin = False
         self.tubes = [] 
         self.autoplay = False
+        self.playing = False
 
     def close(self):
         close.set()
-
-    def stop(self):
-        abort.set()
 
     def start(self):
         self.win.show()
@@ -97,12 +95,30 @@ class Machine:
                 time.sleep(0.2)
                 self.win.toggle_fullscreen()
 
-    def play(self):
+    def oldplay(self):
         if len(self.tubes) > 0 and self.tubes[0].playing is False:
             abort.clear()
             self.tubes[0].aplay(self.win, args.verbose)
         if len(self.tubes) > 1:
             self.tubes.pop(0)
+
+    def __play(self):
+        while len(self.tubes) > 0 and not abort.is_set():
+            if len(self.tubes) > 0 and self.tubes[0].playing is False:
+                self.playing = True
+                abort.clear()
+                self.tubes[0].play(self.win, args.verbose)
+                if len(self.tubes > 1):
+                    self.tubes.pop(0)
+        self.playing = False
+
+    def play(self):
+        if self.playing is False:
+            t = threading.Thread(target=self.__play)
+            t.start()
+
+    def stop(self):
+        abort.set()
 
     def log(self, txt):
         self.ctrlwin.evaluate_js("log('%s')" % txt)

@@ -254,12 +254,12 @@
         var playvid = function(source){
             if(source == "") return;
             const vids = document.querySelectorAll('video');
-            vids.forEach(function(v){
-                v.style.display = "none";
-            });
             let vid = document.querySelector("video[src='" + source + "']");
             vid.currentTime = 0;
             vid.style.display = "block";
+            vids.forEach(function(v){
+                if(v!=vid) v.style.display = "none";
+            });
             console.log("playing " + source);
         };
 

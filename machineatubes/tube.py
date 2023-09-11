@@ -165,9 +165,10 @@ class Tube():
         # send bpm control
         self.stop()
         self.setbpm()
-        initsleep()
+        self.stop()
         self.start_time = time.perf_counter()
         self.playing = True
+        initsleep()
         for b, notes in self.notes.items():
             if abort.is_set():
                 print("aborting play...")
@@ -191,10 +192,6 @@ class Tube():
         out.send_noteon(0, 12, 127)
         time.sleep(0.05)
         out.send_noteoff(0, 12)
-
-    def aplay(self, window=False, verbose=False):
-        t = threading.Thread(target=self.play, args=(window,verbose))
-        t.start()
 
     def mix_videos(self):
         videos = getvideos()

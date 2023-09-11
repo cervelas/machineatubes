@@ -1,7 +1,7 @@
-- OK Tempo selon fichier 
-    - 110: 16 120: 17 130: 18 .. etc .. de 80 à 150 sur channel 1
+- MAJ tempos
 - Faire un executable / facile à utiliser
-- OK Préparer un machin pour des vidéos selon moment dans la chanson (intro, refrain, couplet, etc...)
 - Préparer download/streaming de la video générée depuis amazon
-- OK Faire une liste de correspondance notes <-> midi
 - Préparer lecture de video d'intro, puis à la fin commencer le morceau
+- Préciser affichage :
+   - quand il y a personne
+   - fin d'un morceau
