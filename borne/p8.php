@@ -22,7 +22,7 @@ foreach($format as $key=>$section){
 
             $chord = $chords_per_part[$section][$x];
             $note_autotune = $tube8->getAutotune($song_mood, $chord);
-            $chord_equiv = $tuben->getChordEquiv($mood,$chords_style,$chord);
+            $chord_equiv = $tuben->getChordEquiv($song_mood,$chords_style,$chord);
             $note_pitch = $tuben->getChordPitch($chord_equiv['step'],$chord_equiv['do_alter'],$chord_equiv['octave']);
 
             $json .= '{
