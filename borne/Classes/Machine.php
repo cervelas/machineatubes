@@ -47,7 +47,7 @@ class Machine extends Database {
         $addons = array('clap','hh','kick');
         return $addons;
     }
-    
+
 }
 
 
