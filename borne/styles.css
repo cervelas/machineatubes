@@ -21,7 +21,6 @@ body{
     color:#5000FF;
     font-family: "NipDo505", sans-serif;
     text-align: center;
-    font-size:large;
     text-transform: uppercase;
 }
 
@@ -37,7 +36,7 @@ h2{
 
 p{
     font-family: "NipDo505", sans-serif;
-    font-size:1.7rem;
+    font-size:2.5rem;
 }
 
 .bordered{
@@ -50,29 +49,29 @@ p{
     background-color:#5000FF;
     color:#AAF9D9;
     padding:0 0.1rem;
-    font-size:2rem;
+    font-size:3rem;
 }
 
 .delete_circle::before{
     content: '';
     display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background: #FF0000;
     border:1px solid #5000FF;
-    margin:0.5rem 0.5rem 0 0;
+    margin:0.8rem 0.5rem 0 0;
 }
 
 .submit_circle::before{
     content: '';
     display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
+    width: 2em;
+    height: 2em;
     border-radius: 50%;
     background: #19FF00;
     border:1px solid #5000FF;
-    margin:0.5rem 0.5rem 0 0;
+    margin:0.8rem 0.5rem 0 0;
 }
 
 #welcome, #video_intro_div, #video_enchante_div, #video_outro_div{
@@ -125,7 +124,7 @@ input{
     display:block;
     font-family: "NipDo505", sans-serif;
     text-transform: uppercase;
-    font-size:2rem;
+    font-size:2.5rem;
     padding: 0 0.1rem;
     margin: 0.8vh auto;
     border:2px solid #5000FF;
@@ -184,7 +183,7 @@ input{
 .title_init{
     display:block;
     font-family: "NipDo505", sans-serif;
-    font-size:2rem;
+    font-size:2.5rem;
 }
 
 #video_outro_div{
@@ -208,13 +207,13 @@ input{
 
 #last_screen .section_title{
     font-family: "NipDo505", sans-serif;
-    font-size:1rem;
+    font-size:1.5rem;
     margin:1vh 1vw;
 }
 
 #last_screen p{
     margin:1vh 4vw;
-    font-size:2.5rem;
+    font-size:3rem;
 }
 
 #last_screen .big_number{
