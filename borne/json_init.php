@@ -10,7 +10,7 @@ $json = '{
     "prenom": "'.stripslashes($_SESSION['user_name']).'",
     "numero": '.$_SESSION['song_id'].',
     "id_video": "'.$talk_id.'",
-    "song": {';';
+    "song": {';
 
 include_once('p1.php');
 include_once('pn.php');
