@@ -16,20 +16,14 @@ if(!$_GET['init']){
     $song_mood_name = $_SESSION['song_mood_name'];
     $song_tempo = $_SESSION['song_tempo'];
     $song_style = $_SESSION['song_style'];
-    $song_addons = $_SESSION['song_addons'];
     $midi_channel = $_SESSION['midi_channel'];
+    $mood_variant = $_SESSION['variant'];
 
     $user_id = $tube->insertUser($user_name);
-    $song_id = $tube->insertSong($user_id, $song_title, $song_mood, $song_tempo, $song_style, $song_addons);
+    $song_id = $tube->insertSong($user_id, $song_title, $song_mood, $song_tempo, $song_style);
 
     $_SESSION['song_id'] = $song_id;
     $_SESSION['user_id'] = $user_id;
-
-    /*
-    $filename = "choices.json";
-    $fp = fopen($filename, 'w');
-    fwrite($fp,$json_init);
-    */
 
     include_once('create_tube.php');
 
