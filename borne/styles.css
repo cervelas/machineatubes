@@ -1,15 +1,13 @@
 @font-face {
     font-family: 'NipDo505';
-    src: url('font/NipDo-wt505.woff2') format('woff2'),
-    url('font/NipDo-wt505.otf') format('opentype');
+    src: url('font/NipDo-wt505.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NipDo580';
-    src: url('font/NipDo-wt580.woff2') format('woff2'),
-    url('font/NipDo-wt580.otf') format('opentype');
+    src: url('font/NipDo-wt580.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
 }
