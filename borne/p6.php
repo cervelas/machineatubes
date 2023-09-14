@@ -9,6 +9,7 @@ $json .= '"drums": {
                 ';
 
 $go_drums_note = $tube6->getGoDrums($song_style);
+
 $measure = 1;
 
 foreach($format as $key=>$section) {
@@ -39,6 +40,7 @@ foreach($format as $key=>$section) {
         },';
         }
     }
+
 
     $measure += $general_lengths[$section];
 
