@@ -68,7 +68,6 @@ if($audio_tmp_link!==''){
     curl_close ($ch);
 
     $talk_id = $server_output_arr['id'];
-    $json .= '"id_video": "'.$talk_id.'"';
 
 }
 
