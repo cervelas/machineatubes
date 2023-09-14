@@ -38,7 +38,7 @@ echo '
     <script>
     setTimeout(isFinished, 10000); 
     function isFinished(){
-        window.location = "/borne/interface/init.php";
+        window.location = "interface/init.php";
     }
 </script>
 </div>
