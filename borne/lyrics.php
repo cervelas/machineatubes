@@ -1,8 +1,9 @@
 <?php
 use Classes\Tube;
 
-$csvfile = "lyrics/".$song_mood."/".stripslashes($song_title).".csv";
 $lyrcsv = new Tube();
+$song_filename = $lyrcsv->getSongInfo($song_title_id)['filename'];
+$csvfile = "lyrics/".$song_mood."/".$song_filename.".csv";
 $lyrics = $lyrcsv->getLyrics($csvfile);
 
 $json .= '
