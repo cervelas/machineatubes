@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("texts_dedicace.php");
 $text = $texts_dedicace[array_rand($texts_dedicace)];
 
