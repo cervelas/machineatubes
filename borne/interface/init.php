@@ -76,7 +76,7 @@ $variant = round(rand(1,2));
     <h2><span class="bluebg">>PR&Eacute;NOM</span></h2>
     <form name="init_form" method="post" action="../index.php">
         <div id="user_name_div">
-            <input type="text" id="user_name" required /><br />
+            <input type="text" id="user_name" required autofocus autocomplete="false" /><br />
             <a id="submit_name" class="submit_circle" href="javascript:submitInfo('user_name');"><span class="bluebg">VALIDER</span></a><br />
             <a id="delete_name" class="delete_circle" href="javascript:deleteInfo('user_name');"><span class="bluebg">EFFACER</span></a>
         </div>
