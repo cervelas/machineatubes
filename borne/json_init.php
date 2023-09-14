@@ -9,7 +9,7 @@ $json = '{
     "style": "'.$_SESSION['song_style'].'_'.$_SESSION['variant'].'",
     "prenom": "'.stripslashes($_SESSION['user_name']).'",
     "numero": '.$_SESSION['song_id'].',
-    "id_video": "'.$talk_id.'"';
+    "id_video": "'.$talk_id.'",';
 
 include_once('p1.php');
 include_once('pn.php');
