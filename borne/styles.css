@@ -1,6 +1,15 @@
 @font-face {
-    font-family: "Alaska Expanded";
-    src: url("font/Alaska-ExpandedExtraBold.otf") format("opentype");
+    font-family: 'NipDo505';
+    src: url('font/NipDo-wt505.woff2') format('woff2'),
+    url('font/NipDo-wt505.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NipDo580';
+    src: url('font/NipDo-wt580.woff2') format('woff2'),
+    url('font/NipDo-wt580.otf') format('opentype');
     font-weight: bold;
     font-style: normal;
 }
@@ -8,58 +17,208 @@
 body{
     padding:0 0;
     margin:0 0;
-    background-color:#199BB2;
-    color:#fff;
-    font-family: "Alaska Expanded", "Arial Black", sans-serif;
+    background-color:#AAF9D9;
+    color:#5000FF;
+    font-family: "NipDo505", sans-serif;
     text-align: center;
+    font-size:medium;
+    text-transform: uppercase;
+}
+
+div{
+    background-color:#AAF9D9;
+}
+
+h2{
+    font-family: "NipDo580", sans-serif;
+    text-align:left;
+    margin:2vh 2vw;
+}
+
+p{
+    font-family: "NipDo505", sans-serif;
+    font-size:1.7rem;
+}
+
+.bordered{
+    border:3px solid #5000FF;
+    border-top-width:30px;
+    box-shadow: 7px 7px #5000FF;
+}
+
+.bluebg{
+    background-color:#5000FF;
+    color:#AAF9D9;
+    padding:0 0.1rem;
+    font-size:2rem;
+}
+
+.delete_circle::before{
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: #FF0000;
+    border:1px solid #5000FF;
+    margin:0.5rem 0.5rem 0 0;
+}
+
+.submit_circle::before{
+    content: '';
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #19FF00;
+    border:1px solid #5000FF;
+    margin:0.5rem 0.5rem 0 0;
+}
+
+#welcome, #video_intro_div, #video_enchante_div, #video_outro_div{
+    width:80vw;
+    height:85vh;
+    margin: 5vh auto;
+}
+
+#welcome{
+    z-index:1;
+}
+
+#welcome img{
+    max-width:70vw;
+    max-height:70vh;
+    margin:15vh auto;
+}
+
+#press_start{
+    width:75vw;
+    z-index:2;
+    position:absolute;
+    top:40vh;
+    left:7vw;
+}
+
+#video_intro_div{
+    z-index:3;
+    position:absolute;
+    top:0;
+    left:10vw;
+}
+
+#video_intro_div video, #video_enchante_div video, #video_outro_div video{
+    max-width:70vw;
+    max-height:70vh;
+    margin:0 auto;
 }
 
 #init_form{
-    padding:20vh 2vw 2vh 2vh;
+    z-index:4;
+    position:absolute;
+    top:35vh;
+    left:8vw;
+    padding:1vh 1vw;
+    min-width:70vw;
 }
 
 input{
     display:block;
-    font-family: "Alaska Expanded", "Arial Black", sans-serif;
-    font-size:2em;
-    padding: 0.5vh 0.5vw;
+    font-family: "NipDo505", sans-serif;
+    text-transform: uppercase;
+    font-size:2rem;
+    padding: 0 0.1rem;
     margin: 0.8vh auto;
+    border:2px solid #5000FF;
+    color:#5000FF;
+    background-color:#AAF9D9;
+    width:80%;
 }
 
-.submit_init{
-    display:block;
-    margin-top:3vh;
-    font-family: "Alaska Expanded", "Arial Black", sans-serif;
-    font-size:2em;
-    padding: 0.5vh 0.5vw;
-}
-.submit_init:link, .submit_init:visited, .submit_init:hover, .submit_init:active{
-    color:#fff;
+#video_enchante_div{
+    z-index:5;
+    position:absolute;
+    top:0;
+    left:9vw;
 }
 
-div.image_choices{
-    display:block;
-    padding: 0.5vh 0.5vw;
-    margin: 0.8vh;
+
+#song_mood_div{
+    z-index:6;
+    position:absolute;
+    top:12vh;
+    left:8vw;
+    max-width:80vw;
 }
 
-div.image_choices img{
+#song_mood_div img, #song_style_div img, #song_tempo_div img{
     display:inline-block;
-    max-width:20vw;
+    width:45%;
     margin: 1vh 0.5vw;
 }
 
-#loading{
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
+#song_style_div{
+    z-index:7;
+    position:absolute;
+    top:13vh;
+    left:9vw;
+    max-width:80vw;
 }
 
-#loading video{
-    object-fit: cover;
+#song_tempo_div{
+    z-index:8;
+    position:absolute;
+    top:14vh;
+    left:10vw;
+    max-width:80vw;
 }
 
-#song{
-    padding:10vh 2vw 2vh 2vw;
-    font-size:1.5em;
+#song_title_div{
+    z-index:9;
+    position:absolute;
+    top:20vh;
+    left:8vw;
+    max-width:80vw;
+    min-width:70vw;
 }
+
+.title_init{
+    display:block;
+    font-family: "NipDo505", sans-serif;
+    font-size:2rem;
+}
+
+#video_outro_div{
+    z-index: 10;
+    position:absolute;
+    top:0;
+    left:10vw;
+}
+
+#last_screen{
+    width:80vw;
+    height:90vh;
+    margin:5vh auto;
+}
+
+#last_screen img{
+    display:block;
+    width:85%;
+    margin: 6vh auto;
+}
+
+#last_screen .section_title{
+    font-family: "NipDo505", sans-serif;
+    font-size:1rem;
+    margin:1vh 1vw;
+}
+
+#last_screen p{
+    margin:1vh 4vw;
+    font-size:2.5rem;
+}
+
+#last_screen .big_number{
+    font-size:8rem;
+    font-family: "NipDo580", sans-serif;
+}
+
