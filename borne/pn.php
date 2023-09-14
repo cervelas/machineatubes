@@ -9,7 +9,7 @@ $json .= '"chords sample": {
                "notes": [
                         ';
 
-$measure = 1;
+$measure = 0;
 
 $mood = $_SESSION['song_mood'];
 
