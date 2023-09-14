@@ -35,18 +35,32 @@ echo '
     <p>Cr&eacute;ation en cours !<br />
     Ta chanson porte le num&eacute;ro</p>
     <p class="big_number">#'.$song_id.'</p>
-    <p>Vous pouvez à présent vous diriger vers la machine.</p>
-   
+    <p>Vous pouvez à présent vous diriger vers la machine.</p>';
+
+/*
+if($_SERVER['SERVER_NAME'] == 'localhost'){
+    echo '
     <script>
+    setTimeout(isFinished, 10000); 
+    function isFinished(){
+        window.location = "new_fuzz/interface/init.php";
+    }
+</script>';
+}else{
+    echo '<script>
     setTimeout(isFinished, 10000); 
     function isFinished(){
         window.location = "interface/init.php";
     }
-</script>
-</div>
+</script>';
+}
+
+
+echo '</div>
 </body>
 </html>';
 
+*/
 
 ?>
 
