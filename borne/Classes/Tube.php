@@ -33,7 +33,7 @@ class Tube extends Machine
         return $styles[$key];
     }
 
-    public function getChannel($tonality){
+    public function getChordChannel($tonality){
         $midi_channel_arr = [
             'D' => 4,
             'Ab' => 3,
