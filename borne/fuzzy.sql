@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 14, 2023 at 04:19 PM
+-- Generation Time: Sep 14, 2023 at 04:41 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -20,22 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `fuzzy`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `song_titles`
---
-
-CREATE TABLE `song_titles` (
-  `id` int(11) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  `mood` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `pitch` varchar(255) NOT NULL,
-  `channel` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `song_titles`
@@ -90,26 +74,6 @@ INSERT INTO `song_titles` (`id`, `filename`, `mood`, `keyword`, `titre`, `pitch`
 (47, 'D13', 'D', 'Délibéré', 'Une règle à suivre', '13', '13'),
 (48, 'D14', 'D', 'Anticonformiste', 'Mon credo', '14', '13'),
 (49, 'D15', 'D', 'Teinté', 'Quel est ton ton?', '15', '13');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `song_titles`
---
-ALTER TABLE `song_titles`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `song_titles`
---
-ALTER TABLE `song_titles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
