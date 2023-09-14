@@ -20,8 +20,6 @@ include_once('lyrics.php');
 $json .= '}
 }';
 
-echo '<p style="font-family:sans-serif;">'.$json.'</p>';
-
 echo '
 <html>
 <head>
