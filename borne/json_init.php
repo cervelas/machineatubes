@@ -38,30 +38,17 @@ echo '
     <p class="big_number">#'.$song_id.'</p>
     <p>Vous pouvez à présent vous diriger vers la machine.</p>';
 
-/*
-if($_SERVER['SERVER_NAME'] == 'localhost'){
-    echo '
-    <script>
-    setTimeout(isFinished, 10000); 
-    function isFinished(){
-        window.location = "new_fuzz/interface/init.php";
-    }
-</script>';
-}else{
-    echo '<script>
+ echo '<script>
     setTimeout(isFinished, 10000); 
     function isFinished(){
         window.location = "interface/init.php";
     }
-</script>';
-}
+    </script>
+    </div>
+    </body>
+    </html>';
 
 
-echo '</div>
-</body>
-</html>';
-
-*/
 
 ?>
 
