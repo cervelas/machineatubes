@@ -109,6 +109,7 @@ p{
     max-width:70vw;
     max-height:70vh;
     margin:0 auto;
+    border:3px solid #5000FF;
 }
 
 #init_form{
@@ -153,6 +154,7 @@ input{
     display:inline-block;
     width:45%;
     margin: 1vh 0.5vw;
+    border:3px solid #5000FF;
 }
 
 #song_style_div{
