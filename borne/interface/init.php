@@ -67,7 +67,7 @@ $variant = round(rand(1,2));
 <div id="video_intro_div" class="bordered" style="display: none;">
     <h2 class="section_title"><span class="bluebg">>INTRODUCTION</span></h2>
     <video id="video_intro" playsinline onended="videoFinished('intro');">
-        <source src="../video/loading.mp4" type="video/mp4">
+        <source src="../video/intro.mp4" type="video/mp4">
     </video>
    <!-- <p id="return_intro" style="display: none;"><a class="delete_circle" href="javascript:hideDiv('video_intro');"><span class="bluebg">REDEMARRER</span></a></p>-->
 
@@ -86,7 +86,7 @@ $variant = round(rand(1,2));
 <div id="video_enchante_div" class="bordered" style="display: none;">
     <h2 class="section_title"><span class="bluebg">>VIDEO</span></h2>
     <video id="video_enchante" playsinline onended="videoFinished('enchante');">
-        <source src="../video/loading.mp4" type="video/mp4">
+        <source src="../video/enchante.mp4" type="video/mp4">
     </video>
 </div>
 
@@ -122,7 +122,7 @@ $variant = round(rand(1,2));
     <div id="video_outro_div" class="bordered" style="display: none;">
         <h2 class="section_title"><span class="bluebg">>OUTRO</span></h2>
         <video id="video_outro" playsinline onended="videoFinished('outro');">
-            <source src="../video/loading.mp4" type="video/mp4">
+            <source src="../video/outro.mp4" type="video/mp4">
         </video>
     </div>
 
