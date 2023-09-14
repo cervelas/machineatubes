@@ -5,7 +5,7 @@ $variant = round(rand(1,2));
 
 ?>
 
-<html>
+<!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="../styles.css" type="text/css" />
     <title>La Machine à Tubes</title>
@@ -15,7 +15,6 @@ $variant = round(rand(1,2));
                 if (event.key === "1") {
                     document.getElementById("press_start").style.display = "block";
                 }
-
             });
 
         function startForm() {
@@ -114,9 +113,8 @@ $variant = round(rand(1,2));
         <img src="../imgs/tempo_140.jpg" onclick="javascript:submitInfo('song_tempo',140)" />
     </div>
 
-    <div id="song_title_div" class="bordered" style="display: none;">
+    <div id="song_title_id_div" class="bordered" style="display: none;">
         <h2 class="section_title"><span class="bluebg">>TITRE</span></h2>
-
     </div>
 
     <div id="video_outro_div" class="bordered" style="display: none;">
@@ -128,7 +126,7 @@ $variant = round(rand(1,2));
 
     <div id="debug"></div>
 <script>
-    const types_order = ['user_name', 'video_enchante', 'variant', 'song_mood', 'song_style', 'song_tempo', 'song_title'];
+    const types_order = ['user_name', 'video_enchante', 'variant', 'song_mood', 'song_style', 'song_tempo', 'song_title_id'];
     let info_type;
     let info;
     let next_element;
@@ -137,6 +135,7 @@ $variant = round(rand(1,2));
     let variant;
 
     function submitInfo(t, i = ''){
+
         info_type = t;
         const element = document.getElementById(info_type+"_div");
         const input = document.getElementById(info_type);
@@ -175,7 +174,7 @@ $variant = round(rand(1,2));
                         loadOutro();
                     }
                 }else if(info_type === 'song_mood'){
-                        document.getElementById("song_title_div").innerHTML += this.responseText;
+                        document.getElementById("song_title_id_div").innerHTML += this.responseText;
                         if (types_order.indexOf(info_type) + 1 < types_order.length) {
                             console.log(info_type + info);
                             const next_id = types_order[types_order.indexOf(info_type) + 1];
