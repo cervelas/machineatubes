@@ -18,7 +18,7 @@ $stop_arpeggiato_note = $tube1->getStopArpeggiato();
 $stop_topline_note = $tube1->getStopTopline();
 $harmony = $tube1->getVoiceHarmony();
 
-$measure = 1;
+$measure = 0;
 
 foreach($format as $section){
     $section_length = $general_lengths[$section];
