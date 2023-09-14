@@ -1,1 +1,15 @@
-{"id":"tlk_j5p8aeKBNExGoSME36kok","created_at":"2023-09-14T12:40:54.712Z","created_by":"auth0|636914baf3c085ea3638c6e8","status":"created","object":"talk"}
+{"id":"","created_at":"2023-09-14T12:40:54.712Z","created_by":"auth0|636914baf3c085ea3638c6e8","status":"created","object":"talk"}
+tlk_j5p8aeKBNExGoSME36kok
+
+id = "tlk_j5p8aeKBNExGoSME36kok"
+
+url = "https://api.d-id.com/talks/" + id
+
+headers = {"accept": "application/json",
+           "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
+
+response = requests.get(url, headers=headers)
+
+pprint.pprint(response.json(), indent=4)
+
+print(response.json()["result_url"])
