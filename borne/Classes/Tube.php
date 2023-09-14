@@ -3,7 +3,6 @@ namespace Classes;
 
 require_once 'Machine.php';
 require_once 'midiequiv.php';
-
 class Tube extends Machine
 {
     public function insertChoices($song_mood, $song_tempo, $song_style, $song_addons){
@@ -13,10 +12,9 @@ class Tube extends Machine
     }
 
     public function getTonality($mood){
-        $sql = "SELECT tonality FROM midi_prompts WHERE mood='$mood'";
-        $results = $this->query($sql);
-        $tonality = $results[array_rand($results,1)];
-        return $tonality['tonality'];
+        $sql = "SELECT tonality FROM song_moods WHERE mood='$mood'";
+        $res = $this->query($sql);
+        return $res[0]['tonality'];
     }
 
     public function getMoodName($tonality){
@@ -52,14 +50,13 @@ class Tube extends Machine
     }
 
     public function getChordPitch($step, $do_alter, $octave){
-        $octave++;
         $note = $step;
 
         if($do_alter == 1){
             if($note == "B") $note .= "b";
             else $note .= "#";
         }
-        
+
         $note .= $octave;
         if(array_key_exists($note, MIDIEQUIV)){
             return MIDIEQUIV[$note];
@@ -144,7 +141,7 @@ class Tube extends Machine
         $res = $this->query($sql);
         return $res[0];
     }
-    
+
     public function getPrompt($tonality){
         $sql = "SELECT * FROM midi_prompts WHERE tonality='$tonality'";
         $results = $this->query($sql);
@@ -185,7 +182,7 @@ class Tube extends Machine
         return $lyrics;
     }
 
-        public function getToplineChannel($tonality){
+    public function getToplineChannel($tonality){
         $top_channel = [
             'D' => 10,
             'Ab' => 11,
@@ -198,16 +195,26 @@ class Tube extends Machine
         return rand(1,108);
     }
 
-     public function getStopTopline(){
+    public function getStopTopline(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
         $results = $this->query($sql);
         return $results[0];
     }
 
-     public function getVoiceHarmony(){
+    public function getVoiceHarmony(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'VOICE_HARMONY'";
         $results = $this->query($sql);
         return $results[0];
+    }
+
+    function getOldTitles(){
+        $sql = "SELECT title FROM song_titles";
+        return $this->querySimpleArray($sql, 'title');
+    }
+
+    function getOldInspo(){
+        $sql = "SELECT text FROM song_inspo";
+        return $this->querySimpleArray($sql, 'text');
     }
 
 }
