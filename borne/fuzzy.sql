@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 14, 2023 at 04:41 PM
+-- Generation Time: Sep 14, 2023 at 04:45 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `fuzzy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `song_titles`
+--
+
+DROP TABLE IF EXISTS `song_titles`;
+CREATE TABLE IF NOT EXISTS `song_titles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) NOT NULL,
+  `mood` varchar(255) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `pitch` varchar(255) NOT NULL,
+  `channel` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `song_titles`
