@@ -59,7 +59,7 @@ $variant = round(rand(1,2));
 <div id="press_start" class="bordered" style="display: none;">
     <p><span class="bluebg">>NAVIGUEZ</span> À L’AIDE DES 4 TOUCHES COLORÉES DU CLAVIER<br />
         APPUYEZ SUR
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#19FF00" stroke="#5000FF"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>
+        <svg height="0.8em" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 62 61" style="enable-background:new 0 0 62 61; fill:#19FF00;stroke:#5000FF;stroke-width:3;stroke-miterlimit:10;" xml:space="preserve"><circle cx="30.5" cy="30.5" r="28"/></svg>
         POUR DÉMARRER</p>
         <a href="javascript:startForm();"><span>BOUTON VERT</span></a>
 </div>
