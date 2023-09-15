@@ -30,6 +30,7 @@ def handler(signum, frame):
     '''
     print("Ctrl-c was pressed. Exiting...")
     abort.set()
+    close.set()
     exit(0)
  
 signal.signal(signal.SIGINT, handler)
@@ -209,8 +210,8 @@ def webview_cb():
     machine.stop()
     time.sleep(0.1)
     # add check
-    machine.win.destroy()
     machine.ctrlwin.destroy()
+    machine.win.destroy()
 
 def main():
     '''
@@ -248,7 +249,7 @@ def main():
         print(screens)
 
         window = webview.create_window('Machine à Tubes', server, js_api=machineapi, width=1000, height=700, frameless=is_mac(), focus=False)
-        
+        window.events.closing += machine.close
         ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
 
         machine.win = window

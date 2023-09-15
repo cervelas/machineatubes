@@ -43,6 +43,7 @@
             width: 50vw;
             height: 50vh;
             transform-origin: 0 0;
+            overflow: hidden;
         }
 
         .vertical{
@@ -113,6 +114,14 @@
         #video video{
             max-width: 100%;
             max-height: 100%;
+        }
+
+        #video video#dedicacevideo{
+            position: absolute;
+            transform-origin: 50% 50%;
+            transform: rotate(-90deg) translateY(10vw);
+            max-height: 50vw;
+            max-width: 50vh;
         }
 
         #infos{
@@ -229,7 +238,7 @@
             </div>
             <div class="screen" id="video">
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
-                <div id="dedicacevideo" style="display: none;">INTRO DEDICACE</div>
+                <video id="dedicacevideo" style="display:none;" src="assets/videos/dedicace.mp4"></video>
                 <video id="introvideo" style="display:none;" src="assets/videos/machine/intro/intro.mp4"></video>
                 <video id="outrovideo" style="display:none;" src="assets/videos/machine/outro/outro.mp4"></video>
             </div>
