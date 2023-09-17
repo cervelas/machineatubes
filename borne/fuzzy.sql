@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 17, 2023 at 07:19 PM
+-- Generation Time: Sep 17, 2023 at 07:23 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -384,6 +384,18 @@ CREATE TABLE `songs` (
   `song_tempo` varchar(255) NOT NULL,
   `song_style` varchar(255) NOT NULL,
   `song_addons` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `songs_titles_used`
+--
+
+DROP TABLE IF EXISTS `songs_titles_used`;
+CREATE TABLE `songs_titles_used` (
+  `song_title_id` int(11) NOT NULL,
+  `used` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
