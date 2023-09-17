@@ -12,7 +12,8 @@ $json .= '
             "lyrics": [ ';
 
                 foreach($lyrics as $beat=>$text){
-                    $json .= '{ "beat": '.($beat * 4).', "text": "'.$text.'" }';
+                    $beat = intval($beat);
+                    $json .= '{ "beat": '.($beat * 4).', "text": "'.addcslashes($text, '"').'" }';
                     if($beat != array_key_last($lyrics)){
                         $json .= ', ';
                     }
