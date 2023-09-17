@@ -11,6 +11,7 @@ class Machine extends Database {
     }
 
     public function insertSong($user_id, $title, $mood, $tempo, $style, $addons=''){
+        $title = addslashes($title);
         $sql = "INSERT INTO songs(user_id, song_title, song_mood, song_tempo, song_style, song_addons) VALUES($user_id,'$title','$mood','$tempo','$style','$addons')";
         return $this->query($sql);
     }
