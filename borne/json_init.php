@@ -19,6 +19,7 @@ include_once('p5.php');
 include_once('p6.php');
 include_once('p8.php');
 include_once('p_top.php');
+include_once ('p_singing.php');
 include_once('lyrics.php');
 
 $json .= '}
