@@ -1,6 +1,7 @@
 <?php
+
 require_once("texts_dedicace.php");
-$text = $texts_dedicace[array_rand($texts_dedicace)];
+$text = mb_convert_encoding(stripslashes($texts_dedicace[array_rand($texts_dedicace)]), 'UTF-8');
 
 $credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding('bastien.bron@gmail.com:LaMachine2022', 'UTF-8'));
 
@@ -54,7 +55,6 @@ if($access_token) {
     if(file_put_contents($cereproc_audio_url, $response)){
         include "did_getTalk.php";
     }
-
 
 }
 
