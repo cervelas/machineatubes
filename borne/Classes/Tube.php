@@ -5,12 +5,6 @@ require_once 'Machine.php';
 require_once 'midiequiv.php';
 class Tube extends Machine
 {
-    public function insertChoices($song_mood, $song_tempo, $song_style, $song_addons){
-        $sql = "INSERT INTO song_choices(song_mood, song_tempo, song_style, song_addons) VALUES('$song_mood', $song_tempo, '$song_style', '$song_addons')";
-        $choice_id = $this->query($sql);
-        return $choice_id;
-    }
-
     public function getTonality($mood){
         $sql = "SELECT tonality FROM song_moods WHERE mood='$mood'";
         $res = $this->query($sql);
@@ -40,6 +34,11 @@ class Tube extends Machine
             'C' => 2
         ];
         return $midi_channel_arr[$tonality];
+    }
+
+    public function getSinging($song_title_id){
+        $sql = "SELECT * FROM song_titles WHERE id=$song_title_id";
+        return $this->queryAssocArray($sql);
     }
 
     public function getChords($tonality){
@@ -140,12 +139,6 @@ class Tube extends Machine
         $sql = "SELECT * FROM midi_actions WHERE name LIKE '$addon_name_substr%'";
         $res = $this->query($sql);
         return $res[0];
-    }
-
-    public function getPrompt($tonality){
-        $sql = "SELECT * FROM midi_prompts WHERE tonality='$tonality'";
-        $results = $this->query($sql);
-        return $results[array_rand($results,1)]['notes'];
     }
 
     public function getFormat($lines){
