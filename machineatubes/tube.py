@@ -49,13 +49,11 @@ t = time.perf_counter()
 videospath = Path(__file__).parent / '..' / 'ui' / 'assets' / 'videos'
 relpath = Path(__file__).parent / '..' / 'ui'
 
-print(videospath)
-
 vext = 'mp4'
 
-def getvideos():
+def getvideos(subfolder = ""):
     return {
-        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / v[0]).glob('*.' + vext) ] for v in song_structure
+        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / v[0] / subfolder).glob('*.' + vext) ] for v in song_structure
     }
 
 def initsleep():
@@ -205,13 +203,14 @@ class Tube():
 
     def mix_videos(self, variant = ""):
         videos = getvideos()
-        print(videos)
         for v in song_structure:
+            i = 0
             for b in range(v[1], v[2], v[3]):
                 choices = [ v for v in videos[v[0]] if variant in v ]
                 print("add videonote %s %s" % (b, v[0]))
-                vid = VideoNote(file=random.choice(choices))
+                vid = VideoNote(file=videos[v[0]][i])
                 self.videonote(b, vid)
+                i = (i + 1) % len(videos[v[0]])
 
     def get_intro_video(self, id):
         print("get video id " + id)
