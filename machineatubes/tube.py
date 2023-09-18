@@ -39,7 +39,7 @@ song_structure = [
     ("refrain", 144, 175, 8),
     ("solo", 176, 207, 8),
     ("refrain", 208, 239, 8),
-    ("intro", 240, 248, 8),
+    ("intro", 240, 244, 8),
 ]
 
 # pprint.pprint(notes2midi) show me all your notes

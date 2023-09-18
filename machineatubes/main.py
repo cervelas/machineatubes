@@ -5,6 +5,8 @@ import argparse
 import webview 
 import threading
 import platform
+from pathlib import Path
+import json
 
 import rtmidi2 as rm
 from flask import Flask, render_template, request
@@ -85,8 +87,7 @@ class Machine:
         self.tubes = [] 
         self.autoplay = False
         self.playing = False
-        
-
+        self.last_tube = None
     def close(self):
         close.set()
 
@@ -113,14 +114,21 @@ class Machine:
 
     def __play(self):
         playing.set()
+        if len(self.tubes) == 0 and self.last_tube:
+            self.last_tube.play(self.win, args.verbose)
+            self.last_tube.stop()
+
         while len(self.tubes) > 0 and not abort.is_set():
             if len(self.tubes) > 0 and self.tubes[0].playing is False:
-                playlist = "<br>".join([ t.name for t in self.tubes ])
+                playlist = "<br> Playing %s (%s)" % (self.tubes[0].name, self.tubes[0].infos["numero"])
+                playlist = "<br> Next Song ".join([ "%s (%s)" % (t.name, t.infos["numero"]) for t in self.tubes[1:] ])
                 self.ctrlwin.evaluate_js('uplist("%s")' % playlist)
                 abort.clear()
                 self.tubes[0].play(self.win, args.verbose)
                 self.tubes[0].stop()
+                self.last_tube = self.tubes[0]
                 self.tubes.pop(0)
+        
         if len(self.tubes) > 0:
             self.tubes[0].stop()
         playing.clear()
@@ -206,6 +214,9 @@ def playtube():
     '''
     print("received tube " + str(request.json))
     try:
+        json_file = Path(__file__) / ".." / "songs_json" / "%s_%s" % ( time.time(), request.json["name"] )
+        with open(json_file, "w") as fp:
+            json.dump(request.json, fp)
         machine.load_tube(request.json)
     except Exception as e:
         print("RX: %s" % request.json)
