@@ -26,7 +26,7 @@ foreach($format as $key=>$section){
 
             $json .= '{
                 "beat": '.($measure * 4).',
-                "note": "'.$note_pitch.'",
+                "note": '.$note_pitch.',
                 "duration": 4
                 }';
 
