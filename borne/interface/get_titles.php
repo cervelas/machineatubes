@@ -6,12 +6,15 @@ if(isset($_SESSION['song_mood'])){
     $machine = new Tube();
 
     $_SESSION['song_mood_name'] = $machine->getMoodName($_SESSION['song_mood']);
-    $_SESSION['midi_channel'] = $machine->getChannel($_SESSION['song_mood']);
+    $_SESSION['midi_channel'] = $machine->getChordChannel($_SESSION['song_mood']);
 
-    $song_titles = $machine->getRandomTitles($_SESSION['song_mood'], 4, '../lyrics/');
+    $song_title_ids = $machine->getRandomTitles($_SESSION['song_mood'], 4);
+    $circle_colors = array("green", "yellow", "blue", "red");
 
-    foreach($song_titles as $song_title){
-        echo '<a class="title_init" href="javascript:submitInfo(\'song_title\',\''.urlencode(addslashes($song_title)).'\');">'.$song_title.'</a>';
+    foreach($song_title_ids as $key=>$song_title_id){
+        $circle_class = $circle_colors[$key]."_circle";
+        $song_keyword = $machine->getSongInfo($song_title_id)['keyword'];
+        echo '<a class="title_init '.$circle_class.'" href="javascript:submitInfo(\'song_title_id\',\''.$song_title_id.'\');"><span class="bluebg">>'.$song_keyword.'</span></a>';
     }
 }
 

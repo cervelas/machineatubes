@@ -16,31 +16,28 @@ class Machine extends Database {
         return $this->query($sql);
     }
 
-    public function getSongTitles($tonality, $directory = 'lyrics/'): array
+    public function getSongTitles($tonality): array
     {
-        $files = scandir($directory.$tonality);
-        $filenames = array();
-
-        foreach($files as $key => $value){
-            if(mb_strlen($value)<3){
-                unset($files[$key]);
-            }else{
-                $filenames []= substr($value,0, -4);
-            }
-        }
-
-        return $filenames;
+        $sql = "SELECT * FROM song_titles WHERE mood='$tonality'";
+        return $this->query($sql);
     }
 
-    public function getRandomTitles($tonality, $qty, $directory = 'lyrics/'): array
+    public function getRandomTitles($tonality, $qty): array
     {
-        $titles = $this->getSongTitles($tonality, $directory);
+        $titles = $this->getSongTitles($tonality);
         $random_keys = array_rand($titles,$qty);
         foreach($random_keys as $key){
-            $random[] = $titles[$key];
+            $random[] = $titles[$key]['id'];
         }
         shuffle($random);
         return $random;
+    }
+
+    public function getSongInfo($id) : array
+    {
+        $sql = "SELECT * FROM song_titles WHERE id=$id";
+        $song_info = $this->query($sql);
+        return $song_info[0];
     }
 
     public function getAvailAddons(){

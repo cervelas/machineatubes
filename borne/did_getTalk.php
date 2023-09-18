@@ -22,6 +22,9 @@ $server_output_arr = json_decode($server_output, true);
 curl_close ($ch);
 
 $audio_tmp_link = $server_output_arr['url'];
+$img_url = "https://lamachine.mynameisfuzzy.ch/imgs_did/DID_".strtoupper($_SESSION['song_style'])."_".$_SESSION['variant'].".jpg";
+
+//echo '<p style="text-transform: none;">'.$img_url.'</p>';
 
 if($audio_tmp_link!==''){
     $ch = curl_init();
@@ -47,13 +50,13 @@ if($audio_tmp_link!==''){
         0,
         0
       ],
-      "url": "https://metastories.io/lamachine/lamachine_logo.png"
+      "url": "https://lamachine.mynameisfuzzy.ch/imgs_did/nologo.png"
     },
     "fluent": "false",
     "pad_audio": "0.0",
     "stitch":"true"
   },
-  "source_url": "https://metastories.io/lamachine/bossa_vid.jpg"
+  "source_url": "'.$img_url.'"
 }';
 
     curl_setopt($ch, CURLOPT_URL,"https://api.d-id.com/talks");
@@ -66,6 +69,8 @@ if($audio_tmp_link!==''){
     $server_output_arr = json_decode($server_output, true);
 
     curl_close ($ch);
+
+    //echo '<p style="text-transform: none;">'.$server_output.'</p>';
 
     $talk_id = $server_output_arr['id'];
 

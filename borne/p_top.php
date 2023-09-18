@@ -8,7 +8,7 @@ $json .= '"toplines": {
                "channel": '.$channel.',
                "notes": [';
 
-$measure = 1;
+$measure = 0;
 $keys_used = array();
 
 $note_pitch = $tubet->getToplinePitch();

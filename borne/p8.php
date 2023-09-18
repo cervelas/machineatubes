@@ -7,7 +7,7 @@ $json .= '"autotune": {
                "channel": 8,
                "notes": [';
 
-$measure =1;
+$measure = 0;
 
 $keys_used = array();
 

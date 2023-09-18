@@ -6,19 +6,14 @@ $stopall = 12;
 $json .= '"settings": {
                "type": "notes",
                "channel": 1,
-               "notes": [
-                        {
-                        "beat": 0,
-                        "note": '.$stopall.',
-                        "duration": 4
-                        },';
+               "notes": [ ';
 
 $stop_drums_note = $tube1->getStopDrums();
 $stop_arpeggiato_note = $tube1->getStopArpeggiato();
 $stop_topline_note = $tube1->getStopTopline();
 $harmony = $tube1->getVoiceHarmony();
 
-$measure = 1;
+$measure = 0;
 
 foreach($format as $section){
     $section_length = $general_lengths[$section];
