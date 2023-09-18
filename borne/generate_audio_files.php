@@ -3,10 +3,10 @@ use Classes\Tube;
 require_once 'autoloader.php';
 $machine = new Tube();
 $tonalities = array("C", "D", "Ab");
-//$tonalities = array("Ab");
-$show_only ["C"]= array_map(function($n) { return sprintf("C".$n, $n); }, range(40, 40) );
-$show_only ["D"]= array_map(function($n) { return sprintf("D".$n, $n); }, range(40, 40) );
-$show_only ["Ab"]= array_map(function($n) { return sprintf("Ab".$n, $n); }, range(33, 40) );
+//$tonalities = array("C", "D", "Ab");
+$show_only ["C"]= array_map(function($n) { return sprintf("C".$n, $n); }, range(89, 89) );
+$show_only ["D"]= array_map(function($n) { return sprintf("D".$n, $n); }, range(64, 127) );
+$show_only ["Ab"]= array_map(function($n) { return sprintf("Ab".$n, $n); }, range(21, 78) );
 
 //print_r($show_only);
 
