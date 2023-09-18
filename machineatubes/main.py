@@ -214,7 +214,7 @@ def playtube():
     '''
     print("received tube " + str(request.json))
     try:
-        json_file = Path(__file__) / ".." / "songs_json" / "%s_%s" % ( time.time(), request.json["name"] )
+        json_file = Path(__file__) / ".." / "songs_json" / ("%s_%s" % ( time.time(), request.json["name"] ))
         with open(json_file, "w") as fp:
             json.dump(request.json, fp)
         machine.load_tube(request.json)
