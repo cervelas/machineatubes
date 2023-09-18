@@ -3,12 +3,13 @@ import json
 import threading
 import pprint
 import random
+import requests
 from pathlib import Path, PurePosixPath
 
 import rtmidi2 as rm
 
 abort = threading.Event()
-playsong = threading.Event()
+videoend = threading.Event()
 
 out = rm.MidiOut() # we may need more than one
 
@@ -92,6 +93,7 @@ class Tube():
         self.divisions = 16
         self.playing = False
         self.infos = {}
+        self.intro_video_url = None
 
     def duration(self):
         '''
@@ -156,21 +158,22 @@ class Tube():
         pass
 
     def play(self, window=False, verbose=False):
+        videoend.clear()
+        self.playing = True
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-            Tube.window.evaluate_js('gointro()')
-            print("go intro")
+            if self.infos.get("intro_video_url"):
+                Tube.window.evaluate_js('gointro("%s")' % self.infos["intro_video_url"])
         
         print("wait playsong")
-        playsong.wait(60)
+        videoend.wait(60)
         print("playsong !")
         # send bpm control
         self.stop()
         self.setbpm()
         self.stop()
         self.start_time = time.perf_counter()
-        self.playing = True
         initsleep()
         for b, notes in self.notes.items():
             if abort.is_set():
@@ -182,8 +185,11 @@ class Tube():
                 if len(notes) == 0:
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
+        videoend.clear()
         Tube.window.evaluate_js('gooutro()')
         print("END")
+        videoend.wait(60)
+        time.sleep(5)
         self.stop()
         self.playing = False
 
@@ -197,14 +203,45 @@ class Tube():
         time.sleep(0.2)
         out.send_noteoff(0, 12)
 
-    def mix_videos(self):
+    def mix_videos(self, variant = ""):
         videos = getvideos()
         print(videos)
         for v in song_structure:
             for b in range(v[1], v[2], v[3]):
+                choices = [ v for v in videos[v[0]] if variant in v ]
                 print("add videonote %s %s" % (b, v[0]))
-                vid = VideoNote(file=random.choice(videos[v[0]]))
+                vid = VideoNote(file=random.choice(choices))
                 self.videonote(b, vid)
+
+    def get_intro_video(self, id):
+        print("get video id " + id)
+        if id and len(id) > 0:
+            url = "https://api.d-id.com/talks/" + id
+
+            headers = {"accept": "application/json",
+                    "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
+
+            try:
+                retry = 20
+                while retry > 0:
+                    time.sleep(5)
+                    print(url, headers)
+                    response = requests.get(url, headers=headers)
+
+                    #pprint.pprint(response.json(), indent=4)
+
+                    response = response.json()
+
+                    if response.get("result_url"):
+                        break
+                        
+                    retry -= 1
+
+                self.infos["intro_video_url"] = response.get("result_url")
+            except Exception as e:
+                print("INTRO VIDEO ERROR")
+                print(e)
+        
 
 class Note():
     def play(self, i, verbose=False):

@@ -229,7 +229,7 @@
             </div>
             <div class="screen" id="video">
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
-                <div id="dedicacevideo" style="display: none;">INTRO DEDICACE</div>
+                <video id="dedicacevideo" style="display: none;"></video>
                 <video id="introvideo" style="display:none;" src="assets/videos/machine/intro/intro.mp4"></video>
                 <video id="outrovideo" style="display:none;" src="assets/videos/machine/outro/outro.mp4"></video>
             </div>
@@ -256,19 +256,22 @@
             });
         }
 
-        var gointro = function(){
+        var gointro = function(url){
             wakeup()
             intro_video.style.display = "block";
+            intro_video.currentTime = 0;
             intro_video.play();
+            dedi_video.src = url;
+            dedi_video.load();
+            dedi_video.currentTime = 0;
             intro_video.addEventListener("ended", function(v){
                 intro_video.style.display = "none";
                 dedi_video.style.display = "block";
-                console.log("videoended")
-                setTimeout(() => {
+                dedi_video.play();
+                dedi_video.addEventListener("ended", function(v){
                     dedi_video.style.display = "none";
-                    console.log("super ended")
-                    window.pywebview.api.play();
-                }, 3000);
+                    window.pywebview.api.videoend();
+                });
             });
             
         }
@@ -279,9 +282,11 @@
                 v.style.display = "none";
             });
             outro_video.style.display = "block";
+            outro_video.currentTime = 0;
             outro_video.play();
             outro_video.addEventListener("ended", function(v){
                 outro_video.style.display = "none";
+                window.pywebview.api.videoend();
                 sleep();
             });
         }

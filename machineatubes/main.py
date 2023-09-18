@@ -11,10 +11,10 @@ from flask import Flask, render_template, request
 
 from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
-from machineatubes.tube import out, Tube, VideoNote, abort, playsong, LyricsNote
-
+from machineatubes.tube import out, Tube, VideoNote, abort, videoend, LyricsNote
 
 close = threading.Event()
+playing = threading.Event()
 
 def is_win():
     return platform.system() == 'Windows'
@@ -72,8 +72,8 @@ args = parser.parse_args()
 
 class Machine2:
 
-    def play(self):
-        playsong.set()
+    def videoend(self):
+        videoend.set()
 
 machineapi = Machine2()
 
@@ -111,32 +111,44 @@ class Machine:
             self.tubes.pop(0)
 
     def __play(self):
+        playing.set()
         while len(self.tubes) > 0 and not abort.is_set():
             if len(self.tubes) > 0 and self.tubes[0].playing is False:
+                playlist = "<br>".join([ t.name for t in self.tubes ])
+                self.ctrlwin.evaluate_js('uplist("%s")' % playlist)
                 abort.clear()
                 self.tubes[0].play(self.win, args.verbose)
-                if len(self.tubes) == 1:
-                    break
+                self.tubes[0].stop()
                 self.tubes.pop(0)
+        if len(self.tubes) > 0:
+            self.tubes[0].stop()
+        playing.clear()
 
     def play(self):
-        if len(self.tubes) == 1:
+        if not playing.is_set():
             t = threading.Thread(target=self.__play)
             t.start()
 
     def stop(self):
         abort.set()
+        if len(self.tubes) > 0:
+            self.tubes[0].stop()
 
     def log(self, txt):
         self.ctrlwin.evaluate_js("log('%s')" % txt)
 
     def load_tube(self, payload):
+        t = threading.Thread(target=self.__load_tube, args=(payload,))
+        t.start()
+
+    def __load_tube(self, payload):
         self.tubes.append(parseJSON2Score(payload, args.verbose))
 
         t = self.tubes[-1]
         
         if args.verbose:
-            self.log("parts:")
+            for k, v in t.infos.items():
+                self.log("\t%s: %s" % (k, v))
             for k, v in t.parts.items():
                 self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
             
@@ -144,8 +156,10 @@ class Machine:
             self.log("%s BPM" % t.bpm)
             self.log("%s measures" % t.measures)
             self.log("duration %s s" % t.duration())
+
         self.log("Received the song %s !" % t.name)
-        self.log("Press P to play")
+        
+        self.play()
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
@@ -192,9 +206,9 @@ def playtube():
     print("received tube " + str(request.json))
     try:
         machine.load_tube(request.json)
-        machine.play()
     except Exception as e:
-        print("Error on RX: %s" % e)
+        print("RX: %s" % request.json)
+        print("Error: %s" % e)
         return "error", 500
     return "success", 200
 

@@ -18,7 +18,7 @@
             background-color: #AAF9D9;
             border: 5px solid #5000FF;
             padding: 5px;
-            
+            color: #5000FF;
         }
 
         .debug{
@@ -38,6 +38,13 @@
             text-align: center;
             align-content: center;
             justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .playlist{
+            display: flex;
+            text-align: center;
+            align-content: center;
             margin-bottom: 10px;
         }
 
@@ -66,6 +73,9 @@
                 <button type="button" id="stop">Stop [S]</button>
                 <button type="button" id="close">Quit [Q]</button>
         </div>
+        <div id="playlist" class="playlist">
+            playlist
+        </div>
         <div class="debug" id="debug">
             welcome to Machine A Tube !
         </div>
@@ -74,10 +84,15 @@
 
         
         let debug = document.querySelector("#debug");
+        let playlist = document.querySelector("#playlist");
 
         var log = function(txt){
             d = new Date();
             debug.innerHTML = d.toTimeString().split(' ')[0] + " " + txt + "<br>" + debug.innerHTML;
+        }
+
+        var uplist = function(txt){
+            playlist.innerHTML = txt;
         }
 
         document.addEventListener('click', (event) => {
