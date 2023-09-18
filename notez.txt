@@ -11,3 +11,6 @@
    - Video d'outro (merci c'était super), infos reste, paroles en veille
    - fin video, veille partout.
    . si file d'attente, on attend 5 sec.
+
+- update si pas d-id play video bug
+- 
