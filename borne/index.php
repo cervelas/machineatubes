@@ -22,6 +22,7 @@ if(!$_GET['init']){
 
     $user_id = $tube->insertUser($user_name);
     $song_id = $tube->insertSong($user_id, $song_title, $song_mood, $song_tempo, $song_style);
+    $tube->insertUsedTitle($song_title_id);
 
     $_SESSION['song_id'] = $song_id;
     $_SESSION['user_id'] = $user_id;
