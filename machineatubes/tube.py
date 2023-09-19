@@ -51,10 +51,21 @@ relpath = Path(__file__).parent / '..' / 'ui'
 
 vext = 'mp4'
 
-def getvideos(subfolder = ""):
+def getsongvideos(subfolder = ""):
     return {
-        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / v[0] / subfolder).glob('*.' + vext) ] for v in song_structure
+        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / subfolder / v[0]).glob('*.' + vext) ] for v in song_structure
     }
+
+def get_intro_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "intro").glob('*.' + vext) ]
+    )
+
+def get_outro_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "outro").glob('*.' + vext) ]
+    )
+
 
 def initsleep():
     global t
@@ -162,7 +173,7 @@ class Tube():
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
             if self.infos.get("intro_video_url"):
-                Tube.window.evaluate_js('gointro("%s")' % self.infos["intro_video_url"])
+                Tube.window.evaluate_js('gointro("%s", "%s")' % (get_intro_video(), self.infos["intro_video_url"]))
         
         print("wait playsong")
         videoend.wait(60)
@@ -184,7 +195,7 @@ class Tube():
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
         videoend.clear()
-        Tube.window.evaluate_js('gooutro()')
+        Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
         print("END")
         videoend.wait(60)
         time.sleep(5)
@@ -201,12 +212,12 @@ class Tube():
         time.sleep(0.2)
         out.send_noteoff(0, 12)
 
-    def mix_videos(self, variant = ""):
-        videos = getvideos()
+    def mix_videos(self):
+        videos = getsongvideos(Path(str(self.bpm)) / self.song_infos["style"] / self.style_flavor )
         for v in song_structure:
             i = 0
             for b in range(v[1], v[2], v[3]):
-                choices = [ v for v in videos[v[0]] if variant in v ]
+                choices = [ v for v in videos[v[0]] ]
                 print("add videonote %s %s" % (b, v[0]))
                 vid = VideoNote(file=videos[v[0]][i])
                 self.videonote(b, vid)
@@ -215,15 +226,17 @@ class Tube():
     def get_intro_video(self, id):
         print("get video id " + id)
         if id and len(id) > 0:
+            if self.playing is False:
+                Tube.window.evaluate_js('loading()')
+
             url = "https://api.d-id.com/talks/" + id
 
             headers = {"accept": "application/json",
                     "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
 
             try:
-                retry = 20
+                retry = 10
                 while retry > 0:
-                    time.sleep(5)
                     print(url, headers)
                     response = requests.get(url, headers=headers)
 
@@ -235,12 +248,12 @@ class Tube():
                         break
                         
                     retry -= 1
+                    time.sleep(5)
 
                 self.infos["intro_video_url"] = response.get("result_url")
             except Exception as e:
                 print("INTRO VIDEO ERROR")
                 print(e)
-        
 
 class Note():
     def play(self, i, verbose=False):

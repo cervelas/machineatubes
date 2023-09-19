@@ -183,7 +183,7 @@
             font-size: 0.3em;
         }
 
-        .sleep{
+        .sleep, .loading{
             display: flex;
             text-align: center;
             justify-content: center;
@@ -194,10 +194,9 @@
             height: 100%;
             background-color: #AAF9D9;
             z-index: 10000;
-
         }
 
-        .sleep img{
+        .sleep img, .loading img{
             margin-left: auto;
             margin-right: auto;
         }
@@ -208,10 +207,12 @@
         <div class="playcontainer pywebview-drag-region">
             <div class="screen paroles" >
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
-                <div id="paroles">Paroles</div>
+                <div class="loading"><img src="assets/img/loading.gif"></div>
+                <div id="paroles"></div>
             </div>
             <div class="screen vertical" id="infos" >
                     <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                    <div class="loading"><img src="assets/img/loading.gif"></div>
                     <!-- <div id="infologo"><img src="assets/img/logoinfos.jpg"></div> -->
                     <div id="infonum">Chanson #57</div>
                     <div class="header"><span>>Titre</span></div>
@@ -229,6 +230,7 @@
             </div>
             <div class="screen" id="titre">
                     <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                    <div class="loading"><img src="assets/img/loading.gif"></div>
                     <div class="headertitre"><img src="assets/img/logotitre.jpg"><div id="numtube">CHANSON #47</div></div>
                     <div>
                         <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
@@ -238,6 +240,7 @@
             </div>
             <div class="screen" id="video">
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                <div class="loading"><img src="assets/img/loading.gif"></div>
                 <video id="dedicacevideo" style="display: none;"></video>
                 <video id="introvideo" style="display:none;" src="assets/videos/machine/intro/intro.mp4"></video>
                 <video id="outrovideo" style="display:none;" src="assets/videos/machine/outro/outro.mp4"></video>
@@ -265,18 +268,36 @@
             });
         }
 
-        var gointro = function(url){
+        var loading = function(){
+            const elems = document.querySelectorAll('.loading');
+            elems.forEach(function(e){
+                e.style.display = "flex";
+            });
+        }
+
+        var loaded = function(){
+            const elems = document.querySelectorAll('.loading');
+            elems.forEach(function(e){
+                e.style.display = "none";
+            });
+        }
+
+        loaded();
+
+        var gointro = function(intro_url, dedi_url){
+            loaded()
             wakeup()
-            intro_video.style.display = "block";
+            intro_video.src = intro_url;
             intro_video.currentTime = 0;
             intro_video.play();
+            intro_video.style.display = "block";
             dedi_video.src = url;
             dedi_video.load();
             dedi_video.currentTime = 0;
             intro_video.addEventListener("ended", function(v){
                 intro_video.style.display = "none";
-                dedi_video.style.display = "block";
                 dedi_video.play();
+                dedi_video.style.display = "block";
                 dedi_video.addEventListener("ended", function(v){
                     dedi_video.style.display = "none";
                     window.pywebview.api.videoend();
@@ -285,14 +306,15 @@
             
         }
 
-        var gooutro = function(){
+        var gooutro = function(outro_url){
             const vids = document.querySelectorAll('video');
             vids.forEach(function(v){
                 v.style.display = "none";
             });
-            outro_video.style.display = "block";
+            outro_video.src = outro_url;
             outro_video.currentTime = 0;
             outro_video.play();
+            outro_video.style.display = "block";
             outro_video.addEventListener("ended", function(v){
                 outro_video.style.display = "none";
                 window.pywebview.api.videoend();
