@@ -213,11 +213,10 @@ class Tube():
         out.send_noteoff(0, 12)
 
     def mix_videos(self):
-        videos = getsongvideos(Path(str(self.bpm)) / self.song_infos["style"] / self.style_flavor )
+        videos = getsongvideos(Path(str(self.bpm)) / self.infos["style"] / self.style_flavor )
         for v in song_structure:
             i = 0
             for b in range(v[1], v[2], v[3]):
-                choices = [ v for v in videos[v[0]] ]
                 print("add videonote %s %s" % (b, v[0]))
                 vid = VideoNote(file=videos[v[0]][i])
                 self.videonote(b, vid)
