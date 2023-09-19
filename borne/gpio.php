@@ -7,12 +7,14 @@ use PiPHP\GPIO\Pin\PinInterface;
 // Create a GPIO object
 $gpio = new GPIO();
 
-// Retrieve pin 18 and configure it as an output pin
+// Retrieve pin 17 and configure it as an output pin
 $pin = $gpio->getOutputPin(17);
-// Set the value of the pin high (turn it on)
-$pin->setValue(PinInterface::VALUE_HIGH);
 
-sleep(5);
+if(!$_GET['on']){
 
-// Set the value of the pin high (turn it on)
-$pin->setValue(PinInterface::VALUE_LOW);
+    // Set the value of the pin high (turn it on)
+    $pin->setValue(PinInterface::VALUE_HIGH);
+}else{
+    // Set the value of the pin high (turn it on)
+    $pin->setValue(PinInterface::VALUE_LOW);
+}
