@@ -4,13 +4,13 @@ require_once 'gpio.php';
 require_once 'autoloader.php';
 use Classes\Tube;
 
+ledsOFF();
+
 if(!$_GET['init']){
     session_destroy();
     header("location:interface/init.php");
 }else{
-    
-    // Set the value of the pin high (turn it on)
-    $pin->setValue(PinInterface::VALUE_HIGH);
+    ledsON();
     
     $tube = new Tube();
 
@@ -34,8 +34,7 @@ if(!$_GET['init']){
 
     include_once('create_tube.php');
 
-    // Set the value of the pin high (turn it on)
-    $pin->setValue(PinInterface::VALUE_LOW);
+    ledsOFF();
     
 }
 ?>
