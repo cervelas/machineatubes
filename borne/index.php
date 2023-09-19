@@ -1,7 +1,7 @@
 <?php
 session_start();
+require_once 'gpio.php';
 use Classes\Tube;
-require_once 'autoloader.php';
 
 if(!$_GET['init']){
     session_destroy();
