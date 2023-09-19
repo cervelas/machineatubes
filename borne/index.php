@@ -7,12 +7,8 @@ if(!$_GET['init']){
     session_destroy();
     header("location:interface/init.php");
 }else{
-
-    include('gpio.php');
+    $pin = False;
     
-
-    // Set the value of the pin high (turn it on)
-    $pin->setValue(PinInterface::VALUE_HIGH);
     $tube = new Tube();
 
     $user_name = $_SESSION['user_name'];
@@ -34,8 +30,6 @@ if(!$_GET['init']){
     $_SESSION['song_title'] = $song_title;
 
     include_once('create_tube.php');
-    sleep(2);
-    // Set the value of the pin high (turn it on)
-    $pin->setValue(PinInterface::VALUE_LOW);
+    
 }
 ?>
