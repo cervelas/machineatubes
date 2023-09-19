@@ -176,7 +176,7 @@ class Machine:
         result = self.ctrlwin.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
         
         if result:
-            self.tubes.append(parseFile2Score(result[0]))
+            self.tubes.append(parseFile2Score(result[0], args.verbose))
             self.log("loaded file " + result[0])
             t = self.tubes[-1]
         

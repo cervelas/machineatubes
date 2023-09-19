@@ -30,7 +30,7 @@ def parseJSON2Score(payload, verbose=False):
 
     max_length = 0
 
-    score.style_flavor = payload.get("style").split("_")[1]
+    score.style_flavor = payload.get("style").split("_")[1] or "1"
 
     score.infos = {
         "name": payload.get("name"),
@@ -42,7 +42,7 @@ def parseJSON2Score(payload, verbose=False):
         "intro_video_url": "intro_bug.mp4",
     }
     
-    #pprint.pprint(score.infos)
+    pprint.pprint(score.infos)
 
     for name, part in payload.get("song").items():
         score.parts[name] = { 

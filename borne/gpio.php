@@ -26,3 +26,11 @@ function ledsOFF(){
     // Set the value of the pin high (turn it on)
     $pin->setValue(PinInterface::VALUE_LOW);
 }
+
+if(isset($_GET["leds"])){
+    if($_GET["leds"] == "on"){
+        ledsON();
+    }else{
+        ledsOFF();
+    }
+}

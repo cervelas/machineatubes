@@ -56,6 +56,8 @@ def getsongvideos(subfolder = ""):
         v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / subfolder / v[0]).glob('*.' + vext) ] for v in song_structure
     }
 
+
+
 def get_intro_video():
     return random.choice(
         [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "intro").glob('*.' + vext) ]
@@ -213,14 +215,19 @@ class Tube():
         out.send_noteoff(0, 12)
 
     def mix_videos(self):
-        videos = getsongvideos(Path(str(self.bpm)) / self.infos["style"] / self.style_flavor )
+        path = Path(str(self.bpm)) / self.infos["style"] / self.style_flavor
+        videos = getsongvideos(path)
         for v in song_structure:
             i = 0
             for b in range(v[1], v[2], v[3]):
+                if len(videos[v[0]]) == 0:
+                    print("no video for %s / %s" % (path, v[0]))
+                    continue
                 print("add videonote %s %s" % (b, v[0]))
-                vid = VideoNote(file=videos[v[0]][i])
+                vid = VideoNote(file=videos[v[0]][i % (len(videos[v[0]]))])
                 self.videonote(b, vid)
-                i = (i + 1) % (len(videos[v[0]]) - 1)
+                if len(videos[v[0]]) > 0:
+                    i = (i + 1)
 
     def get_intro_video(self, id):
         print("get video id " + id)
