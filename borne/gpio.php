@@ -10,11 +10,13 @@ $gpio = new GPIO();
 // Retrieve pin 17 and configure it as an output pin
 $pin = $gpio->getOutputPin(17);
 
-if(!$_GET['on']){
+if(isset($_GET['on'])){
 
     // Set the value of the pin high (turn it on)
     $pin->setValue(PinInterface::VALUE_HIGH);
+    echo "on";
 }else{
     // Set the value of the pin high (turn it on)
     $pin->setValue(PinInterface::VALUE_LOW);
+    echo "off";
 }
