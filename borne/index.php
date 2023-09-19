@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+use PiPHP\GPIO\GPIO;
+use PiPHP\GPIO\Pin\PinInterface;
+
+// Create a GPIO object
+$gpio = new GPIO();
+
+// Retrieve pin 18 and configure it as an output pin
+$pin = $gpio->getOutputPin(17);
+
 use Classes\Tube;
 require_once 'autoloader.php';
 
@@ -7,6 +17,9 @@ if(!$_GET['init']){
     session_destroy();
     header("location:interface/init.php");
 }else{
+
+    // Set the value of the pin high (turn it on)
+    $pin->setValue(PinInterface::VALUE_HIGH);
 
     $tube = new Tube();
 
@@ -30,5 +43,7 @@ if(!$_GET['init']){
 
     include_once('create_tube.php');
 
+    // Set the value of the pin high (turn it on)
+    $pin->setValue(PinInterface::VALUE_LOW);
 }
 ?>
