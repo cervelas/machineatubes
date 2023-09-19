@@ -177,6 +177,7 @@ class Tube():
             if self.infos.get("intro_video_url"):
                 Tube.window.evaluate_js('gointro("%s", "%s")' % (get_intro_video(), self.infos["intro_video_url"]))
         
+        self.gomachine()
         print("wait playsong")
         videoend.wait(60)
         print("playsong !")
@@ -208,6 +209,11 @@ class Tube():
         out.send_noteon(0, bpm2midi[self.bpm], 127)
         time.sleep(0.2)
         out.send_noteoff(0, bpm2midi[self.bpm])
+
+    def gomachine(self):
+        out.send_noteon(14, 84, 127)
+        time.sleep(0.2)
+        out.send_noteoff(14, 84)
 
     def stop(self):
         out.send_noteon(0, 12, 127)
@@ -243,20 +249,24 @@ class Tube():
             try:
                 retry = 10
                 while retry > 0:
-                    print(url, headers)
+                    print("getting d-id %s" % url)
+                    time.sleep(2)
                     response = requests.get(url, headers=headers)
 
-                    #pprint.pprint(response.json(), indent=4)
+                    pprint.pprint(response.json(), indent=4)
 
                     response = response.json()
 
                     if response.get("result_url"):
+                        print("result ok from d-id !")
+                        self.infos["intro_video_url"] = response.get("result_url")
+                        if self.playing is False:
+                            Tube.window.evaluate_js('loaded()')
                         break
-                        
-                    retry -= 1
-                    time.sleep(5)
 
-                self.infos["intro_video_url"] = response.get("result_url")
+                    print("retry")
+                    retry -= 1
+
             except Exception as e:
                 print("INTRO VIDEO ERROR")
                 print(e)

@@ -39,7 +39,7 @@ def parseJSON2Score(payload, verbose=False):
         "prenom": payload.get("prenom"),
         "numero": payload.get("numero"),
         "id_video": payload.get("id_video"),
-        "intro_video_url": "intro_bug.mp4",
+        "intro_video_url": "assets/videos/machine/bug.mp4",
     }
     
     pprint.pprint(score.infos)
