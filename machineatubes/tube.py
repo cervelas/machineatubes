@@ -220,7 +220,7 @@ class Tube():
                 print("add videonote %s %s" % (b, v[0]))
                 vid = VideoNote(file=videos[v[0]][i])
                 self.videonote(b, vid)
-                i = (i + 1) % len(videos[v[0]])
+                i = (i + 1) % (len(videos[v[0]]) - 1)
 
     def get_intro_video(self, id):
         print("get video id " + id)

@@ -12,6 +12,10 @@
     font-style: normal;
 }
 
+* {
+    cursor: none;
+}
+
 body{
     padding:0 0;
     margin:0 0;
