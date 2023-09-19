@@ -14,9 +14,7 @@ if(isset($_GET['gpio']) && $_GET['gpio']=="on"){
 
     // Set the value of the pin high (turn it on)
     $pin->setValue(PinInterface::VALUE_HIGH);
-    echo "on";
 }else{
     // Set the value of the pin high (turn it on)
     $pin->setValue(PinInterface::VALUE_LOW);
-    echo "off";
 }
