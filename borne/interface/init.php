@@ -1,6 +1,9 @@
 <?php
 session_start();
 $variant = round(rand(1,2));
+
+require_once '../gpio.php';
+ledsOFF();
 ?>
 
 <!DOCTYPE html>
