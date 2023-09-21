@@ -199,11 +199,15 @@ class Tube():
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
         videoend.clear()
+        self.stop()
+        self.applause()
+        time.sleep(2)
         Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
         print("END")
         videoend.wait(60)
         time.sleep(5)
         self.stop()
+
         self.playing = False
 
     def setbpm(self):
@@ -220,11 +224,19 @@ class Tube():
         out.send_noteon(0, 12, 127)
         time.sleep(0.2)
         out.send_noteoff(0, 12)
-
-    def applause(self):
+        time.sleep(0.1)
         out.send_noteon(0, 12, 127)
         time.sleep(0.2)
         out.send_noteoff(0, 12)
+
+    def applause(self):
+        out.send_noteon(0, 109, 127)
+        out.send_noteon(0, 110, 127)
+        out.send_noteon(0, 111, 127)
+        time.sleep(0.2)
+        out.send_noteoff(0, 109)
+        out.send_noteoff(0, 110)
+        out.send_noteoff(0, 111)
 
     def mix_videos(self):
         path = Path(str(self.bpm)) / self.infos["style"] / self.style_flavor
