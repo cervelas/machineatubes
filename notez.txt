@@ -18,3 +18,7 @@
 - OK enlever double guillemet dans les paroles
 - OK update dossier videos 
     - BPM > STYLE > 1/2 > PARTIE
+
+- refresh Page 
+- randomiser preset synthös
+- revoir la fin

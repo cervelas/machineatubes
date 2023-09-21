@@ -268,27 +268,25 @@ class Tube():
             try:
                 retry = 10
                 while retry > 0:
-                    print("getting d-id %s" % url)
-                    time.sleep(3)
+                    print("trying d-id %s" % url)
+                    time.sleep(10)
                     response = requests.get(url, headers=headers)
-
-                    pprint.pprint(response.json(), indent=4)
 
                     response = response.json()
 
                     if response.get("result_url"):
-                        print("result ok from d-id !")
                         video_url = response.get("result_url")
                         response = requests.get(video_url)
-                        pprint.pprint(response.__dict__, indent=4)
+                        #pprint.pprint(response.__dict__, indent=4)
                         if response.status_code == 200:
+                            print("result ok from d-id !")
                             self.infos["intro_video_url"] = video_url
                         
                         if Tube.playing is False:
                             Tube.window.evaluate_js('loaded()')
                         break
 
-                    print("retry")
+                    print("retrying... %s" % retry)
                     retry -= 1
 
             except Exception as e:
