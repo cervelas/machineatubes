@@ -78,8 +78,8 @@ $json .='{
     "beat": '.($measure * 4).',
                     "note": '.$stopall.',
                     "duration": 4
-            }
-            ]
+            }*/
+$json .=']
             },';
-*/
+
 ?>

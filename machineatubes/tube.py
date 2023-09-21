@@ -90,6 +90,7 @@ def nanosleep(s):
 class Tube():
 
     window = False
+    playing = False
 
     def __init__(self, name="noname") -> None:
         self.name = name
@@ -103,7 +104,6 @@ class Tube():
         self.start_time = 0
         self.time_signature = 0
         self.divisions = 16
-        self.playing = False
         self.infos = {}
         self.intro_video_url = None
 
@@ -171,7 +171,7 @@ class Tube():
 
     def play(self, window=False, verbose=False):
         videoend.clear()
-        self.playing = True
+        Tube.playing = True
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
@@ -201,14 +201,15 @@ class Tube():
         videoend.clear()
         self.stop()
         self.applause()
-        time.sleep(2)
+        time.sleep(3)
         Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
         print("END")
         videoend.wait(60)
+        #attente
         time.sleep(5)
         self.stop()
 
-        self.playing = False
+        Tube.playing = False
 
     def setbpm(self):
         out.send_noteon(0, bpm2midi[self.bpm], 127)
@@ -256,7 +257,7 @@ class Tube():
     def get_intro_video(self, id):
         print("get video id " + id)
         if id and len(id) > 0:
-            if self.playing is False:
+            if Tube.playing is False:
                 Tube.window.evaluate_js('loading()')
 
             url = "https://api.d-id.com/talks/" + id
@@ -283,7 +284,7 @@ class Tube():
                         if response.status_code == 200:
                             self.infos["intro_video_url"] = video_url
                         
-                        if self.playing is False:
+                        if Tube.playing is False:
                             Tube.window.evaluate_js('loaded()')
                         break
 

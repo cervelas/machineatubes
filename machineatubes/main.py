@@ -105,13 +105,6 @@ class Machine:
                 time.sleep(0.2)
                 self.win.toggle_fullscreen()
 
-    def oldplay(self):
-        if len(self.tubes) > 0 and self.tubes[0].playing is False:
-            abort.clear()
-            self.tubes[0].aplay(self.win, args.verbose)
-        if len(self.tubes) > 1:
-            self.tubes.pop(0)
-
     def __play(self):
         playing.set()
         if len(self.tubes) == 0 and self.last_tube:
@@ -119,7 +112,7 @@ class Machine:
             self.last_tube.stop()
 
         while len(self.tubes) > 0 and not abort.is_set():
-            if len(self.tubes) > 0 and self.tubes[0].playing is False:
+            if len(self.tubes) > 0 and Tube.playing is False:
                 playlist = "<br> Playing %s (%s)" % (self.tubes[0].name, self.tubes[0].infos["numero"])
                 playlist = "<br> Next Song ".join([ "%s (%s)" % (t.name, t.infos["numero"]) for t in self.tubes[1:] ])
                 self.ctrlwin.evaluate_js('uplist("%s")' % playlist)
