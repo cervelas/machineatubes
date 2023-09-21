@@ -73,13 +73,13 @@ foreach($format as $section){
 }
 
 
-/*
+
 $json .='{
-    "beat": '.($measure * 4).',
-                    "note": '.$stopall.',
-                    "duration": 4
-            }*/
-$json .=']
+            "beat": '.($measure * 4)-4.',
+            "note": '.$stopall.',
+            "duration": 1
+            }
+            ]
             },';
 
 ?>
