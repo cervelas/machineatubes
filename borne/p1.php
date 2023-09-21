@@ -75,9 +75,9 @@ foreach($format as $section){
 
 
 $json .='{
-            "beat": '.($measure * 4)-4.',
+            "beat": '.( ($measure * 4) - 4).',
             "note": 255,
-            "duration": 1
+            "duration": 
             }
             ]
             },';
