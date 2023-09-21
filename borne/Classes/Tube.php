@@ -13,9 +13,9 @@ class Tube extends Machine
 
     public function getMoodName($tonality){
         $mood_names = array(
-            'D'=>'Joyeux',
-            'Ab'=>'Neutre',
-            'C'=>'Triste'
+            'D'=>'Joyeuse',
+            'Ab'=>'Stable',
+            'C'=>'Mélancolique'
         );
 
         return $mood_names[$tonality];

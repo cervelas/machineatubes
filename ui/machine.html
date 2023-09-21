@@ -112,6 +112,7 @@
         }
 
         #video video{
+            position: absolute;
             max-width: 100%;
             max-height: 100%;
         }
@@ -183,7 +184,7 @@
             font-size: 0.3em;
         }
 
-        .sleep, .loading, .gifintro{
+        .sleep, .loading, .jingle{
             display: none;
             text-align: center;
             justify-content: center;
@@ -208,13 +209,13 @@
             <div class="screen paroles" >
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                 <div class="loading"><img src="assets/img/loading.gif"></div>
-                <div class="gifintro"><img src="assets/img/intro_landscape.gif"></div>
+                <div class="jingle"><img src="assets/img/intro_landscape.gif"></div>
                 <div id="paroles"></div>
             </div>
             <div class="screen vertical" id="infos" >
                     <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
-                    <div class="loading"><img src="assets/img/loading.gif"></div>
-                    <div class="gifintro"><img src="assets/img/intro_portrait.gif"></div>
+                    <div class="loading"><img src="assets/img/intro_portrait.gif"></div>
+                    <div class="jingle"><img src="assets/img/intro_portrait.gif"></div>
                     <!-- <div id="infologo"><img src="assets/img/logoinfos.jpg"></div> -->
                     <div id="infonum">Chanson #57</div>
                     <div class="header"><span>>Titre</span></div>
@@ -233,7 +234,7 @@
             <div class="screen" id="titre">
                     <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                     <div class="loading"><img src="assets/img/loading.gif"></div>
-                    <div class="gifintro"><img src="assets/img/intro_landscape.gif"></div>
+                    <div class="jingle"><img src="assets/img/intro_landscape.gif"></div>
                     <div class="headertitre"><img src="assets/img/logotitre.jpg"><div id="numtube">CHANSON #47</div></div>
                     <div>
                         <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
@@ -244,7 +245,6 @@
             <div class="screen" id="video">
                 <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
                 <div class="loading"><img src="assets/img/loading.gif"></div>
-                <div class="gifintro"><img src="assets/img/intro_portrait.gif"></div> 
                 <video id="dedicacevideo" style="display: none;"></video>
                 <video id="introvideo" style="display: none;"></video>
                 <video id="outrovideo" style="display:none;"></video>
@@ -293,13 +293,17 @@
             intro_video.currentTime = 0;
             intro_video.play();
             intro_video.style.display = "block";
+            const elems = document.querySelectorAll('.jingle');
+            elems.forEach(function(e){
+                e.style.display = "flex";
+            });
             dedi_video.src = dedi_url;
             dedi_video.load();
             dedi_video.currentTime = 0;
             intro_video.addEventListener("ended", function(v){
-                const elems = document.querySelectorAll('.gifintro');
+                const elems = document.querySelectorAll('.jingle');
                 elems.forEach(function(e){
-                    e.style.display = "flex";
+                    e.style.display = "none";
                 });
                 intro_video.style.display = "none";
                 dedi_video.play();
@@ -307,10 +311,6 @@
 
                 dedi_video.addEventListener("ended", function(v){
 
-                    const elems = document.querySelectorAll('.gifintro');
-                    elems.forEach(function(e){
-                        e.style.display = "none";
-                    });
                     dedi_video.style.display = "none";
                     window.pywebview.api.videoend();
                 });
@@ -360,6 +360,7 @@
                 vid.src = source;
                 vid.muted = true;
                 vid.loop = true;
+                vid.style.position = "absolute";
                 vid.addEventListener("ended", function(e){
                     vid.style.display = "none";
                 });
@@ -378,12 +379,16 @@
             if(source == "") return;
             const vids = document.querySelectorAll('video');
             let vid = document.querySelector("video[src='" + source + "']");
-            vid.currentTime = 0;
-            vid.style.display = "block";
+
             vids.forEach(function(v){
-                if(v !== vid) v.style.display = "none";
+                if(v!==vid) v.style.display = "none";
             });
-            console.log("playing " + source);
+            vid.style.display = "block";
+
+            
+            //vid.play();
+            //vid.currentTime = 0;
+            //setTimeOut( function(){}, 200);
         };
 
         sleep();

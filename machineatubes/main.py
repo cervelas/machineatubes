@@ -282,7 +282,7 @@ def main():
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(webview_cb, debug=True, private_mode=False, gui="cef")
+        webview.start(webview_cb, debug=True, private_mode=False, gui="qt")
         exit(0)
 
 if __name__ == "__main__":

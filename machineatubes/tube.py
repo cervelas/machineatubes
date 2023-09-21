@@ -12,6 +12,7 @@ abort = threading.Event()
 videoend = threading.Event()
 
 out = rm.MidiOut() # we may need more than one
+#out2 = rm.MidiOut() # we may need more than one
 
 notes2midi = { rm.midi2note(i): i for i in range(-255, 255) }
 
@@ -39,7 +40,7 @@ song_structure = [
     ("refrain", 144, 175, 8),
     ("solo", 176, 207, 8),
     ("refrain", 208, 239, 8),
-    ("intro", 240, 244, 8),
+    ("intro", 240, 244, 4),
 ]
 
 # pprint.pprint(notes2midi) show me all your notes
