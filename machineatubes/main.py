@@ -212,7 +212,7 @@ def playtube():
     '''
     This will load a song when a post request is received
     '''
-    print("received tube " + str(request.json))
+    print("received tube " + str(request.get_json(force=True)))
     try:
         json_file = Path(__file__).parent / ".." / "songs_json" / ("%s_%s.json" % ( time.time(), request.json["name"] ))
         with open(json_file, "w") as fp:

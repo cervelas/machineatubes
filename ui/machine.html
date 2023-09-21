@@ -31,11 +31,6 @@
             overflow: hidden;
         }
 
-        img{
-            max-width: 100%;
-            max-height: 100%;
-        }
-        
         .screen{
             position: absolute;
             top: 0;
@@ -61,6 +56,8 @@
             flex-direction: column;
             color: #5000FF;
             background-color: #AAF9D9;
+            font-size: 1.3em;
+            line-height: 1.1em;
         }
 
         #paroles{
@@ -71,33 +68,42 @@
             left: 50%;
             display: flex;
             text-align: center;
-            justify-content: space-between;
+            justify-content: center;
             align-content: center;
             flex-direction: column;
             color: #AAF9D9;
             background-color: #5000FF;
+            padding: 20px;
         }
 
         #titre #grostitre{
             font-family: 'NippDo-580';
-            font-size: 1.2em;
-            line-height: 1em;
+            font-size: 1.5em;
+            line-height: 1.1em;
+            padding-left: 50px;
+            padding-right: 50px;
         }
 
         #titre #infoprenom{
-            font-size: 0.6em;
+            font-size: 0.8em;
         }
         
         #titre .headertitre{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
             display: flex;
             justify-content: space-between;
             font-size: 0.6em;
-            height: 5vh;
+            line-height: 0.9em;
         }
 
         #titre .footer{
+            position: absolute;
             text-align: right;
-            height: 5vh;
+            right: 20px;
+            bottom: 20px;
         }
 
         #video{
@@ -113,11 +119,13 @@
 
         #video video{
             position: absolute;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: calc(100% - 100px);
+            border: 15px solid #5000FF;
+            margin-left: 30px;
+            margin-right: auto;
         }
 
-        #video video#dedicacevideo{
+        #video .cadre video#dedicacevideo{
             position: absolute;
             transform-origin: 50% 50%;
             transform: rotate(-90deg) scale(1.79);
@@ -142,6 +150,8 @@
             background-color: #5000FF;
             color: #AAF9D9;
             line-height: 70%;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         #infos .header::before{
@@ -164,10 +174,14 @@
             font-size: 0.6em;
         }
 
+        #infos #infonum{
+            font-size: 1.4em;
+        }
+
         #infos .info{
             line-height: 1em;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 30px;
+            padding-bottom: 30px;
             font-size: 1em;
             font-weight: 700;
             text-transform: uppercase;
@@ -181,7 +195,7 @@
             right: 0;
             text-align: center;
             display: block;
-            font-size: 0.3em;
+            font-size: 0.5em;
         }
 
         .sleep, .loading, .jingle{
@@ -207,17 +221,17 @@
     <body>
         <div class="playcontainer pywebview-drag-region">
             <div class="screen paroles" >
-                <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                <div class="sleep"><img src="assets/img/logoinfos.png"></div>
                 <div class="loading"><img src="assets/img/loading.gif"></div>
                 <div class="jingle"><img src="assets/img/intro_landscape.gif"></div>
-                <div id="paroles"></div>
+                <div id="paroles">Dans ce mone informatique, une énigme ce dessine, Dans l'informatique</div>
             </div>
             <div class="screen vertical" id="infos" >
-                    <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                    <div class="sleep"><img src="assets/img/logoinfos.png"></div>
                     <div class="loading"><img src="assets/img/intro_portrait.gif"></div>
                     <div class="jingle"><img src="assets/img/intro_portrait.gif"></div>
-                    <!-- <div id="infologo"><img src="assets/img/logoinfos.jpg"></div> -->
-                    <div id="infonum">Chanson #57</div>
+                    <!-- <div id="infologo"><img src="assets/img/logoinfos.png"></div> -->
+                    <div id="infonum">tube #57</div>
                     <div class="header"><span>>Titre</span></div>
                     <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
                     
@@ -232,22 +246,23 @@
                     <div class="footer">MY NAME IS FUZZY</div>
             </div>
             <div class="screen" id="titre">
-                    <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                    <div class="sleep"><img src="assets/img/logoinfos.png"></div>
                     <div class="loading"><img src="assets/img/loading.gif"></div>
                     <div class="jingle"><img src="assets/img/intro_landscape.gif"></div>
-                    <div class="headertitre"><img src="assets/img/logotitre.jpg"><div id="numtube">CHANSON #47</div></div>
+                    <div class="headertitre"><img src="assets/img/logotitre.png" width="616px" height="51px"><div id="numtube">tube #47</div></div>
                     <div>
-                        <div id="grostitre">"UNE DANSE MYSTÉRIEUSE"</div>
+                        <div id="grostitre">"UNE DANSE MYSTÉRIEUSE, UNE DANSE MYSTÉRIEUSE"</div>
                         <div id="infoprenom">pour prenom</div>
                     </div>
-                    <div class="footer"><img src="assets/img/footertitle.jpg"></div>
+                    <div class="footer"><img src="assets/img/footertitle.png"></div>
             </div>
             <div class="screen" id="video">
-                <div class="sleep"><img src="assets/img/logoinfos.jpg"></div>
+                
+                <div class="sleep"><img src="assets/img/logoinfos.png"></div>
                 <div class="loading"><img src="assets/img/loading.gif"></div>
-                <video id="dedicacevideo" style="display: none;"></video>
-                <video id="introvideo" style="display: none;"></video>
-                <video id="outrovideo" style="display:none;"></video>
+                <video id="introvideo" style="display:none;" ></video>
+                <video id="dedicacevideo" style="display:none;"></video>
+                <video id="outrovideo" src="assets/videos/machine/outro/outro_1.mp4" autoplay loop muted ></video>
             </div>
         </div>
     </body> 
@@ -391,7 +406,7 @@
             //setTimeOut( function(){}, 200);
         };
 
-        sleep();
+        //sleep();
 
     </script>
 </html>

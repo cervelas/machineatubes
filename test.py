@@ -26,7 +26,12 @@ pprint.pprint(midi_outs)
 out = rm.MidiOut() # we may need more than one
 out.open_port(0)
 
-out.send_noteon(14, 84, 127)
+
+out.send_noteon(12, 129, 127)
+time.sleep(0.2)
+out.send_noteoff(12, 129)
+
+'''out.send_noteon(14, 84, 127)
 time.sleep(0.2)
 out.send_noteoff(14, 84)
 
@@ -45,7 +50,7 @@ for i in range(0, 0):
         out.send_noteoff(15, n)
         time.sleep(0.3)
         out.send_noteoff(15, n+1)
-        time.sleep(0.3)
+        time.sleep(0.3)'''
 
 '''for n in range(12, 61):
     out.send_noteon(15, n, 127)
