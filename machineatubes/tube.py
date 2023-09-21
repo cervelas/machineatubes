@@ -221,6 +221,11 @@ class Tube():
         time.sleep(0.2)
         out.send_noteoff(0, 12)
 
+    def applause(self):
+        out.send_noteon(0, 12, 127)
+        time.sleep(0.2)
+        out.send_noteoff(0, 12)
+
     def mix_videos(self):
         path = Path(str(self.bpm)) / self.infos["style"] / self.style_flavor
         videos = getsongvideos(path)
@@ -251,7 +256,7 @@ class Tube():
                 retry = 10
                 while retry > 0:
                     print("getting d-id %s" % url)
-                    time.sleep(2)
+                    time.sleep(3)
                     response = requests.get(url, headers=headers)
 
                     pprint.pprint(response.json(), indent=4)
@@ -260,7 +265,12 @@ class Tube():
 
                     if response.get("result_url"):
                         print("result ok from d-id !")
-                        self.infos["intro_video_url"] = response.get("result_url")
+                        video_url = response.get("result_url")
+                        response = requests.get(video_url)
+                        pprint.pprint(response.__dict__, indent=4)
+                        if response.status_code == 200:
+                            self.infos["intro_video_url"] = video_url
+                        
                         if self.playing is False:
                             Tube.window.evaluate_js('loaded()')
                         break

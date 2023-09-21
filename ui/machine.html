@@ -73,7 +73,7 @@
             flex-direction: column;
             color: #AAF9D9;
             background-color: #5000FF;
-            padding: 20px;
+            
         }
 
         #titre #grostitre{
@@ -125,10 +125,10 @@
             margin-right: auto;
         }
 
-        #video .cadre video#dedicacevideo{
+        #video .rotated{
             position: absolute;
             transform-origin: 50% 50%;
-            transform: rotate(-90deg) scale(1.79);
+            transform: rotate(-90deg) scale(1.82);
             height: 100%;
             width: 100%;
         }
@@ -142,7 +142,7 @@
             font-family: 'NippDo-580';
             color: #5000FF;
             background-color: #AAF9D9;
-            padding: 3vh;
+            
         }
 
         #infos .header{
@@ -152,6 +152,8 @@
             line-height: 70%;
             padding-top: 10px;
             padding-bottom: 10px;
+            margin-left: 3vh;
+            margin-right: 3vh;
         }
 
         #infos .header::before{
@@ -186,6 +188,10 @@
             font-weight: 700;
             text-transform: uppercase;
             border: 3px solid #5000FF;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: 3vh;
+            margin-right: 3vh;
         }
 
         #infos .footer{
@@ -211,9 +217,21 @@
             z-index: 10000;
         }
 
-        .sleep img, .loading img{
+        .sleep img, .loading img, .jingle img{
             margin-left: auto;
             margin-right: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .vertical .jingle img{
+            transform-origin: 50% 50%;
+            transform: rotate(90deg) scale(1.80);
+        }
+
+        #video video.full{
+            max-width: 100%;
+            border: 0;
         }
             
     </style>
@@ -228,7 +246,7 @@
             </div>
             <div class="screen vertical" id="infos" >
                     <div class="sleep"><img src="assets/img/logoinfos.png"></div>
-                    <div class="loading"><img src="assets/img/intro_portrait.gif"></div>
+                    <div class="loading"><img src="assets/img/loading.gif"></div>
                     <div class="jingle"><img src="assets/img/intro_portrait.gif"></div>
                     <!-- <div id="infologo"><img src="assets/img/logoinfos.png"></div> -->
                     <div id="infonum">tube #57</div>
@@ -258,11 +276,11 @@
             </div>
             <div class="screen" id="video">
                 
-                <div class="sleep"><img src="assets/img/logoinfos.png"></div>
-                <div class="loading"><img src="assets/img/loading.gif"></div>
-                <video id="introvideo" style="display:none;" ></video>
-                <video id="dedicacevideo" style="display:none;"></video>
-                <video id="outrovideo" src="assets/videos/machine/outro/outro_1.mp4" autoplay loop muted ></video>
+                <div class="sleep"><img src="assets/img/logoinfos_90.png"></div>
+                <div class="loading"><img src="assets/img/loading_90.gif"></div>
+                <video id="introvideo" class="full" style="display:none;" ></video>
+                <video id="dedicacevideo" class="rotated" style="display:none;"></video>
+                <video id="outrovideo" style="display:none;" ></video>
             </div>
         </div>
     </body> 
