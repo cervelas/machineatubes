@@ -278,7 +278,7 @@
                 
                 <div class="sleep"><img src="assets/img/logoinfos_90.png"></div>
                 <div class="loading"><img src="assets/img/loading_90.gif"></div>
-                <video id="introvideo" class="full" style="display:none;" ></video>
+                <video id="introvideo" src="assets/videos/machine/intro/intro.mp4" class="full" style="display:none;"></video>
                 <video id="dedicacevideo" class="rotated" style="display:none;"></video>
                 <video id="outrovideo" style="display:none;" ></video>
             </div>
@@ -288,6 +288,7 @@
 
         let video = document.querySelector("#video");
         let intro_video = document.querySelector("#introvideo");
+        intro_video.load()
         let outro_video = document.querySelector("#outrovideo");
         let dedi_video = document.querySelector("#dedicacevideo");
 
@@ -319,11 +320,9 @@
             });
         }
 
-        var gointro = function(intro_url, dedi_url){
+        var gointro = function(dedi_url){
             loaded()
             wakeup()
-            intro_video.src = intro_url;
-            intro_video.currentTime = 0;
             intro_video.play();
             intro_video.style.display = "block";
             const elems = document.querySelectorAll('.jingle');
@@ -356,14 +355,28 @@
             vids.forEach(function(v){
                 v.style.display = "none";
             });
+            clearclipvids();
+            intro_video.play();
+            intro_video.style.display = "block";
             outro_video.src = outro_url;
-            outro_video.currentTime = 0;
-            outro_video.play();
-            outro_video.style.display = "block";
-            outro_video.addEventListener("ended", function(v){
-                outro_video.style.display = "none";
-                window.pywebview.api.videoend();
-                sleep();
+            outro_video.load();
+            const elems = document.querySelectorAll('.jingle');
+            elems.forEach(function(e){
+                e.style.display = "flex";
+            });
+            intro_video.addEventListener("ended", function(v){
+                const elems = document.querySelectorAll('.jingle');
+                elems.forEach(function(e){
+                    e.style.display = "none";
+                });
+                intro_video.style.display = "none";
+                outro_video.play();
+                outro_video.style.display = "block";
+                outro_video.addEventListener("ended", function(v){
+                    outro_video.style.display = "none";
+                    window.pywebview.api.videoend();
+                    sleep();
+                });
             });
         }
 
@@ -393,6 +406,7 @@
                 vid.src = source;
                 vid.muted = true;
                 vid.loop = true;
+                vid.classList.add("clipvid");
                 vid.style.position = "absolute";
                 vid.addEventListener("ended", function(e){
                     vid.style.display = "none";
@@ -404,9 +418,18 @@
                 vid.load();
                 vid.play();
                 vid.style.display="none";
-                console.log("loaded " + source);
             }
         };
+
+        var clearclipvids = function(){
+            const vids = document.querySelectorAll('video.clipvid');
+
+            vids.forEach(function(v){
+                v.pause();
+                v.src = "";
+                v.remove();
+            });
+        }
 
         var playvid = function(source){
             if(source == "") return;
@@ -416,11 +439,9 @@
             vids.forEach(function(v){
                 if(v!==vid) v.style.display = "none";
             });
-            vid.style.display = "block";
-
-            
+            vid.style.display = "block";            
             //vid.play();
-            //vid.currentTime = 0;
+            //vid.currentTime = 1;
             //setTimeOut( function(){}, 200);
         };
 

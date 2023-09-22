@@ -106,6 +106,7 @@ class Tube():
         self.divisions = 16
         self.infos = {}
         self.intro_video_url = None
+        self.videos = []
 
     def duration(self):
         '''
@@ -133,6 +134,8 @@ class Tube():
         note.beat = beat
         notes = self.notes.get(beat, [])
         self.notes.update( { beat: notes + [ note ] } )
+        if note.file not in self.videos:
+            self.videos.append(note.file)
 
     def lyricsnote(self, beat, note):
         note.beat = beat
@@ -170,17 +173,20 @@ class Tube():
         pass
 
     def play(self, window=False, verbose=False):
+        Tube.window.load_url('/')
         videoend.clear()
         Tube.playing = True
+        for v in self.videos:
+            Tube.window.evaluate_js("preloadvid('%s')" % (v))
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
             if self.infos.get("intro_video_url"):
-                Tube.window.evaluate_js('gointro("%s", "%s")' % (get_intro_video(), self.infos["intro_video_url"]))
+                Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
         
         self.gomachine()
         print("wait playsong")
-        videoend.wait(60)
+        videoend.wait(30)
         print("playsong !")
         # send bpm control
         self.stop()
@@ -201,10 +207,10 @@ class Tube():
         videoend.clear()
         self.stop()
         self.applause()
-        time.sleep(3)
+        
         Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
         print("END")
-        videoend.wait(60)
+        videoend.wait(30)
         #attente
         time.sleep(5)
         self.stop()
@@ -266,10 +272,10 @@ class Tube():
                     "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
 
             try:
-                retry = 10
-                while retry > 0:
+                retry = 1
+                while retry <= 10:
                     print("trying d-id %s" % url)
-                    time.sleep(10)
+                    time.sleep(retry+1)
                     response = requests.get(url, headers=headers)
 
                     response = response.json()
@@ -287,7 +293,7 @@ class Tube():
                         break
 
                     print("retrying... %s" % retry)
-                    retry -= 1
+                    retry += 1
 
             except Exception as e:
                 print("INTRO VIDEO ERROR")
@@ -334,8 +340,6 @@ class VideoNote():
         self.file = file
         self.beat = 0
         self.position = position or "video"
-        if VideoNote.window:
-            VideoNote.window.evaluate_js("preloadvid('%s')" % (self.file))
 
     def play(self, i, verbose=False):
         if i == self.beat:

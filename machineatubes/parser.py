@@ -98,13 +98,15 @@ def parseJSON2Score(payload, verbose=False):
 
             for note in notes:
                 
-                b = int(note["beat"]) - 4
+                if len(note["text"]) > 0:
+                    b = int(note["beat"]) - 4
 
-                if b > max_length:
-                    max_length = b
+                    if b > max_length:
+                        max_length = b
 
-                score.lyricsnote(b, LyricsNote(note["text"].replace('"', ''),
-                                position=note.get("position", False)))
+
+                    score.lyricsnote(b, LyricsNote(note["text"].replace('"', ''),
+                                    position=note.get("position", False)))
 
 
     score.measures = int(max_length / score.beat_type) + 1

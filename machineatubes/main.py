@@ -153,14 +153,12 @@ class Machine:
                 self.log("\t%s: %s" % (k, v))
             for k, v in t.parts.items():
                 self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
-            
-            self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
-            self.log("%s BPM" % t.bpm)
-            self.log("%s measures" % t.measures)
-            self.log("duration %s s" % t.duration())
 
         self.log("Received the song %s !" % t.name)
-        
+        self.log("num %s, ambiance %s, style %s, prenom %s" % ( t.infos["numero"], t.infos["ambiance"], 
+                                             t.infos["style"], t.infos["prenom"]))
+        self.log("de-id: %s" % t.infos["intro_video_url"].split("/")[-1])
+
         self.play()
 
     def load_score_file(self):
@@ -275,7 +273,7 @@ def main():
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(webview_cb, debug=True, private_mode=False, gui="qt")
+        webview.start(webview_cb, debug=True, private_mode=False)
         exit(0)
 
 if __name__ == "__main__":

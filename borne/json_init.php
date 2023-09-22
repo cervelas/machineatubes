@@ -36,9 +36,9 @@ echo '
 <h2 class="section_title">MY NAME IS FUZZY</h2>
     <img src="imgs/lamachine.png" />
     <p>Cr&eacute;ation en cours !<br />
-    Ta chanson porte le num&eacute;ro</p>
+    Le Tube porte le num&eacute;ro</p>
     <p class="big_number">#'.$song_id.'</p>
-    <p>Vous pouvez à présent vous diriger vers la machine.</p>';
+    <p>Poser le casque et se diriger vers la machine</p>';
 
     echo '<script>
     setTimeout(isFinished, 10000); 
