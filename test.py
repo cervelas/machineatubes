@@ -27,9 +27,9 @@ out = rm.MidiOut() # we may need more than one
 out.open_port(0)
 
 
-out.send_noteon(12, 129, 127)
-time.sleep(0.2)
-out.send_noteoff(12, 129)
+out.send_noteon(14, 29, 127)
+time.sleep(1)
+out.send_noteoff(14, 29)
 
 '''out.send_noteon(14, 84, 127)
 time.sleep(0.2)

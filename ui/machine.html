@@ -278,8 +278,9 @@
                 
                 <div class="sleep"><img src="assets/img/logoinfos_90.png"></div>
                 <div class="loading"><img src="assets/img/loading_90.gif"></div>
-                <video id="introvideo" src="assets/videos/machine/intro/intro.mp4" class="full" style="display:none;"></video>
+                <video id="jingle_intro" src="assets/videos/machine/intro/intro.mp4" class="full" style="display:none;"></video>
                 <video id="dedicacevideo" class="rotated" style="display:none;"></video>
+                <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full" style="display:none;" ></video>
                 <video id="outrovideo" style="display:none;" ></video>
             </div>
         </div>
@@ -287,8 +288,10 @@
     <script>
 
         let video = document.querySelector("#video");
-        let intro_video = document.querySelector("#introvideo");
-        intro_video.load()
+        let jingle_intro = document.querySelector("#jingle_intro");
+        jingle_intro.load();
+        let jingle_outro = document.querySelector("#jingle_outro");
+        jingle_outro.load();
         let outro_video = document.querySelector("#outrovideo");
         let dedi_video = document.querySelector("#dedicacevideo");
 
@@ -321,10 +324,10 @@
         }
 
         var gointro = function(dedi_url){
-            loaded()
-            wakeup()
-            intro_video.play();
-            intro_video.style.display = "block";
+            loaded();
+            wakeup();
+            jingle_intro.play();
+            jingle_intro.style.display = "block";
             const elems = document.querySelectorAll('.jingle');
             elems.forEach(function(e){
                 e.style.display = "flex";
@@ -332,12 +335,12 @@
             dedi_video.src = dedi_url;
             dedi_video.load();
             dedi_video.currentTime = 0;
-            intro_video.addEventListener("ended", function(v){
+            jingle_intro.addEventListener("ended", function(v){
                 const elems = document.querySelectorAll('.jingle');
                 elems.forEach(function(e){
                     e.style.display = "none";
                 });
-                intro_video.style.display = "none";
+                jingle_intro.style.display = "none";
                 dedi_video.play();
                 dedi_video.style.display = "block";
 
@@ -347,8 +350,7 @@
                     window.pywebview.api.videoend();
                 });
             });
-            
-        }
+        };
 
         var gooutro = function(outro_url){
             const vids = document.querySelectorAll('video');
@@ -356,29 +358,29 @@
                 v.style.display = "none";
             });
             clearclipvids();
-            intro_video.play();
-            intro_video.style.display = "block";
+            jingle_outro.play();
+            jingle_outro.style.display = "block";
             outro_video.src = outro_url;
             outro_video.load();
             const elems = document.querySelectorAll('.jingle');
             elems.forEach(function(e){
                 e.style.display = "flex";
             });
-            intro_video.addEventListener("ended", function(v){
-                const elems = document.querySelectorAll('.jingle');
-                elems.forEach(function(e){
-                    e.style.display = "none";
-                });
-                intro_video.style.display = "none";
+            jingle_outro.addEventListener("ended", function(v){
+                jingle_outro.style.display = "none";
                 outro_video.play();
                 outro_video.style.display = "block";
                 outro_video.addEventListener("ended", function(v){
+                    const elems = document.querySelectorAll('.jingle');
+                    elems.forEach(function(e){
+                        e.style.display = "none";
+                    });
                     outro_video.style.display = "none";
                     window.pywebview.api.videoend();
                     sleep();
                 });
             });
-        }
+        };
 
         var displaylyrics = function(text, pos){
             console.log("display " + text + " @ " + pos);
@@ -419,7 +421,7 @@
                 vid.play();
                 vid.style.display="none";
             }
-        };
+        }
 
         var clearclipvids = function(){
             const vids = document.querySelectorAll('video.clipvid');

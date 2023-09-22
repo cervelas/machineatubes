@@ -43,6 +43,10 @@ song_structure = [
     ("intro", 240, 244, 4),
 ]
 
+presets_arp = [ int(i) for i in range(48, 68) ]
+
+presets_pss = [ 24, 29, 31, 33, 34, 38, 41, 42 ]
+
 # pprint.pprint(notes2midi) show me all your notes
 
 t = time.perf_counter()
@@ -192,6 +196,7 @@ class Tube():
         self.stop()
         self.setbpm()
         self.stop()
+        self.rnd_preset()
         self.start_time = time.perf_counter()
         initsleep()
         for b, notes in self.notes.items():
@@ -216,6 +221,17 @@ class Tube():
         self.stop()
 
         Tube.playing = False
+
+    def rnd_preset(self):
+        n = random.choice(presets_arp)
+        out.send_noteon(4, n, 127)
+        time.sleep(0.2)
+        out.send_noteoff(4, n)
+
+        n = random.choice(presets_pss)
+        out.send_noteon(14, n, 127)
+        time.sleep(0.2)
+        out.send_noteoff(14, n)
 
     def setbpm(self):
         out.send_noteon(0, bpm2midi[self.bpm], 127)

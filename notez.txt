@@ -19,6 +19,6 @@
 - OK update dossier videos 
     - BPM > STYLE > 1/2 > PARTIE
 
-- refresh Page 
-- randomiser preset synthös
-- revoir la fin
+- OK refresh Page 
+- OK randomiser preset synthös
+- OK revoir la fin
