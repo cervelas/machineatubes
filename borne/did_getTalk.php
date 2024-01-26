@@ -5,7 +5,7 @@ $ch = curl_init();
 $headers = [
     'Content-Type: multipart/form-data',
     'Accept: application/json',
-    'Authorization: Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr'
+    'Authorization: Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3'
 ];
 
 $file = new CURLFile($cereproc_audio_url, 'audio/mpeg', $_SESSION['song_id'].'.mp3');
@@ -31,7 +31,7 @@ if($audio_tmp_link!==''){
     $headers = [
         'Content-Type: application/json',
         'Accept: application/json',
-        'Authorization: Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr'
+        'Authorization: Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3'
     ];
     $data = '{
   "script": {
