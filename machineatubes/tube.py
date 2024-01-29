@@ -285,7 +285,7 @@ class Tube():
             url = "https://api.d-id.com/talks/" + id
 
             headers = {"accept": "application/json",
-                    "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
+                    "Authorization": "Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3"}
 
             try:
                 retry = 1
