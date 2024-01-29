@@ -303,6 +303,9 @@ class Tube():
                         if response.status_code == 200:
                             print("result ok from d-id !")
                             self.infos["intro_video_url"] = video_url
+                        else:
+                            print("bad response from d-id: %s" % response.status_code)
+                            print(response)
                         
                         if Tube.playing is False:
                             Tube.window.evaluate_js('loaded()')
