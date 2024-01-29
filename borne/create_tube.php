@@ -20,6 +20,7 @@ foreach($chords as $chord_arr){
     $chords_equiv[$chord] = $midi_tube->getChordEquiv($song_mood,$chords_style,$chord);
     $chords_pitch[$chord] = $midi_tube->getChordPitch($chords_equiv[$chord]['step'], $chords_equiv[$chord]['do_alter'], $chords_equiv[$chord]['octave']);
 }
+$e=fopen('php://stderr','w');
 
 $json = "";
 
@@ -28,14 +29,15 @@ include "json_init.php";
 
 $url = 'http://192.168.1.20:23456/play';
 
-$json_obj = json_decode($json);
+$json = json_encode(json_decode($json));
 
-$json = json_encode($json_obj);
 
 if(json_last_error() > 0){
     echo "ERROR in JSON: " . json_last_error_msg();
     var_dump($json);
 }
+fwrite($e, "apres");
+fwrite($e, $json);
 
 // use key 'http' even if you send the request to https://...
 $options = [
