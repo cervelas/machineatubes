@@ -2,8 +2,10 @@
 use Classes\Tube;
 $midi_tube = new Tube();
 
-$directory = strtolower($song_title);
 setlocale(LC_CTYPE, 'fr_FR.UTF-8');
+$url = 'http://192.168.1.20:23456/play';
+
+$directory = strtolower($song_title);
 $directory = iconv('UTF-8', 'ASCII//IGNORE', $directory);
 $directory = str_replace([" ", "'", "’", "-", "?", "!", ",", "&"],"", $directory);
 $directory = $song_id.'_'.$directory;
@@ -26,9 +28,9 @@ include "song_format.php";
 include "json_init.php";
 
 $url = 'http://192.168.1.20:23456/play';
-fwrite($e, "avant");
-fwrite($e, $json);
+
 $json = json_encode(json_decode($json));
+
 
 if(json_last_error() > 0){
     echo "ERROR in JSON: " . json_last_error_msg();
@@ -52,6 +54,10 @@ $result = file_get_contents($url, false, $context);
 if ($result === false) {
     throw new \Exception('SENDING SONG ERROR');
 }
+
+// Si on arrive là c'est que tout s'est bien passé !
+
+echo "bravo ! le numero de ta chanson est le " . $json_obj->numero . "<br><a href='/index.php'>retour à la case départ</a>";
 
 /*
 if (!file_exists('audio/'.$directory)){

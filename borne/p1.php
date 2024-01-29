@@ -35,6 +35,15 @@ foreach($format as $section){
                 "duration": 4
         },';
     }
+    
+    if(in_array($section,$stop_topline)){
+        $note_pitch = $tube1->getChordPitch($stop_topline_note['step'],$stop_topline_note['do_alter'],$stop_topline_note['octave']);
+        $json .= '{
+                "beat": '.($measure * 4).',
+                "note": '.$note_pitch.',
+                "duration": 4
+        },';
+    }
 
     if(in_array($section,$stop_topline)){
         $note_pitch = $tube1->getChordPitch($stop_topline_note['step'],$stop_topline_note['do_alter'],$stop_topline_note['octave']);
