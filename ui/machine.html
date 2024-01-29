@@ -119,16 +119,16 @@
 
         #video video{
             position: absolute;
-            max-width: calc(100% - 100px);
-            border: 15px solid #5000FF;
-            margin-left: 30px;
-            margin-right: auto;
+            max-width: 100vw;
+            border: 0px solid #5000FF;
+            margin-left: 0px;
+            margin-right: 0px;
         }
 
         #video .rotated{
             position: absolute;
             transform-origin: 50% 50%;
-            transform: rotate(-90deg) scale(1.82);
+            transform: rotate(-90deg) scale(1.87);
             height: 100%;
             width: 100%;
         }
@@ -232,6 +232,7 @@
         #video video.full{
             max-width: 100%;
             border: 0;
+            left: 0px;
         }
             
     </style>
@@ -278,10 +279,10 @@
                 
                 <div class="sleep"><img src="assets/img/logoinfos_90.png"></div>
                 <div class="loading"><img src="assets/img/loading_90.gif"></div>
-                <video id="jingle_intro" src="assets/videos/machine/intro/intro.mp4" class="full" style="display:none;"></video>
-                <video id="dedicacevideo" class="rotated" style="display:none;"></video>
-                <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full" style="display:none;" ></video>
-                <video id="outrovideo" style="display:none;" ></video>
+                <video id="jingle_intro" src="assets/videos/machine/intro/intro.mp4" class="full" style="display:none;" ></video>
+                <video id="dedicacevideo" class="rotated"></video>
+                <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full"  style="display:none;"  ></video>
+                <video id="outrovideo" ></video>
             </div>
         </div>
     </body> 

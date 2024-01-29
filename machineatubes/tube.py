@@ -225,12 +225,12 @@ class Tube():
     def rnd_preset(self):
         n = random.choice(presets_arp)
         out.send_noteon(4, n, 127)
-        time.sleep(0.2)
+        time.sleep(0.5)
         out.send_noteoff(4, n)
 
         n = random.choice(presets_pss)
         out.send_noteon(14, n, 127)
-        time.sleep(0.2)
+        time.sleep(0.5)
         out.send_noteoff(14, n)
 
     def setbpm(self):

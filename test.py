@@ -26,10 +26,20 @@ pprint.pprint(midi_outs)
 out = rm.MidiOut() # we may need more than one
 out.open_port(0)
 
+out2 = rm.MidiOut() # we may need more than one
+out2.open_port(1)
 
-out.send_noteon(14, 29, 127)
+presets_pss = [ 24, 29, 31, 33, 34, 38, 41, 42 ]
+
+out.send_noteon(14, 24, 127)
 time.sleep(1)
-out.send_noteoff(14, 29)
+out.send_noteoff(14, 24)
+time.sleep(2)
+
+out2.send_noteon(14, 83, 127)
+time.sleep(1)
+out2.send_noteoff(14, 83)
+
 
 '''out.send_noteon(14, 84, 127)
 time.sleep(0.2)
