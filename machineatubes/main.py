@@ -5,16 +5,18 @@ import argparse
 import webview 
 import threading
 import platform
+from pathlib import Path
+import json
 
 import rtmidi2 as rm
 from flask import Flask, render_template, request
 
 from machineatubes.server import server
 from machineatubes.parser import parseFile2Score, parseJSON2Score
-from machineatubes.tube import out, Tube, VideoNote, abort, playsong, LyricsNote
-
+from machineatubes.tube import out, Tube, VideoNote, abort, videoend, LyricsNote
 
 close = threading.Event()
+playing = threading.Event()
 
 def is_win():
     return platform.system() == 'Windows'
@@ -30,6 +32,7 @@ def handler(signum, frame):
     '''
     print("Ctrl-c was pressed. Exiting...")
     abort.set()
+    close.set()
     exit(0)
  
 signal.signal(signal.SIGINT, handler)
@@ -72,8 +75,8 @@ args = parser.parse_args()
 
 class Machine2:
 
-    def play(self):
-        playsong.set()
+    def videoend(self):
+        videoend.set()
 
 machineapi = Machine2()
 
@@ -84,8 +87,7 @@ class Machine:
         self.tubes = [] 
         self.autoplay = False
         self.playing = False
-        
-
+        self.last_tube = None
     def close(self):
         close.set()
 
@@ -103,49 +105,61 @@ class Machine:
                 time.sleep(0.2)
                 self.win.toggle_fullscreen()
 
-    def oldplay(self):
-        if len(self.tubes) > 0 and self.tubes[0].playing is False:
-            abort.clear()
-            self.tubes[0].aplay(self.win, args.verbose)
-        if len(self.tubes) > 1:
-            self.tubes.pop(0)
-
     def __play(self):
+        playing.set()
+        if len(self.tubes) == 0 and self.last_tube:
+            self.last_tube.play(self.win, args.verbose)
+            self.last_tube.stop()
+
         while len(self.tubes) > 0 and not abort.is_set():
-            if len(self.tubes) > 0 and self.tubes[0].playing is False:
+            if len(self.tubes) > 0 and Tube.playing is False:
+                playlist = "<br> Playing %s (%s)" % (self.tubes[0].name, self.tubes[0].infos["numero"])
+                playlist = "<br> Next Song ".join([ "%s (%s)" % (t.name, t.infos["numero"]) for t in self.tubes[1:] ])
+                self.ctrlwin.evaluate_js('uplist("%s")' % playlist)
                 abort.clear()
                 self.tubes[0].play(self.win, args.verbose)
-                if len(self.tubes) == 1:
-                    break
+                self.tubes[0].stop()
+                self.last_tube = self.tubes[0]
                 self.tubes.pop(0)
+        
+        if len(self.tubes) > 0:
+            self.tubes[0].stop()
+        playing.clear()
 
     def play(self):
-        if len(self.tubes) == 1:
+        if not playing.is_set():
             t = threading.Thread(target=self.__play)
             t.start()
 
     def stop(self):
         abort.set()
+        if len(self.tubes) > 0:
+            self.tubes[0].stop()
 
     def log(self, txt):
         self.ctrlwin.evaluate_js("log('%s')" % txt)
 
     def load_tube(self, payload):
+        t = threading.Thread(target=self.__load_tube, args=(payload,))
+        t.start()
+
+    def __load_tube(self, payload):
         self.tubes.append(parseJSON2Score(payload, args.verbose))
 
         t = self.tubes[-1]
         
         if args.verbose:
-            self.log("parts:")
+            for k, v in t.infos.items():
+                self.log("\t%s: %s" % (k, v))
             for k, v in t.parts.items():
                 self.log("\t(%s) %s channel %s" % (k, v["name"], v["channel"]))
-            
-            self.log("Signature : %s/%s" % (t.beat_time, t.beat_type))
-            self.log("%s BPM" % t.bpm)
-            self.log("%s measures" % t.measures)
-            self.log("duration %s s" % t.duration())
+
         self.log("Received the song %s !" % t.name)
-        self.log("Press P to play")
+        self.log("num %s, ambiance %s, style %s, prenom %s" % ( t.infos["numero"], t.infos["ambiance"], 
+                                             t.infos["style"], t.infos["prenom"]))
+        self.log("de-id: %s" % t.infos["intro_video_url"].split("/")[-1])
+
+        self.play()
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
@@ -153,7 +167,7 @@ class Machine:
         result = self.ctrlwin.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
         
         if result:
-            self.tubes.append(parseFile2Score(result[0]))
+            self.tubes.append(parseFile2Score(result[0], args.verbose))
             self.log("loaded file " + result[0])
             t = self.tubes[-1]
         
@@ -189,12 +203,15 @@ def playtube():
     '''
     This will load a song when a post request is received
     '''
-    print("received tube " + str(request.json))
+    print("received tube " + str(request.get_json(force=True)))
     try:
+        json_file = Path(__file__).parent / ".." / "songs_json" / ("%s_%s.json" % ( request.json["numero"], request.json["name"] ))
+        with open(json_file, "w") as fp:
+            json.dump(request.json, fp)
         machine.load_tube(request.json)
-        machine.play()
     except Exception as e:
-        print("Error on RX: %s" % e)
+        print("RX: %s" % request.json)
+        print("Error: %s" % e)
         return "error", 500
     return "success", 200
 
@@ -209,8 +226,8 @@ def webview_cb():
     machine.stop()
     time.sleep(0.1)
     # add check
-    machine.win.destroy()
     machine.ctrlwin.destroy()
+    machine.win.destroy()
 
 def main():
     '''
@@ -248,7 +265,7 @@ def main():
         print(screens)
 
         window = webview.create_window('Machine à Tubes', server, js_api=machineapi, width=1000, height=700, frameless=is_mac(), focus=False)
-        
+        window.events.closing += machine.close
         ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
 
         machine.win = window
@@ -256,7 +273,7 @@ def main():
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(webview_cb, debug=True, private_mode=False, gui="cef")
+        webview.start(webview_cb, debug=True, private_mode=False)
         exit(0)
 
 if __name__ == "__main__":

@@ -3,14 +3,16 @@ import json
 import threading
 import pprint
 import random
+import requests
 from pathlib import Path, PurePosixPath
 
 import rtmidi2 as rm
 
 abort = threading.Event()
-playsong = threading.Event()
+videoend = threading.Event()
 
 out = rm.MidiOut() # we may need more than one
+#out2 = rm.MidiOut() # we may need more than one
 
 notes2midi = { rm.midi2note(i): i for i in range(-255, 255) }
 
@@ -38,8 +40,12 @@ song_structure = [
     ("refrain", 144, 175, 8),
     ("solo", 176, 207, 8),
     ("refrain", 208, 239, 8),
-    ("intro", 240, 248, 8),
+    ("intro", 240, 244, 4),
 ]
+
+presets_arp = [ int(i) for i in range(48, 68) ]
+
+presets_pss = [ 24, 29, 31, 33, 34, 38, 41, 42 ]
 
 # pprint.pprint(notes2midi) show me all your notes
 
@@ -48,14 +54,25 @@ t = time.perf_counter()
 videospath = Path(__file__).parent / '..' / 'ui' / 'assets' / 'videos'
 relpath = Path(__file__).parent / '..' / 'ui'
 
-print(videospath)
-
 vext = 'mp4'
 
-def getvideos():
+def getsongvideos(subfolder = ""):
     return {
-        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / v[0]).glob('*.' + vext) ] for v in song_structure
+        v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / subfolder / v[0]).glob('*.' + vext) ] for v in song_structure
     }
+
+
+
+def get_intro_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "intro").glob('*.' + vext) ]
+    )
+
+def get_outro_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "outro").glob('*.' + vext) ]
+    )
+
 
 def initsleep():
     global t
@@ -77,6 +94,7 @@ def nanosleep(s):
 class Tube():
 
     window = False
+    playing = False
 
     def __init__(self, name="noname") -> None:
         self.name = name
@@ -90,8 +108,9 @@ class Tube():
         self.start_time = 0
         self.time_signature = 0
         self.divisions = 16
-        self.playing = False
         self.infos = {}
+        self.intro_video_url = None
+        self.videos = []
 
     def duration(self):
         '''
@@ -119,6 +138,8 @@ class Tube():
         note.beat = beat
         notes = self.notes.get(beat, [])
         self.notes.update( { beat: notes + [ note ] } )
+        if note.file not in self.videos:
+            self.videos.append(note.file)
 
     def lyricsnote(self, beat, note):
         note.beat = beat
@@ -156,21 +177,27 @@ class Tube():
         pass
 
     def play(self, window=False, verbose=False):
+        Tube.window.load_url('/')
+        videoend.clear()
+        Tube.playing = True
+        for v in self.videos:
+            Tube.window.evaluate_js("preloadvid('%s')" % (v))
         if Tube.window:
             Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
                                     (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-            Tube.window.evaluate_js('gointro()')
-            print("go intro")
+            if self.infos.get("intro_video_url"):
+                Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
         
+        self.gomachine()
         print("wait playsong")
-        playsong.wait(60)
+        videoend.wait(30)
         print("playsong !")
         # send bpm control
         self.stop()
         self.setbpm()
         self.stop()
+        self.rnd_preset()
         self.start_time = time.perf_counter()
-        self.playing = True
         initsleep()
         for b, notes in self.notes.items():
             if abort.is_set():
@@ -182,29 +209,111 @@ class Tube():
                 if len(notes) == 0:
                     print(b)
             nanosleep( ( 60 / self.bpm ) )
-        Tube.window.evaluate_js('gooutro()')
-        print("END")
+        videoend.clear()
         self.stop()
-        self.playing = False
+        self.applause()
+        
+        Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
+        print("END")
+        videoend.wait(30)
+        #attente
+        time.sleep(5)
+        self.stop()
+
+        Tube.playing = False
+
+    def rnd_preset(self):
+        n = random.choice(presets_arp)
+        out.send_noteon(4, n, 127)
+        time.sleep(0.2)
+        out.send_noteoff(4, n)
+
+        n = random.choice(presets_pss)
+        out.send_noteon(14, n, 127)
+        time.sleep(0.2)
+        out.send_noteoff(14, n)
 
     def setbpm(self):
         out.send_noteon(0, bpm2midi[self.bpm], 127)
         time.sleep(0.2)
         out.send_noteoff(0, bpm2midi[self.bpm])
 
+    def gomachine(self):
+        out.send_noteon(14, 84, 127)
+        time.sleep(0.2)
+        out.send_noteoff(14, 84)
+
     def stop(self):
         out.send_noteon(0, 12, 127)
         time.sleep(0.2)
         out.send_noteoff(0, 12)
+        time.sleep(0.1)
+        out.send_noteon(0, 12, 127)
+        time.sleep(0.2)
+        out.send_noteoff(0, 12)
+
+    def applause(self):
+        out.send_noteon(0, 109, 127)
+        out.send_noteon(0, 110, 127)
+        out.send_noteon(0, 111, 127)
+        time.sleep(0.2)
+        out.send_noteoff(0, 109)
+        out.send_noteoff(0, 110)
+        out.send_noteoff(0, 111)
 
     def mix_videos(self):
-        videos = getvideos()
-        print(videos)
+        path = Path(str(self.bpm)) / self.infos["style"] / self.style_flavor
+        videos = getsongvideos(path)
         for v in song_structure:
+            i = 0
             for b in range(v[1], v[2], v[3]):
+                if len(videos[v[0]]) == 0:
+                    print("no video for %s / %s" % (path, v[0]))
+                    continue
                 print("add videonote %s %s" % (b, v[0]))
-                vid = VideoNote(file=random.choice(videos[v[0]]))
+                vid = VideoNote(file=videos[v[0]][i % (len(videos[v[0]]))])
                 self.videonote(b, vid)
+                if len(videos[v[0]]) > 0:
+                    i = (i + 1)
+
+    def get_intro_video(self, id):
+        print("get video id " + id)
+        if id and len(id) > 0:
+            if Tube.playing is False:
+                Tube.window.evaluate_js('loading()')
+
+            url = "https://api.d-id.com/talks/" + id
+
+            headers = {"accept": "application/json",
+                    "Authorization": "Basic c2FsdXRAbXluYW1laXNmdXp6eS5jaA:N51ON3CPUu3QXeujqjDKr"}
+
+            try:
+                retry = 1
+                while retry <= 10:
+                    print("trying d-id %s" % url)
+                    time.sleep(retry+1)
+                    response = requests.get(url, headers=headers)
+
+                    response = response.json()
+
+                    if response.get("result_url"):
+                        video_url = response.get("result_url")
+                        response = requests.get(video_url)
+                        #pprint.pprint(response.__dict__, indent=4)
+                        if response.status_code == 200:
+                            print("result ok from d-id !")
+                            self.infos["intro_video_url"] = video_url
+                        
+                        if Tube.playing is False:
+                            Tube.window.evaluate_js('loaded()')
+                        break
+
+                    print("retrying... %s" % retry)
+                    retry += 1
+
+            except Exception as e:
+                print("INTRO VIDEO ERROR")
+                print(e)
 
 class Note():
     def play(self, i, verbose=False):
@@ -247,8 +356,6 @@ class VideoNote():
         self.file = file
         self.beat = 0
         self.position = position or "video"
-        if VideoNote.window:
-            VideoNote.window.evaluate_js("preloadvid('%s')" % (self.file))
 
     def play(self, i, verbose=False):
         if i == self.beat:

@@ -30,12 +30,16 @@ def parseJSON2Score(payload, verbose=False):
 
     max_length = 0
 
+    score.style_flavor = payload.get("style").split("_")[1] or "1"
+
     score.infos = {
         "name": payload.get("name"),
         "ambiance": payload.get("ambiance"),
-        "style": payload.get("style"),
+        "style": payload.get("style").split("_")[0],
         "prenom": payload.get("prenom"),
         "numero": payload.get("numero"),
+        "id_video": payload.get("id_video"),
+        "intro_video_url": "assets/videos/machine/bug.mp4",
     }
     
     pprint.pprint(score.infos)
@@ -94,18 +98,22 @@ def parseJSON2Score(payload, verbose=False):
 
             for note in notes:
                 
-                b = int(note["beat"])
+                if len(note["text"]) > 0:
+                    b = int(note["beat"]) - 4
 
-                if b > max_length:
-                    max_length = b
+                    if b > max_length:
+                        max_length = b
 
-                score.lyricsnote(b, LyricsNote(note["text"],
-                                position=note.get("position", False)))
+
+                    score.lyricsnote(b, LyricsNote(note["text"].replace('"', ''),
+                                    position=note.get("position", False)))
 
 
     score.measures = int(max_length / score.beat_type) + 1
 
     score.mix_videos()
+
+    score.get_intro_video(payload.get("id_video"))
 
     return score
 

@@ -10,6 +10,7 @@ dependencies = [
     "rtmidi2",
     "pywebview",
     "flask",
+    "requests",
 ]
 [tool.setuptools]
 packages = ["machineatubes"]

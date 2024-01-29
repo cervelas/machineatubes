@@ -11,7 +11,7 @@ $directory = str_replace([" ", "'", "’", "-", "?", "!", ",", "&"],"", $directo
 $directory = $song_id.'_'.$directory;
 $_SESSION['directory'] = $directory;
 
-$midi_channel = $midi_tube->getChannel($song_mood);
+$midi_channel = $midi_tube->getChordChannel($song_mood);
 $chords = $midi_tube->getChords($song_mood);
 $chords_style = $drums_style = $midi_tube->getChordsDrums($song_style);
 
@@ -26,6 +26,7 @@ $json = "";
 include "song_format.php";
 include "json_init.php";
 
+$url = 'http://192.168.1.20:23456/play';
 
 $json_obj = json_decode($json);
 

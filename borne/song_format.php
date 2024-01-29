@@ -15,9 +15,6 @@ $general_lengths = [
     'outro'=>4
 ];
 
-$song_formats_tube = new Tube();
-$chp = $song_formats_tube->getChordProgression($chords);
-
 $go_drums = ['theme0'];
 $stop_drums = ['text4'];
 $go_arpeggiato = ['text1', 'text3'];
@@ -25,9 +22,13 @@ $stop_arpeggiato = ['theme1', 'solo'];
 $go_topline = ['theme0','theme1','solo'];
 $stop_topline = ['text0', 'text2', 'text4'];
 $go_harmony = ['text1','text3'];
-$stop_harmony = ['text2'];
+$stop_harmony = ['text2','outro'];
+
+$song_formats_tube = new Tube();
+$chp = $song_formats_tube->getChordProgression($chords);
 
 include_once 'addons.php';
+
 $avail_addons = $song_formats_tube->getAvailAddons();
 foreach($avail_addons as $addon_name){
     $go_addon = 'go_'.$addon_name;
@@ -48,5 +49,6 @@ $chords_per_part = [
     'solo' => $chp['m1'],
     'outro' => $chp['m1']
 ];
+
 
 ?>

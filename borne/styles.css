@@ -1,15 +1,13 @@
 @font-face {
     font-family: 'NipDo505';
-    src: url('font/NipDo-wt505.woff2') format('woff2'),
-    url('font/NipDo-wt505.otf') format('opentype');
+    src: url('font/NipDo-wt505.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NipDo580';
-    src: url('font/NipDo-wt580.woff2') format('woff2'),
-    url('font/NipDo-wt580.otf') format('opentype');
+    src: url('font/NipDo-wt580.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
 }
@@ -21,23 +19,30 @@ body{
     color:#5000FF;
     font-family: "NipDo505", sans-serif;
     text-align: center;
-    font-size:medium;
     text-transform: uppercase;
 }
 
 div{
     background-color:#AAF9D9;
+    padding-bottom:2vh;
 }
 
 h2{
-    font-family: "NipDo580", sans-serif;
+    font-family: "NipDo505", sans-serif;
     text-align:left;
-    margin:2vh 2vw;
+    margin:1.8vh 3vw;
+    padding:0 0;
+    font-weight:normal;
+    font-size:3rem;
 }
 
 p{
     font-family: "NipDo505", sans-serif;
-    font-size:1.7rem;
+    font-size:2.5rem;
+}
+
+a{
+    text-decoration: none;
 }
 
 .bordered{
@@ -47,32 +52,58 @@ p{
 }
 
 .bluebg{
+    font-family: "NipDo505", sans-serif;
     background-color:#5000FF;
     color:#AAF9D9;
-    padding:0 0.1rem;
-    font-size:2rem;
+    padding:0 0.5rem;
 }
 
-.delete_circle::before{
+.action_button{
+    font-size:3rem;
+}
+
+.red_circle::before{
     content: '';
     display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background: #FF0000;
     border:1px solid #5000FF;
-    margin:0.5rem 0.5rem 0 0;
+    margin:0.8rem 0.5rem 0 0;
 }
 
-.submit_circle::before{
+.blue_circle::before{
     content: '';
     display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #5000FF;
+    border:1px solid #5000FF;
+    margin:0.8rem 0.5rem 0 0;
+}
+
+.yellow_circle::before{
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #FFF800;
+    border:1px solid #5000FF;
+    margin:0.8rem 0.5rem 0 0;
+}
+
+.green_circle::before{
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background: #19FF00;
     border:1px solid #5000FF;
-    margin:0.5rem 0.5rem 0 0;
+    margin:0.8rem 0.5rem 0 0;
 }
 
 #welcome, #video_intro_div, #video_enchante_div, #video_outro_div{
@@ -91,12 +122,14 @@ p{
     margin:15vh auto;
 }
 
-#press_start{
-    width:75vw;
+#start_div{
+    width:80vw;
     z-index:2;
     position:absolute;
-    top:40vh;
+    top:27vh;
     left:7vw;
+    padding:0 0;
+    line-height:3rem;
 }
 
 #video_intro_div{
@@ -110,28 +143,29 @@ p{
     max-width:70vw;
     max-height:70vh;
     margin:0 auto;
+    border:3px solid #5000FF;
 }
 
-#init_form{
+#user_name_div{
     z-index:4;
     position:absolute;
     top:35vh;
     left:8vw;
     padding:1vh 1vw;
-    min-width:70vw;
+    min-width:82vw;
 }
 
 input{
     display:block;
     font-family: "NipDo505", sans-serif;
     text-transform: uppercase;
-    font-size:2rem;
+    font-size:2.5rem;
     padding: 0 0.1rem;
     margin: 0.8vh auto;
     border:2px solid #5000FF;
     color:#5000FF;
     background-color:#AAF9D9;
-    width:80%;
+    width:93%;
 }
 
 #video_enchante_div{
@@ -153,26 +187,27 @@ input{
 #song_mood_div img, #song_style_div img, #song_tempo_div img{
     display:inline-block;
     width:45%;
-    margin: 1vh 0.5vw;
+    margin: 0.5vw 0.5vw;
+    border:3px solid #5000FF;
 }
 
 #song_style_div{
     z-index:7;
     position:absolute;
-    top:13vh;
-    left:9vw;
+    top:15vh;
+    left:10vw;
     max-width:80vw;
 }
 
 #song_tempo_div{
     z-index:8;
     position:absolute;
-    top:14vh;
-    left:10vw;
+    top:18vh;
+    left:12vw;
     max-width:80vw;
 }
 
-#song_title_div{
+#song_title_id_div{
     z-index:9;
     position:absolute;
     top:20vh;
@@ -182,9 +217,11 @@ input{
 }
 
 .title_init{
-    display:block;
     font-family: "NipDo505", sans-serif;
-    font-size:2rem;
+    font-size:2.5rem;
+    text-align:left;
+    margin-left:3vw;
+    display:block;
 }
 
 #video_outro_div{
@@ -195,30 +232,43 @@ input{
 }
 
 #last_screen{
-    width:80vw;
+    width:85vw;
     height:90vh;
     margin:5vh auto;
+    line-height:3rem;
 }
 
 #last_screen img{
     display:block;
     width:85%;
-    margin: 6vh auto;
+    margin: 8vh auto;
 }
 
 #last_screen .section_title{
     font-family: "NipDo505", sans-serif;
-    font-size:1rem;
+    font-size:1.5rem;
     margin:1vh 1vw;
 }
 
 #last_screen p{
     margin:1vh 4vw;
-    font-size:2.5rem;
+    font-size:3rem;
 }
 
 #last_screen .big_number{
     font-size:8rem;
-    font-family: "NipDo580", sans-serif;
+    font-family: "NipDo505", sans-serif;
+    margin:5vh 0;
 }
 
+#loading_gif{
+    z-index:11;
+    position:absolute;
+    top:35vh;
+    left:30vw;
+    background: transparent;
+}
+
+#loading_gif img{
+    width:40vw;
+}

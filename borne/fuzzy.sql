@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 03, 2023 at 11:37 PM
+-- Generation Time: Sep 17, 2023 at 07:23 PM
 -- Server version: 5.7.39
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `fuzzy`
 --
+CREATE DATABASE IF NOT EXISTS `fuzzy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `fuzzy`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `midi_actions`
 --
 
+DROP TABLE IF EXISTS `midi_actions`;
 CREATE TABLE `midi_actions` (
   `action_id` int(11) NOT NULL,
   `channel` int(11) DEFAULT NULL,
@@ -54,7 +57,7 @@ INSERT INTO `midi_actions` (`action_id`, `channel`, `name`, `step`, `do_alter`, 
 (10, 1, 'STOP_ADDON_TOMS', 'E', NULL, 5, ''),
 (11, 1, 'STOP_TOPLINE', 'C', NULL, 6, 'Melody'),
 (12, 1, 'STOP_VOIX', 'C', NULL, 7, ''),
-(13, 8, 'VOICE_HARMONY', 'C', NULL, 8, 'ON/OFF SWITCH'),
+(13, 1, 'VOICE_HARMONY', 'C', NULL, 8, 'ON/OFF SWITCH'),
 (14, 1, 'TEMPO_80', 'C', 1, 0, ''),
 (15, 1, 'TEMPO_90', 'D', NULL, 0, ''),
 (16, 1, 'TEMPO_100', 'D', 1, 0, ''),
@@ -70,6 +73,7 @@ INSERT INTO `midi_actions` (`action_id`, `channel`, `name`, `step`, `do_alter`, 
 -- Table structure for table `midi_avail_chords_per_tonality`
 --
 
+DROP TABLE IF EXISTS `midi_avail_chords_per_tonality`;
 CREATE TABLE `midi_avail_chords_per_tonality` (
   `chord_ton_id` int(11) NOT NULL,
   `tonality` set('D','Ab','C') DEFAULT NULL,
@@ -106,6 +110,7 @@ INSERT INTO `midi_avail_chords_per_tonality` (`chord_ton_id`, `tonality`, `chord
 -- Table structure for table `midi_chords`
 --
 
+DROP TABLE IF EXISTS `midi_chords`;
 CREATE TABLE `midi_chords` (
   `id` bigint(20) NOT NULL,
   `function` enum('sample','autotune','arpeggiato','qlab') DEFAULT NULL,
@@ -329,141 +334,10 @@ INSERT INTO `midi_chords` (`id`, `function`, `channel`, `tonality`, `style_optio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `midi_equiv`
---
-
-CREATE TABLE `midi_equiv` (
-  `id` int(11) NOT NULL,
-  `note_name` varchar(255) NOT NULL,
-  `pitch` varchar(255) DEFAULT NULL,
-  `step` varchar(255) NOT NULL,
-  `do_alter` varchar(255) DEFAULT NULL,
-  `octave` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `midi_equiv`
---
-
-INSERT INTO `midi_equiv` (`id`, `note_name`, `pitch`, `step`, `do_alter`, `octave`) VALUES
-(1, 'G9', '127', 'G', '', '10'),
-(2, 'F#9', '126', 'F', '1', '10'),
-(3, 'F9', '125', 'F', '', '10'),
-(4, 'E9', '124', 'E', '', '10'),
-(5, 'D#9', '123', 'D', '1', '10'),
-(6, 'D9', '122', 'D', '', '10'),
-(7, 'C#9', '121', 'C', '1', '10'),
-(8, 'C9', '120', 'C', '', '10'),
-(9, 'B8', '119', 'B', '', '9'),
-(10, 'A#8', '118', 'A', '1', '9'),
-(11, 'A8', '117', 'A', '', '9'),
-(12, 'G#8', '116', 'G', '1', '9'),
-(13, 'G8', '115', 'G', '', '9'),
-(14, 'F#8', '114', 'F', '1', '9'),
-(15, 'F8', '113', 'F', '', '9'),
-(16, 'E8', '112', 'E', '', '9'),
-(17, 'D#8', '111', 'D', '1', '9'),
-(18, 'D8', '110', 'D', '', '9'),
-(19, 'C#8', '109', 'C', '1', '9'),
-(20, 'C8', '108', 'C', '', '9'),
-(21, 'B7', '107', 'B', '', '8'),
-(22, 'A#7', '106', 'A', '1', '8'),
-(23, 'A7', '105', 'A', '', '8'),
-(24, 'G#7', '104', 'G', '1', '8'),
-(25, 'G7', '103', 'G', '', '8'),
-(26, 'F#7', '102', 'F', '1', '8'),
-(27, 'F7', '101', 'F', '', '8'),
-(28, 'E7', '100', 'E', '', '8'),
-(29, 'D#7', '99', 'D', '1', '8'),
-(30, 'D7', '98', 'D', '', '8'),
-(31, 'C#7', '97', 'C', '1', '8'),
-(32, 'C7', '96', 'C', '', '8'),
-(33, 'B6', '95', 'B', '', '7'),
-(34, 'A#6', '94', 'A', '1', '7'),
-(35, 'A6', '93', 'A', '', '7'),
-(36, 'G#6', '92', 'G', '1', '7'),
-(37, 'G6', '91', 'G', '', '7'),
-(38, 'F#6', '90', 'F', '1', '7'),
-(39, 'F6', '89', 'F', '', '7'),
-(40, 'E6', '88', 'E', '', '7'),
-(41, 'D#6', '87', 'D', '1', '7'),
-(42, 'D6', '86', 'D', '', '7'),
-(43, 'C#6', '85', 'C', '1', '7'),
-(44, 'C6', '84', 'C', '', '7'),
-(45, 'B5', '83', 'B', '', '6'),
-(46, 'A#5', '82', 'A', '1', '6'),
-(47, 'A5', '81', 'A', '', '6'),
-(48, 'G#5', '80', 'G', '1', '6'),
-(49, 'G5', '79', 'G', '', '6'),
-(50, 'F#5', '78', 'F', '1', '6'),
-(51, 'F5', '77', 'F', '', '6'),
-(52, 'E5', '76', 'E', '', '6'),
-(53, 'D#5/Eb5', '75', 'D', '1', '6'),
-(54, 'D5', '74', 'D', '', '6'),
-(55, 'C#5/Db5', '73', 'C', '1', '6'),
-(56, 'C5', '72', 'C', '', '6'),
-(57, 'B4', '71', 'B', '', '5'),
-(58, 'A#4', '70', 'A', '1', '5'),
-(59, 'A4 concert pitch', '69', 'A', '', '5'),
-(60, 'G#4/Ab4', '68', 'G', '1', '5'),
-(61, 'G4', '67', 'G', '', '5'),
-(62, 'F#4/Gb4', '66', 'F', '1', '5'),
-(63, 'F4', '65', 'F', '', '5'),
-(64, 'E4', '64', 'E', '', '5'),
-(65, 'D#4/Eb4', '63', 'D', '1', '5'),
-(66, 'D4', '62', 'D', '', '5'),
-(67, 'C#4/Db4', '61', 'C', '1', '5'),
-(68, 'C4 (middle C)', '60', 'C', '', '5'),
-(69, 'B3', '59', 'B', '', '4'),
-(70, 'A#3', '58', 'A', '1', '4'),
-(71, 'A3', '57', 'A', '', '4'),
-(72, 'G#3/Ab3', '56', 'G', '1', '4'),
-(73, 'G3', '55', 'G', '', '4'),
-(74, 'F#3/Gb3', '54', 'F', '1', '4'),
-(75, 'F3', '53', 'F', '', '4'),
-(76, 'E3', '52', 'E', '', '4'),
-(77, 'D#3/Eb3', '51', 'D', '1', '4'),
-(78, 'D3', '50', 'D', '', '4'),
-(79, 'C#3/Db3', '49', 'C', '1', '4'),
-(80, 'C3', '48', 'C', '', '4'),
-(81, 'B2', '47', 'B', '', '3'),
-(82, 'A#2', '46', 'A', '1', '3'),
-(83, 'A2', '45', 'A', '', '3'),
-(84, 'G#2/Ab2', '44', 'G', '1', '3'),
-(85, 'G2', '43', 'G', '', '3'),
-(86, 'F#2/Gb2', '42', 'F', '1', '3'),
-(87, 'F2', '41', 'F', '', '3'),
-(88, 'E2', '40', 'E', '', '3'),
-(89, 'D#2/Eb2', '39', 'D', '1', '3'),
-(90, 'D2', '38', 'D', '', '3'),
-(91, 'C#2/Db2', '37', 'C', '1', '3'),
-(92, 'C2', '36', 'C', '', '3'),
-(93, 'B1', '35', 'B', '', '2'),
-(94, 'A#1', '34', 'A', '1', '2'),
-(95, 'A1', '33', 'A', '', '2'),
-(96, 'G#1/Ab1', '32', 'G', '1', '2'),
-(97, 'G1', '31', 'G', '', '2'),
-(98, 'F#1/Gb1', '30', 'F', '1', '2'),
-(99, 'F1', '29', 'F', '', '2'),
-(100, 'E1', '28', 'E', '', '2'),
-(101, 'D#1/Eb1', '27', 'D', '1', '2'),
-(102, 'D1', '26', 'D', '', '2'),
-(103, 'C#1/Db1', '25', 'C', '1', '2'),
-(104, 'C1', '24', 'C', '', '2'),
-(105, 'B0', '23', 'B', '', '1'),
-(106, 'A#0', '22', 'A', '1', '1'),
-(107, 'A0', '21', 'A', '', '1'),
-(108, 'D0', '14', 'D', NULL, '1'),
-(109, 'D#0', '15', 'D', '1', '1'),
-(110, 'C-1', '12', 'C', '', '-1'),
-(111, 'C0', '24', 'C', NULL, '0');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `midi_percussions`
 --
 
+DROP TABLE IF EXISTS `midi_percussions`;
 CREATE TABLE `midi_percussions` (
   `percussion_id` int(11) NOT NULL,
   `channel` int(11) DEFAULT NULL,
@@ -501,15 +375,196 @@ INSERT INTO `midi_percussions` (`percussion_id`, `channel`, `name`, `step`, `do_
 -- Table structure for table `songs`
 --
 
+DROP TABLE IF EXISTS `songs`;
 CREATE TABLE `songs` (
   `song_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `song_title` text NOT NULL,
   `song_mood` varchar(255) NOT NULL,
-  `song_tempo` int(11) NOT NULL,
-  `song_style` enum('16beat','bossa','disco','pop') NOT NULL,
-  `song_addons` enum('simple','claps','full','hammer') NOT NULL
+  `song_tempo` varchar(255) NOT NULL,
+  `song_style` varchar(255) NOT NULL,
+  `song_addons` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `songs_titles_used`
+--
+
+DROP TABLE IF EXISTS `songs_titles_used`;
+CREATE TABLE `songs_titles_used` (
+  `song_title_id` int(11) NOT NULL,
+  `used` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `song_moods`
+--
+
+DROP TABLE IF EXISTS `song_moods`;
+CREATE TABLE `song_moods` (
+  `id` int(11) NOT NULL,
+  `mood` varchar(255) NOT NULL,
+  `tonality` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `song_moods`
+--
+
+INSERT INTO `song_moods` (`id`, `mood`, `tonality`) VALUES
+(1, 'joyeux', 'D'),
+(2, 'neutre', 'Ab'),
+(3, 'triste', 'C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `song_titles`
+--
+
+DROP TABLE IF EXISTS `song_titles`;
+CREATE TABLE `song_titles` (
+  `id` int(11) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `mood` varchar(255) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `pitch` varchar(255) NOT NULL,
+  `channel` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `song_titles`
+--
+
+INSERT INTO `song_titles` (`id`, `filename`, `mood`, `keyword`, `titre`, `pitch`, `channel`) VALUES
+(2, 'Ab0', 'Ab', 'Fan', 'Mon Idole', '0', '14'),
+(3, 'Ab1', 'Ab', 'Espoir', 'Juste y croire', '1', '14'),
+(4, 'Ab2', 'Ab', 'Insouciance', 'Un plaisir enfantin', '2', '14'),
+(5, 'Ab3', 'Ab', 'Rêverie', 'Regard en l\'air', '3', '14'),
+(6, 'Ab4', 'Ab', 'Drogue', 'Machines à dopamine', '4', '14'),
+(7, 'Ab5', 'Ab', 'Laisser-aller', 'C\'est pas grave, tant qu\'on s\'amuse', '5', '14'),
+(8, 'Ab6', 'Ab', 'Allégresse', 'Ce qui compte, c\'est de rire', '6', '14'),
+(9, 'Ab7', 'Ab', 'Sériosité', 'Mélange dans ma tête', '7', '14'),
+(10, 'Ab8', 'Ab', 'Liberté', 'Mon amie fidèle', '8', '14'),
+(11, 'Ab9', 'Ab', 'Energie', 'En mode tonique', '9', '14'),
+(12, 'Ab10', 'Ab', 'Dérision', 'Question d\'intention', '10', '14'),
+(13, 'Ab11', 'Ab', 'Légèreté', 'Rire, c\'est mieux', '11', '14'),
+(14, 'Ab12', 'Ab', 'Bouffe', 'Ma petite cuisine', '12', '14'),
+(15, 'Ab13', 'Ab', 'Sportitude', 'Le mental gagant', '13', '14'),
+(16, 'Ab14', 'Ab', 'Gribouillage', 'Ecrire, c\'est mon plaisir', '14', '14'),
+(17, 'Ab15', 'Ab', 'Rock\'n\'roll', 'Rock Star', '15', '14'),
+(18, 'Ab16', 'Ab', 'Accumulation', 'La collection déjantée', '16', '14'),
+(19, 'Ab17', 'Ab', 'Désordre', 'Le bazar dans ma tête', '17', '14'),
+(20, 'Ab18', 'Ab', 'Ivresse', 'Le monde des petites ironies', '18', '14'),
+(21, 'Ab19', 'Ab', 'Laideur', 'Beauté moche', '19', '14'),
+(22, 'Ab20', 'Ab', 'Clownitude', 'Populaire et rigolo', '20', '14'),
+(23, 'Ab21', 'Ab', 'Addiction', 'Cigarette', '21', '14'),
+(24, 'Ab22', 'Ab', 'Star', 'Joe Dassin', '22', '14'),
+(25, 'Ab23', 'Ab', 'Twist', 'Double sens', '23', '14'),
+(26, 'Ab24', 'Ab', 'Saveur', 'Lasagnes Veggie, ma folie', '24', '14'),
+(27, 'Ab25', 'Ab', 'Tableau', 'L\'Art pour tous', '25', '14'),
+(28, 'Ab26', 'Ab', 'Gadgets', 'Objetmania', '26', '14'),
+(29, 'Ab27', 'Ab', 'Observation', 'Les gens', '27', '14'),
+(30, 'Ab28', 'Ab', 'Ameublement', 'Chez Casa', '28', '14'),
+(31, 'Ab29', 'Ab', 'Stressé', 'Le Trac', '29', '14'),
+(32, 'Ab30', 'Ab', 'Don', 'Ma mémoire visuelle', '30', '14'),
+(33, 'Ab31', 'Ab', 'Gaieté', 'Juste pour rire', '31', '14'),
+(34, 'Ab32', 'Ab', 'Agacement', 'J\'aime pas les clowns', '32', '14'),
+(35, 'Ab33', 'Ab', 'Coutures', 'Une pop star excentrique', '33', '14'),
+(36, 'Ab34', 'Ab', 'Rangement', 'Scénarios farfelus', '34', '14'),
+(37, 'Ab35', 'Ab', 'Désinvolte', 'Sans limites', '35', '14'),
+(38, 'Ab36', 'Ab', 'Dépendance', 'Accro à mon phone', '36', '14'),
+(39, 'Ab37', 'Ab', 'Manipulation', 'Je me laisse convaincre', '37', '14'),
+(40, 'Ab38', 'Ab', 'Pensées', 'Un monde délirant', '38', '14'),
+(41, 'Ab39', 'Ab', 'Bordel', 'Vivre dans le chaos', '39', '14'),
+(42, 'Ab40', 'Ab', 'Amusement', 'Le squash', '40', '14'),
+(43, 'C0', 'C', 'Marre', 'Overdose', '0', '12'),
+(44, 'C1', 'C', 'Malheureux', 'La Déprime', '1', '12'),
+(45, 'C2', 'C', 'Instruments', 'Sans Instrument', '2', '12'),
+(46, 'C3', 'C', 'Rêveur', 'Les Yeux dans le Vague', '3', '12'),
+(47, 'C4', 'C', 'Molécule', 'Dopamine Addiction', '4', '12'),
+(48, 'C5', 'C', 'Tracas', 'Pas grave, mais c\'est dommage', '5', '12'),
+(49, 'C6', 'C', 'Nul', 'Médiocrité', '6', '12'),
+(50, 'C7', 'C', 'Bataille', 'Histoire de contexte', '7', '12'),
+(51, 'C8', 'C', 'Libération', 'La Liberté', '8', '12'),
+(52, 'C9', 'C', 'Désaccordé', 'Quel est ton ton?', '9', '12'),
+(53, 'C10', 'C', 'Dessein', 'J\'ai pas fait exprès', '10', '12'),
+(54, 'C11', 'C', 'Enthousiasme', 'Pas de mauvaise humeur', '11', '12'),
+(55, 'C12', 'C', 'Gastronomie', 'La recette de la fête', '12', '12'),
+(56, 'C13', 'C', 'Intellect', 'Le champion du cerveau', '13', '12'),
+(57, 'C14', 'C', 'Spleen', 'Mélo-colie', '14', '12'),
+(58, 'C15', 'C', 'Prémices', 'Le tambour', '15', '12'),
+(59, 'C16', 'C', 'Pagaille', 'Mon joyeux bazar', '16', '12'),
+(60, 'C17', 'C', 'Monotonie', 'Le mauvaise ordre', '17', '12'),
+(61, 'C18', 'C', 'Démission', 'Le chanteur rigolo', '18', '12'),
+(62, 'C19', 'C', 'Paradoxe', 'Les choses moches', '19', '12'),
+(63, 'C20', 'C', 'Triomphe', 'Ma seule prière', '20', '12'),
+(64, 'C21', 'C', 'Cigarette', 'Je suis accro', '21', '12'),
+(65, 'C22', 'C', 'Admiration', 'J\'aime bien Joe Dassin', '22', '12'),
+(66, 'C23', 'C', 'Flou', 'L\'ambiguïté', '23', '12'),
+(67, 'C24', 'C', 'Cuisine', 'Lasagnes végétariennes', '24', '12'),
+(68, 'C25', 'C', 'Œuvres', 'L\'art pour les nuls', '25', '12'),
+(69, 'C26', 'C', 'Bibelots', 'Amour d\'objets', '26', '12'),
+(70, 'C27', 'C', 'Témoin', 'Danser avec les regards', '27', '12'),
+(71, 'C28', 'C', 'Affligeant', 'Les gens chez Casa', '28', '12'),
+(72, 'C29', 'C', 'Stress', 'Le trac', '29', '12'),
+(73, 'C30', 'C', 'Film', 'Mémoire visuelle', '30', '12'),
+(74, 'C31', 'C', 'Prodige', 'Pas besoin de virtuosité', '31', '12'),
+(75, 'C32', 'C', 'Basta', 'Stop les clowns', '32', '12'),
+(76, 'C33', 'C', 'Moi', 'Caché sous les coutures', '33', '12'),
+(77, 'C34', 'C', 'Ordre', 'Le rangement à la Hollywood', '34', '12'),
+(78, 'C35', 'C', 'Désinvolture', 'Le grand saut', '35', '12'),
+(79, 'C36', 'C', 'Accro', 'Esclave de mon téléphone', '36', '12'),
+(80, 'C37', 'C', 'Mouton', 'J\'suis le pigeon des opinions', '37', '12'),
+(81, 'C38', 'C', 'Perdu', 'D\'humeur triste', '38', '12'),
+(82, 'C39', 'C', 'Fouillis', 'Le bordel ambulant', '39', '12'),
+(83, 'C40', 'C', 'Sport', 'Partie de squash', '40', '12'),
+(84, 'D0', 'D', 'Idole', 'Mon égérie', '0', '13'),
+(85, 'D1', 'D', 'Marre', 'Overdose', '1', '13'),
+(86, 'D2', 'D', 'Rêve', 'J\'suis pas fou, j\'y crois', '2', '13'),
+(87, 'D3', 'D', 'Légèreté', 'Sans y croire', '3', '13'),
+(88, 'D4', 'D', 'Voix', 'Vous faire danser', '4', '13'),
+(89, 'D5', 'D', 'Instruments', 'Un chanteur paresseux', '5', '13'),
+(90, 'D6', 'D', 'Original', 'Style singulier', '6', '13'),
+(91, 'D7', 'D', 'Bonheur', 'Dopamine Party', '7', '13'),
+(92, 'D8', 'D', 'Addiction', 'La danse de la dopamine', '8', '13'),
+(93, 'D9', 'D', 'Soucis', 'C’est dommage mais c’est pas grave', '9', '13'),
+(94, 'D10', 'D', 'Déconvenue', 'C\'est pas grave si c’est nul', '10', '13'),
+(95, 'D11', 'D', 'Décalé', 'Histoire de contexte', '11', '13'),
+(96, 'D12', 'D', 'Loufoque', 'Le contexte en folie', '12', '13'),
+(97, 'D13', 'D', 'Délibéré', 'Une règle à suivre', '13', '13'),
+(98, 'D14', 'D', 'Anticonformiste', 'Mon credo', '14', '13'),
+(99, 'D15', 'D', 'Teinté', 'Quel est ton ton?', '15', '13'),
+(100, 'D16', 'D', 'Folie', 'Question d\'intention', '16', '13'),
+(101, 'D17', 'D', 'Joie', 'Sourire sincère', '17', '13'),
+(102, 'D18', 'D', 'Offense', 'Un monde fou', '18', '13'),
+(103, 'D19', 'D', 'Ingrédients', 'Passion cuisine', '19', '13'),
+(104, 'D20', 'D', 'Recette', 'Cuisine-moi le bonheur', '20', '13'),
+(105, 'D21', 'D', 'Sportif', 'Invincible', '21', '13'),
+(106, 'D22', 'D', 'Mental', 'C\'est toi le champion', '22', '13'),
+(107, 'D23', 'D', 'Ecriture', 'Les blocs-notes', '23', '13'),
+(108, 'D24', 'D', 'Satisfaction', 'La magie des blocs-notes', '24', '13'),
+(109, 'D25', 'D', 'Drums', 'Le tambour en plastique', '25', '13'),
+(110, 'D26', 'D', 'Fierté', 'Le roi du tambour', '26', '13'),
+(111, 'D27', 'D', 'Amas', 'La collection folle', '27', '13'),
+(112, 'D28', 'D', 'Trésors', 'La collectionneuse', '28', '13'),
+(113, 'D29', 'D', 'Bazar', 'Vive le désordre!', '29', '13'),
+(114, 'D30', 'D', 'Chaos', 'Fous le bordel!', '30', '13'),
+(115, 'D31', 'D', 'Signification', 'Sans prise de tête', '31', '13'),
+(116, 'D32', 'D', 'Moche', 'Les choses démodées', '32', '13'),
+(117, 'D33', 'D', 'Tubes', 'Pop addiction', '33', '13'),
+(118, 'D34', 'D', 'Succès', 'Superstar', '34', '13'),
+(119, 'D35', 'D', 'Tabac', 'Délicieuse fumée', '35', '13'),
+(120, 'D36', 'D', 'Fumée', 'La fête des bouffées', '36', '13'),
+(121, 'D37', 'D', 'Dassin', 'Fan de Joe', '37', '13'),
+(122, 'D38', 'D', 'Fan', 'Ma providence', '38', '13'),
+(123, 'D39', 'D', 'Bizarrerie', 'Ambiguïté, c\'est mon crédo', '39', '13'),
+(124, 'D40', 'D', 'Béchamel', 'Les folles lasagnes', '40', '13');
 
 -- --------------------------------------------------------
 
@@ -517,6 +572,7 @@ CREATE TABLE `songs` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` bigint(20) NOT NULL,
   `user_name` varchar(255) NOT NULL
@@ -545,12 +601,6 @@ ALTER TABLE `midi_chords`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `midi_equiv`
---
-ALTER TABLE `midi_equiv`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `midi_percussions`
 --
 ALTER TABLE `midi_percussions`
@@ -561,6 +611,18 @@ ALTER TABLE `midi_percussions`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`song_id`);
+
+--
+-- Indexes for table `song_moods`
+--
+ALTER TABLE `song_moods`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `song_titles`
+--
+ALTER TABLE `song_titles`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -591,12 +653,6 @@ ALTER TABLE `midi_chords`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
--- AUTO_INCREMENT for table `midi_equiv`
---
-ALTER TABLE `midi_equiv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
-
---
 -- AUTO_INCREMENT for table `midi_percussions`
 --
 ALTER TABLE `midi_percussions`
@@ -607,6 +663,18 @@ ALTER TABLE `midi_percussions`
 --
 ALTER TABLE `songs`
   MODIFY `song_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `song_moods`
+--
+ALTER TABLE `song_moods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `song_titles`
+--
+ALTER TABLE `song_titles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `users`

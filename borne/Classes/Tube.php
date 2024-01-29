@@ -3,27 +3,19 @@ namespace Classes;
 
 require_once 'Machine.php';
 require_once 'midiequiv.php';
-
 class Tube extends Machine
 {
-    public function insertChoices($song_mood, $song_tempo, $song_style, $song_addons){
-        $sql = "INSERT INTO song_choices(song_mood, song_tempo, song_style, song_addons) VALUES('$song_mood', $song_tempo, '$song_style', '$song_addons')";
-        $choice_id = $this->query($sql);
-        return $choice_id;
-    }
-
     public function getTonality($mood){
-        $sql = "SELECT tonality FROM midi_prompts WHERE mood='$mood'";
-        $results = $this->query($sql);
-        $tonality = $results[array_rand($results,1)];
-        return $tonality['tonality'];
+        $sql = "SELECT tonality FROM song_moods WHERE mood='$mood'";
+        $res = $this->query($sql);
+        return $res[0]['tonality'];
     }
 
     public function getMoodName($tonality){
         $mood_names = array(
-            'D'=>'Joyeux',
-            'Ab'=>'Neutre',
-            'C'=>'Triste'
+            'D'=>'Joyeuse',
+            'Ab'=>'Stable',
+            'C'=>'Mélancolique'
         );
 
         return $mood_names[$tonality];
@@ -35,13 +27,18 @@ class Tube extends Machine
         return $styles[$key];
     }
 
-    public function getChannel($tonality){
+    public function getChordChannel($tonality){
         $midi_channel_arr = [
             'D' => 4,
             'Ab' => 3,
             'C' => 2
         ];
         return $midi_channel_arr[$tonality];
+    }
+
+    public function getSinging($song_title_id){
+        $sql = "SELECT * FROM song_titles WHERE id=$song_title_id";
+        return $this->queryAssocArray($sql);
     }
 
     public function getChords($tonality){
@@ -52,14 +49,13 @@ class Tube extends Machine
     }
 
     public function getChordPitch($step, $do_alter, $octave){
-        //$octave++;
         $note = $step;
 
         if($do_alter == 1){
             if($note == "B") $note .= "b";
             else $note .= "#";
         }
-        
+
         $note .= $octave;
         if(array_key_exists($note, MIDIEQUIV)){
             return MIDIEQUIV[$note];
@@ -144,12 +140,6 @@ class Tube extends Machine
         $res = $this->query($sql);
         return $res[0];
     }
-    
-    public function getPrompt($tonality){
-        $sql = "SELECT * FROM midi_prompts WHERE tonality='$tonality'";
-        $results = $this->query($sql);
-        return $results[array_rand($results,1)]['notes'];
-    }
 
     public function getFormat($lines){
         $text = array();
@@ -204,7 +194,7 @@ class Tube extends Machine
         return $results[0];
     }
 
-        public function getToplineChannel($tonality){
+    public function getToplineChannel($tonality){
         $top_channel = [
             'D' => 10,
             'Ab' => 11,
@@ -217,16 +207,26 @@ class Tube extends Machine
         return rand(1,108);
     }
 
-     public function getStopTopline(){
+    public function getStopTopline(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
         $results = $this->query($sql);
         return $results[0];
     }
 
-     public function getVoiceHarmony(){
+    public function getVoiceHarmony(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'VOICE_HARMONY'";
         $results = $this->query($sql);
         return $results[0];
+    }
+
+    function getOldTitles(){
+        $sql = "SELECT title FROM song_titles";
+        return $this->querySimpleArray($sql, 'title');
+    }
+
+    function getOldInspo(){
+        $sql = "SELECT text FROM song_inspo";
+        return $this->querySimpleArray($sql, 'text');
     }
 
 }

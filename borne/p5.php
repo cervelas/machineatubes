@@ -9,6 +9,9 @@ $json .= '"arpeggiato": {
 
 //$go_arpeggiato_note = $tube5->getGoDrums($song_style);
 $measure = 1;
+
+$go_arpeggiato_note = $tube5->getGoDrums($song_style);
+$measure = 0;
 $keys_used = array();
 
 foreach($format as $key=>$section) {

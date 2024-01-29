@@ -11,3 +11,14 @@
    - Video d'outro (merci c'était super), infos reste, paroles en veille
    - fin video, veille partout.
    . si file d'attente, on attend 5 sec.
+
+- OK update si pas d-id play video bug
+- OK lusieurs video outro et intro
+- revoir cadxrage video
+- OK enlever double guillemet dans les paroles
+- OK update dossier videos 
+    - BPM > STYLE > 1/2 > PARTIE
+
+- OK refresh Page 
+- OK randomiser preset synthös
+- OK revoir la fin
