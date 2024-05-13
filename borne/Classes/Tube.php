@@ -188,25 +188,6 @@ class Tube extends Machine
         return rand(1,108);
     }
 
-     public function getStopTopline(){
-        $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
-        $results = $this->query($sql);
-        return $results[0];
-    }
-
-    public function getToplineChannel($tonality){
-        $top_channel = [
-            'D' => 10,
-            'Ab' => 11,
-            'C' => 9
-        ];
-        return $top_channel[$tonality];
-    }
-
-    public function getToplinePitch(){
-        return rand(1,108);
-    }
-
     public function getStopTopline(){
         $sql = "SELECT * FROM midi_actions WHERE name = 'STOP_TOPLINE'";
         $results = $this->query($sql);

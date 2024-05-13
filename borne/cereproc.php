@@ -1,8 +1,9 @@
 <?php
 
 $text = mb_convert_encoding($line, 'UTF-8');
+require_once("cereprocs_logins.php");
 
-$credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding('salut@mynameisfuzzy.ch:LaMachine2022', 'UTF-8'));
+$credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding($cereproc_login, 'UTF-8'));
 
 $ch = curl_init();
 
