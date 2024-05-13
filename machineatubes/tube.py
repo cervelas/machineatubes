@@ -78,6 +78,11 @@ def get_outro_video():
     )
 
 
+def get_bug_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "bug").glob('*.' + vext) ]
+    )
+
 def initsleep():
     global t
     t = time.perf_counter()
@@ -281,6 +286,8 @@ class Tube():
                     i = (i + 1)
 
     def get_intro_video(self, id):
+        import random
+        self.infos["intro_video_url"] = get_bug_video()
         print("get video id " + id)
         if id and len(id) > 0:
             if Tube.playing is False:
@@ -289,7 +296,7 @@ class Tube():
             url = "https://api.d-id.com/talks/" + id
 
             headers = {"accept": "application/json",
-                    "Authorization": "Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3"}
+                    "Authorization": "Basic " + did_key}
 
             try:
                 retry = 1
@@ -314,6 +321,8 @@ class Tube():
                         if Tube.playing is False:
                             Tube.window.evaluate_js('loaded()')
                         break
+                    else:
+                        pprint.pprint(response)
 
                     print("retrying... %s" % retry)
                     retry += 1
