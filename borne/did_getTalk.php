@@ -1,11 +1,13 @@
 <?php
 
+require_once("did_key.php");
+
 //upload audio first
 $ch = curl_init();
 $headers = [
     'Content-Type: multipart/form-data',
     'Accept: application/json',
-    'Authorization: Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3'
+    'Authorization: Basic ' . $did_key,
 ];
 
 $file = new CURLFile($cereproc_audio_url, 'audio/mpeg', $_SESSION['song_id'].'.mp3');
@@ -31,7 +33,7 @@ if($audio_tmp_link!==''){
     $headers = [
         'Content-Type: application/json',
         'Accept: application/json',
-        'Authorization: Basic bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:QTfYIk99xhvh2VOYa1gL3'
+        'Authorization: Basic' . $did_key,
     ];
     $data = '{
   "script": {

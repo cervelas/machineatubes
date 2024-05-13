@@ -175,6 +175,7 @@ class Tube extends Machine
         return $lyrics;
     }
 
+    
     public function getToplineChannel($tonality){
         $top_channel = [
             'D' => 10,

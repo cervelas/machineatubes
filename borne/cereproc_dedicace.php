@@ -1,9 +1,11 @@
 <?php
 
 require_once("texts_dedicace.php");
+require_once("cereprocs_logins.php");
+
 $text = mb_convert_encoding(stripslashes($texts_dedicace[array_rand($texts_dedicace)]), 'UTF-8');
 
-$credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding('bastien.bron@gmail.com:LaMachine2022', 'UTF-8'));
+$credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding($cereproc_dedicace_login, 'UTF-8'));
 
 $ch = curl_init();
 
