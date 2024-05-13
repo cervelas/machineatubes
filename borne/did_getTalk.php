@@ -33,7 +33,7 @@ if($audio_tmp_link!==''){
     $headers = [
         'Content-Type: application/json',
         'Accept: application/json',
-        'Authorization: Basic' . $did_key,
+        'Authorization: Basic ' . $did_key,
     ];
     $data = '{
   "script": {
