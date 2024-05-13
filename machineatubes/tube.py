@@ -56,6 +56,10 @@ relpath = Path(__file__).parent / '..' / 'ui'
 
 vext = 'mp4'
 
+did_key = False
+with open(Path(__file__).parent / "did_key", 'r') as f:
+    did_key = f.read()
+
 def getsongvideos(subfolder = ""):
     return {
         v[0]: [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / subfolder / v[0]).glob('*.' + vext) ] for v in song_structure
