@@ -245,23 +245,23 @@
                 <div id="paroles"></div>
             </div>
             <div class="screen vertical" id="infos" >
-                    <div class="sleep"><img src="assets/img/logoinfos.png"></div>
-                    <div class="loading"><img src="assets/img/loading.gif"></div>
-                    <div class="jingle"><img src="assets/img/intro_portrait.gif"></div>
-                    <!-- <div id="infologo"><img src="assets/img/logoinfos.png"></div> -->
-                    <div id="infonum">tube #57</div>
-                    <div class="header"><span>>Titre</span></div>
-                    <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
-                    
-                    <div class="header"><span>>Humeur</span></div>
-                    <div  class="info"><span id="infoambiance">Joyeuse</span></div>
-                    
-                    <div class="header"><span>>Tempo</span></div>
-                    <div  class="info"><span id="infobpm">BPM</span></div>
-                    
-                    <div class="header"><span>>Ambiance</span></div>
-                    <div class="info"><span  id="infostyle">Tropicale</span></div>
-                    <div class="footer">MY NAME IS FUZZY</div>
+                <div class="sleep"><img src="assets/img/logoinfos.png"></div>
+                <div class="loading"><img src="assets/img/loading.gif"></div>
+                <div class="jingle"><img src="assets/img/intro_portrait.gif"></div>
+                <!-- <div id="infologo"><img src="assets/img/logoinfos.png"></div> -->
+                <div id="infonum">tube #57</div>
+                <div class="header"><span>>Title</span></div>
+                <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
+                
+                <div class="header"><span>>Mood</span></div>
+                <div  class="info"><span id="infoambiance">Joyeuse</span></div>
+                
+                <div class="header"><span>>Tempo</span></div>
+                <div  class="info"><span id="infobpm">BPM</span></div>
+                
+                <div class="header"><span>>Ambiance</span></div>
+                <div class="info"><span  id="infostyle">Tropicale</span></div>
+                <div class="footer">MY NAME IS FUZZY</div>
             </div>
             <div class="screen" id="titre">
                     <div class="sleep"><img src="assets/img/logoinfos.png"></div>
@@ -282,6 +282,7 @@
                 <video id="dedicacevideo" class="rotated" style="display:none;"></video>
                 <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full" style="display:none;" ></video>
                 <video id="outrovideo" style="display:none;" ></video>
+                <div class="subtitle">bluhbluhbluh</div>
             </div>
         </div>
     </body> 
@@ -395,9 +396,9 @@
             document.querySelector("#infoambiance").innerHTML = ambiance;
             document.querySelector("#infostyle").innerHTML = style;
             document.querySelector("#infobpm").innerHTML = bpm;
-            document.querySelector("#infoprenom").innerHTML = "pour " + prenom;
-            document.querySelector("#numtube").innerHTML = "Chanson #" + numero;
-            document.querySelector("#infonum").innerHTML = "Chanson #" + numero;
+            document.querySelector("#infoprenom").innerHTML = "for " + prenom;
+            document.querySelector("#numtube").innerHTML = "Song #" + numero;
+            document.querySelector("#infonum").innerHTML = "Song #" + numero;
         };
 
         var preloadvid = function(source){

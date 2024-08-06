@@ -9,6 +9,7 @@ $json = '{
     "style": "'.$_SESSION['song_style'].'_'.$_SESSION['variant'].'",
     "prenom": "'.$_SESSION['user_name'].'",
     "numero": '.$_SESSION['song_id'].',
+    "id_dedicace": '.$_SESSION['dedicace_id'].',
     "id_video": "'.$talk_id.'",';
 
 $json .= ' "song": {';
@@ -35,10 +36,10 @@ echo '
 <div id="last_screen" class="bluebg">
 <h2 class="section_title">MY NAME IS FUZZY</h2>
     <img src="imgs/lamachine.png" />
-    <p>Cr&eacute;ation en cours !<br />
-    Le Tube porte le num&eacute;ro</p>
+    <p>Your song is being created<br />
+    The hit is number</p>
     <p class="big_number">#'.$song_id.'</p>
-    <p>Poser le casque et se diriger vers la machine</p>';
+    <p>Take off the headphones and head to the machine</p>';
 
     echo '<script>
     setTimeout(isFinished, 10000); 

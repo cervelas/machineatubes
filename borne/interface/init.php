@@ -9,6 +9,7 @@ ledsOFF();
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="../styles.css" type="text/css" />
     <title>La Machine à Tubes</title>
     <script>
@@ -45,7 +46,7 @@ ledsOFF();
                                 submitInfo('song_mood','D');
                                 break;
                             case "song_style":
-                                submitInfo('song_style','16beat');
+                                submitInfo('song_style','urban');
                                 break;
                             case "song_tempo":
                                 submitInfo('song_tempo','95');
@@ -267,44 +268,44 @@ ledsOFF();
     </div>
 
     <div id="welcome" class="bordered">
-        <h2 class="section_title"><span class="bluebg">>ACCUEIL</span></h2>
+        <h2 class="section_title"><span class="bluebg">>HOME</span></h2>
         <img src="../imgs/lamachine_fuzzy.png" />
-        <p>METTRE LE CASQUE SUR LES OREILLES <br /> ET INS&Eacute;RER LE JETON POUR <span class="bluebg">>D&Eacute;MARRER</span></p>
+        <p>PUT THE HEADPHONE ON<br /> AND INSERT A TOKEN TO <span class="bluebg">>START</span></p>
     </div>
 
     <div id="start_div" class="bordered" style="display: none;">
-        <p>Bonjour et bienvenue dans <br /><span class="bluebg">>la machine &agrave; tubes</span></p>
-        <p>UTILISER LES 4 TOUCHES COLOR&Eacute;ES <br />DU CLAVIER POUR <span class="bluebg">>NAVIGUER</span><br /></p>
-            <p>APPUYEZ SUR
+        <p>Welcome to <br /><span class="bluebg">>la machine &agrave; tubes</span></p>
+        <p>USE THE FOUR COLORED BUTTONS <br />TO <span class="bluebg">>NAVIGATE</span><br /></p>
+            <p>PRESS
             <svg height="0.8em" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 62 61" style="enable-background:new 0 0 62 61; fill:#19FF00;stroke:#5000FF;stroke-width:3;stroke-miterlimit:10;" xml:space="preserve"><circle cx="30.5" cy="30.5" r="28"/></svg>
-                POUR <span class="bluebg">>D&Eacute;MARRER</span></p>
+                TO <span class="bluebg">>START</span></p>
     </div>
 
     <div id="video_intro_div" class="bordered" style="display: none;">
-        <h2 class="section_title"><span class="bluebg">>SALUTATIONS</span></h2>
+        <h2 class="section_title"><span class="bluebg">>GREETINGS</span></h2>
         <video id="video_intro" playsinline onended="videoFinished('intro');">
             <source src="../video/intro.mp4" type="video/mp4">
         </video>
     </div>
 
     <div id="user_name_div" class="bordered" style="display:none;">
-        <h2><span class="bluebg">>PR&Eacute;NOM</span></h2>
+        <h2><span class="bluebg">>NAME</span></h2>
         <form name="init_form" id="init_form" method="post" action="../index.php">
             <input type="text" id="user_name" required autocomplete="false" oninput="checkInput();" />
-            <a id="submit_name" class="green_circle" href="javascript:submitInfo('user_name');"><span class="bluebg action_button">>VALIDER</span></a><br />
-            <a id="delete_name" class="red_circle" href="javascript:deleteInfo('user_name');"><span class="bluebg action_button">>EFFACER</span></a>
+            <a id="submit_name" class="green_circle" href="javascript:submitInfo('user_name');"><span class="bluebg action_button">>CONFIRM</span></a><br />
+            <a id="delete_name" class="red_circle" href="javascript:deleteInfo('user_name');"><span class="bluebg action_button">>CLEAR</span></a>
         </form>
     </div>
 
     <div id="video_enchante_div" class="bordered" style="display: none;">
-        <h2 class="section_title"><span class="bluebg">>&Agrave; TOI DE JOUER</span></h2>
+        <h2 class="section_title"><span class="bluebg">>LET'S GET STARTED</span></h2>
         <video id="video_enchante" playsinline onended="videoFinished('enchante');">
             <source src="../video/enchante.mp4" type="video/mp4">
         </video>
     </div>
 
     <div id="song_mood_div" class="bordered" style="display: none;">
-        <h2 class="section_title"><span class="bluebg">>HUMEUR</span></h2>
+        <h2 class="section_title"><span class="bluebg">>MOOD</span></h2>
         <img src="../imgs/mood_happy.jpg" onclick="submitInfo('song_mood','D')" />
         <img src="../imgs/mood_sad.jpg" onclick="submitInfo('song_mood','C')" />
         <img src="../imgs/mood_other.jpg" onclick="submitInfo('song_mood','Ab')" />
@@ -328,7 +329,7 @@ ledsOFF();
     </div>
 
     <div id="song_title_id_div" class="bordered" style="display: none;">
-        <h2 class="section_title"><span class="bluebg">>TH&Egrave;ME</span></h2>
+        <h2 class="section_title"><span class="bluebg">>TOPIC</span></h2>
     </div>
 
     <div id="video_outro_div" class="bordered" style="display: none;">

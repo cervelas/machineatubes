@@ -2,6 +2,7 @@
 session_start();
 require_once 'gpio.php';
 require_once 'autoloader.php';
+require_once 'english.php';
 use Classes\Tube;
 
 ledsOFF();
@@ -30,7 +31,8 @@ if(!$_GET['init']){
 
     $_SESSION['song_id'] = $song_id;
     $_SESSION['user_id'] = $user_id;
-    $_SESSION['song_title'] = $song_title;
+    $_SESSION['song_title'] = $titles_eng[$song_title_id - 2];
+    
 
     include_once('create_tube.php');
 

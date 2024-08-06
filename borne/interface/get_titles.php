@@ -1,6 +1,7 @@
 <?php
 use Classes\Tube;
 require_once '../autoloader.php';
+require_once '../english.php';
 
 if(isset($_SESSION['song_mood'])){
     $machine = new Tube();
@@ -13,7 +14,7 @@ if(isset($_SESSION['song_mood'])){
 
     foreach($song_title_ids as $key=>$song_title_id){
         $circle_class = $circle_colors[$key]."_circle";
-        $song_keyword = $machine->getSongInfo($song_title_id)['keyword'];
+        $song_keyword = $keywords_eng[$song_title_id-2];
         echo '<a class="title_init '.$circle_class.'" href="javascript:submitInfo(\'song_title_id\',\''.$song_title_id.'\');"><span class="bluebg">>'.$song_keyword.'</span></a>';
     }
 }
