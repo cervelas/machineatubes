@@ -31,7 +31,7 @@ if(!$_GET['init']){
 
     $_SESSION['song_id'] = $song_id;
     $_SESSION['user_id'] = $user_id;
-    $_SESSION['song_title'] = $titles_eng[$song_title_id - 2];
+    $_SESSION['song_title'] = $titles_eng[$song_title_id - 1];
     
 
     include_once('create_tube.php');

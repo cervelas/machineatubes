@@ -14,7 +14,7 @@ if(isset($_SESSION['song_mood'])){
 
     foreach($song_title_ids as $key=>$song_title_id){
         $circle_class = $circle_colors[$key]."_circle";
-        $song_keyword = $keywords_eng[$song_title_id-2];
+        $song_keyword = $keywords_eng[$song_title_id - 1];
         echo '<a class="title_init '.$circle_class.'" href="javascript:submitInfo(\'song_title_id\',\''.$song_title_id.'\');"><span class="bluebg">>'.$song_keyword.'</span></a>';
     }
 }
