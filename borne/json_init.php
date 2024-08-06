@@ -36,8 +36,8 @@ echo '
 <div id="last_screen" class="bluebg">
 <h2 class="section_title">MY NAME IS FUZZY</h2>
     <img src="imgs/lamachine.png" />
-    <p>Your song is being created<br />
-    The hit is number</p>
+    <p>The song is being created!<br />
+    Your hit number is</p>
     <p class="big_number">#'.$song_id.'</p>
     <p>Take off the headphones and head to the machine</p>';
 
