@@ -85,7 +85,7 @@ class Machine:
         self.win = False
         self.ctrlwin = False
         self.tubes = [] 
-        self.autoplay = False
+        self.autoplay = True
         self.playing = False
         self.last_tube = None
     def close(self):
@@ -157,7 +157,7 @@ class Machine:
         self.log("Received the song %s !" % t.name)
         self.log("num %s, ambiance %s, style %s, prenom %s" % ( t.infos["numero"], t.infos["ambiance"], 
                                              t.infos["style"], t.infos["prenom"]))
-        self.log("de-id: %s" % t.infos["intro_video_url"].split("/")[-1])
+        self.log("d-id: %s" % t.infos["intro_video_url"].split("/")[-1])
 
         self.play()
 

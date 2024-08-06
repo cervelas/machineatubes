@@ -403,7 +403,7 @@
 
         var preloadvid = function(source){
             if(document.querySelector("video[src='" + source + "']") == null){
-                console.log("loading " + source);
+                console.log("preloading " + source);
                 let vid = document.createElement("video");
                 vid.preload = "auto";
                 vid.src = source;
@@ -421,6 +421,8 @@
                 vid.load();
                 vid.play();
                 vid.style.display="none";
+            }else{                
+                console.log("loaded " + source);
             }
         }
 

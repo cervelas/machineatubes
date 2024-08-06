@@ -120,6 +120,7 @@ class Tube():
         self.infos = {}
         self.intro_video_url = None
         self.videos = []
+        self.infos["intro_video_url"] = get_bug_video()
 
     def duration(self):
         '''
@@ -286,8 +287,6 @@ class Tube():
                     i = (i + 1)
 
     def get_intro_video(self, id):
-        import random
-        self.infos["intro_video_url"] = get_bug_video()
         print("get video id " + id)
         if id and len(id) > 0:
             if Tube.playing is False:
