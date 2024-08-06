@@ -3,7 +3,13 @@
 require_once("texts_dedicace.php");
 require_once("cereprocs_logins.php");
 
-$text = mb_convert_encoding(stripslashes($texts_dedicace[array_rand($texts_dedicace)]), 'UTF-8');
+$random_dedicace_id = array_rand($texts_dedicace);
+
+$_SESSION["dedicace_id"] = $random_dedicace_id;
+
+$text = mb_convert_encoding(stripslashes($texts_dedicace[$random_dedicace_id]), 'UTF-8');
+
+//$text_eng = mb_convert_encoding(stripslashes($texts_dedicace_eng[$random_dedicace_id]), 'UTF-8');
 
 $credentials = 'Authorization: Basic '.base64_encode(mb_convert_encoding($cereproc_dedicace_login, 'UTF-8'));
 
