@@ -25,7 +25,7 @@ $json = "";
 include "song_format.php";
 include "json_init.php";
 
-$url = 'http://192.168.1.20:23456/play';
+$url = 'http://192.168.2.20:23456/play';
 fwrite($e, "avant");
 fwrite($e, $json);
 $json = json_encode(json_decode($json));
