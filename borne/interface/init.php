@@ -270,7 +270,7 @@ ledsOFF();
     <div id="welcome" class="bordered">
         <h2 class="section_title"><span class="bluebg">>HOME</span></h2>
         <img src="../imgs/lamachine_fuzzy.png" />
-        <p>PUT THE HEADPHONE ON<br /> AND INSERT A TOKEN TO <span class="bluebg">>START</span></p>
+        <p>PUT THE HEADPHONES ON<br /> AND INSERT A TOKEN TO <span class="bluebg">>START</span></p>
     </div>
 
     <div id="start_div" class="bordered" style="display: none;">
