@@ -301,7 +301,6 @@ $keywords_eng = array(
 );
 
 $titles_eng = array(
-    "Titre EN",
     "My Idol",
     "Just believe it",
     "A childish pleasure",
