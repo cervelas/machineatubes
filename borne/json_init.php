@@ -1,12 +1,13 @@
 <?php
 
 include_once('cereproc_dedicace.php');
+include_once('text_dedicace.php');
 
 $json = '{
     "name":"'.$_SESSION['song_title'].'",
     "tempo": '.$_SESSION['song_tempo'].',
     "ambiance": "'.$_SESSION['song_mood_name'].'",
-    "style": "'.$_SESSION['song_style'].'_'.$_SESSION['variant'].'",
+    "style": "'.$humeur[$_SESSION['song_style']].'_'.$_SESSION['variant'].'",
     "prenom": "'.$_SESSION['user_name'].'",
     "numero": '.$_SESSION['song_id'].',
     "id_dedicace": '.$_SESSION['dedicace_id'].',
