@@ -204,7 +204,7 @@
             font-size: 0.5em;
         }
 
-        .sleep, .loading, .jingle{
+        .sleep, .loading, .jingle, #subtitles{
             display: none;
             text-align: center;
             justify-content: center;
@@ -215,6 +215,21 @@
             height: 100%;
             background-color: #AAF9D9;
             z-index: 10000;
+        }
+
+        #subtitles {
+            border: 1px red solid;
+            display: flex;
+            width: 50vh;
+            height: 40vw;
+            background-color: transparent;
+            transform-origin: 50% 50%;
+            transform: rotate(-90deg) translate(0, 30%);
+            color: #AAF9D9;
+            word-wrap: break-word;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+            z-index: 20000;
         }
 
         .sleep img, .loading img, .jingle img{
@@ -283,6 +298,7 @@
                 <video id="dedicacevideo" class="rotated"></video>
                 <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full"  style="display:none;"  ></video>
                 <video id="outrovideo" ></video>
+                <div id="subtitles"></div>
             </div>
         </div>
     </body> 
@@ -296,6 +312,7 @@
         jingle_outro.load();
         let outro_video = document.querySelector("#outrovideo");
         let dedi_video = document.querySelector("#dedicacevideo");
+        let subtitles = document.querySelector("#subtitles");
 
         var sleep = function(){
             const elems = document.querySelectorAll('.sleep');
@@ -329,7 +346,7 @@
             "";
         }
 
-        var gointro = function(dedi_url){
+        var gointro = function(dedi_url, sub="test1|test2|test3"){
             loaded();
             wakeup();
             jingle_intro.play();
@@ -341,6 +358,12 @@
             dedi_video.src = dedi_url;
             dedi_video.load();
             dedi_video.currentTime = 0;
+            let subs = []
+            if(sub.length > 0){
+                subs = sub.split("|");
+            }
+            let cur=0;
+            let subanim = null;
             jingle_intro.addEventListener("ended", function(v){
                 const elems = document.querySelectorAll('.jingle');
                 elems.forEach(function(e){
@@ -349,12 +372,30 @@
                 jingle_intro.style.display = "none";
                 dedi_video.play();
                 dedi_video.style.display = "block";
+                
 
                 dedi_video.addEventListener("ended", function(v){
 
                     dedi_video.style.display = "none";
                     window.pywebview.api.videoend();
+                    subtitles.innerHTML = "";
+                    if(subs.length > 0){
+                        clearInterval(subanim);
+                    }
                 });
+
+                if(subs.length > 0){
+                    cur = 0;
+                    subtitles.innerHTML = subs[cur];
+                    subanim = setInterval(function(){
+                        cur++;
+                        if(cur < subs.length){
+                            subtitles.innerHTML = subs[cur];
+                        }else{
+                            subtitles.innerHTML = "";
+                        }
+                    }, (dedi_video.duration/subs.length)*1000);
+                }
             });
             "";
         };
