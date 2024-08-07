@@ -16,6 +16,12 @@
             font-style: normal;
         }
  
+        @font-face {
+            font-family: 'Nippo-Medium';
+            src: url('assets/fonts/Nippo-Medium.woff2') format('woff2');
+            font-style: normal;
+        }
+
         *, *:before, *:after {
             box-sizing: border-box;
         }
@@ -218,20 +224,20 @@
         }
 
         #subtitles {
-            border: 1px red solid;
             display: flex;
             width: 50vh;
             height: 40vw;
-            font-family: 'NippDo-580';
+            font-family: 'Nippo-Medium';
+            color: #5000FF;
+            line-height: 0.9em;
             background-color: transparent;
             transform-origin: 50% 50%;
             transform: rotate(-90deg) translate(0, 30%);
-            color: #AAF9D9;
             text-transform: none;
             padding: 20px;
             word-wrap: break-word;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #AAF9D9;
             z-index: 20000;
         }
 

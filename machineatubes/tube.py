@@ -56,36 +56,36 @@ intro_subs_did = {
 }
 
 intro_subs_bugs = {
-    "1_long.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: {user_name}. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
-    "1_short.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: {user_name}. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
+    "1_long.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: <span style='text-transform:uppercase;'>{user_name}</span>. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
+    "1_short.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: <span style='text-transform:uppercase;'>{user_name}</span>. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
     
-    "2_long.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: {user_name}. |It's a beautiful song with some {song_style} accents. Let’s get started!",
-    "2_short.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: {user_name}. |It's a beautiful song with some {song_style} accents. Let’s get started!",
+    "2_long.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: <span style='text-transform:uppercase;'>{user_name}</span>. |It's a beautiful song with some {song_style} accents. Let’s get started!",
+    "2_short.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: <span style='text-transform:uppercase;'>{user_name}</span>. |It's a beautiful song with some {song_style} accents. Let’s get started!",
     
-    "3_long.mp4": "Hello! The next song is called: |'{song_title}'.|I composed it for: {user_name}, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, {user_name}.",
-    "3_short.mp4": "Hello! The next song is called: |'{song_title}'. |I composed it for: {user_name}, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, {user_name}.",
+    "3_long.mp4": "Hello! The next song is called: '{song_title}'.|I composed it for: <span style='text-transform:uppercase;'>{user_name}</span>, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, <span style='text-transform:uppercase;'>{user_name}</span>.",
+    "3_short.mp4": "Hello! The next song is called: '{song_title}'. |I composed it for: <span style='text-transform:uppercase;'>{user_name}</span>, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, <span style='text-transform:uppercase;'>{user_name}</span>.",
     
-    "4_long.mp4": "All set, I'm ready! |Watch out, {user_name}, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
-    "4_short.mp4": "All set, I'm ready! |Watch out, {user_name}, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
+    "4_long.mp4": "Watch out, <span style='text-transform:uppercase;'>{user_name}</span>, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
+    "4_short.mp4": "Watch out, <span style='text-transform:uppercase;'>{user_name}</span>, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
     
-    "5_long.mp4": "Dear {user_name}, I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, {user_name}, I'm starting the machine now. Bye-bye.",
-    "5_short.mp4": "Dear {user_name}, |I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, {user_name}, I'm starting the machine now. Bye-bye.",
+    "5_long.mp4": "Dear <span style='text-transform:uppercase;'>{user_name}</span>, I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, <span style='text-transform:uppercase;'>{user_name}</span>, I'm starting the machine now. Bye-bye.",
+    "5_short.mp4": "Dear <span style='text-transform:uppercase;'>{user_name}</span>, |I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, <span style='text-transform:uppercase;'>{user_name}</span>, I'm starting the machine now. Bye-bye.",
     
-    "6_long.mp4": "The next song is for you, {user_name}! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, {user_name}.",
-    "6_short.mp4": "The next song is for you, {user_name}! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, {user_name}.",
+    "6_long.mp4": "The next song is for you, <span style='text-transform:uppercase;'>{user_name}</span>! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, <span style='text-transform:uppercase;'>{user_name}</span>.",
+    "6_short.mp4": "The next song is for you, <span style='text-transform:uppercase;'>{user_name}</span>! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, <span style='text-transform:uppercase;'>{user_name}</span>.",
     
-    "7_long.mp4": "I don’t mean to brag, |but I think the next song is a stroke of genius! |I wrote it for: {user_name} |and it's called: '{song_title}.' |Honestly, I think it’s pretty good. {user_name}, get ready!",
-    "7_short.mp4": "I don’t mean to brag, |but I think the next song is a stroke of genius! |I wrote it for: {user_name} and it's called: '{song_title}'. |Honestly, I think it’s pretty good. {user_name}, get ready!",
+    "7_long.mp4": "I don’t mean to brag, but I think the next song is a stroke of genius! |I wrote it for: <span style='text-transform:uppercase;'>{user_name}</span> |and it's called: '{song_title}.' |Honestly, I think it’s pretty good. <span style='text-transform:uppercase;'>{user_name}</span>, get ready!",
+    "7_short.mp4": "I don’t mean to brag, but I think the next song is a stroke of genius! |I wrote it for: <span style='text-transform:uppercase;'>{user_name}</span> and it's called: '{song_title}'. |Honestly, I think it’s pretty good. <span style='text-transform:uppercase;'>{user_name}</span>, get ready!",
 
-    "8_long.mp4": "Well, it wasn’t easy, but I’ve finally finished writing |'{song_title}', especially for {user_name}.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
-    "8_short.mp4": "Well, it wasn’t easy, |but I’ve finally finished writing |'{song_title}', especially for {user_name}.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
+    "8_long.mp4": "Well, it wasn’t easy, but I’ve finally finished writing |'{song_title}', especially for <span style='text-transform:uppercase;'>{user_name}</span>.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
+    "8_short.mp4": "Well, it wasn’t easy, |but I’ve finally finished writing |'{song_title}', especially for <span style='text-transform:uppercase;'>{user_name}</span>.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
 
-    "Bug1.mp4": "BUG 1|bug 1| beug1",
-    "Bug2.mp4": "BUG 2|bug 2| beug2",
-    "Bug3.mp4": "BUG 3|bug 3| beug3",
-    "Bug4.mp4": "BUG 4|bug 4| beug4",
-    "Bug5.mp4": "BUG 5|bug 5| beug5",
-    "Bug6.mp4": "BUG 6|bug 6| beug6",
+    "Bug1.mp4": "And there you go! It wasn’t easy, but I’ve written a beautiful song just as you wanted! I hope you’ll like it; I think it’s going to be great. Ready, three, four!",
+    "Bug2.mp4": "Hey! I worked really fast! Here’s a new song, composed according to your wishes. Will it become your favorite song now? I’m not sure, but I put all my love into it. Let’s go!",
+    "Bug3.mp4": "Hi! I’m back with an amazing new song! Maybe the most beautiful one ever written. Well, I say that, but I haven’t heard it yet. In any case, it was composed just for you! Hopefully, you’ll like it. At least a little. Ready, here we go!",
+    "Bug4.mp4": "Boom! A new hit just for you! Composed as closely as possible to your wishes, this song full of sincerity and truth should particularly move you. Let me know what you think! Ready? Three, four!",
+    "Bug5.mp4": "Well, it wasn’t easy, but I’ve just finished writing this beautiful song just for you! Chords, melody, lyrics. A hit tailored to your choices and desires. You better love it. Ready? Go!",
+    "Bug6.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
 }
     
 presets_arp = [ int(i) for i in range(48, 68) ]
