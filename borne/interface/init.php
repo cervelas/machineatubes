@@ -46,7 +46,7 @@ ledsOFF();
                                 submitInfo('song_mood','D');
                                 break;
                             case "song_style":
-                                submitInfo('song_style','urban');
+                                submitInfo('song_style','16beat');
                                 break;
                             case "song_tempo":
                                 submitInfo('song_tempo','95');
