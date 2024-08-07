@@ -224,20 +224,25 @@
         }
 
         #subtitles {
+            border: 1px solid red;
             display: flex;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: row;
             width: 50vh;
             height: 40vw;
             font-family: 'Nippo-Medium';
-            color: #5000FF;
-            line-height: 0.9em;
+            color: #AAF9D9;
+            line-height: 1em;
             background-color: transparent;
             transform-origin: 50% 50%;
-            transform: rotate(-90deg) translate(0, 30%);
+            transform: rotate(-90deg) translate(0, 40%);
             text-transform: none;
             padding: 20px;
             word-wrap: break-word;
-            -webkit-text-stroke-width: 2px;
-            -webkit-text-stroke-color: #AAF9D9;
+            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-color: #5000FF;
             z-index: 20000;
         }
 
@@ -307,7 +312,7 @@
                 <video id="dedicacevideo" class="rotated"></video>
                 <video id="jingle_outro" src="assets/videos/machine/jingleout.mp4" class="full"  style="display:none;"  ></video>
                 <video id="outrovideo" ></video>
-                <div id="subtitles"></div>
+                <div id="subtitles"><div></div></div>
             </div>
         </div>
     </body> 
@@ -321,7 +326,7 @@
         jingle_outro.load();
         let outro_video = document.querySelector("#outrovideo");
         let dedi_video = document.querySelector("#dedicacevideo");
-        let subtitles = document.querySelector("#subtitles");
+        let subtitles = document.querySelector("#subtitles > div");
 
         var sleep = function(){
             const elems = document.querySelectorAll('.sleep');
