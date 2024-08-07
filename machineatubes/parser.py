@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import json
 import pprint
 
-from machineatubes.tube import Tube, MidiNote, VideoNote, LyricsNote
+from machineatubes.tube import Tube, MidiNote, VideoNote, LyricsNote, get_dedi_video
 
 def parseFile2Score(filepath, verbose=False):
     if filepath.endswith(".xml"):
@@ -39,7 +39,7 @@ def parseJSON2Score(payload, verbose=False, intro=True):
         "prenom": payload.get("prenom"),
         "numero": payload.get("numero"),
         "id_video": payload.get("id_video"),
-        "intro_video_url": "assets/videos/machine/bug.mp4",
+        "id_dedicace": payload.get("id_dedicace"),
     }
     
     pprint.pprint(score.infos)
@@ -115,6 +115,8 @@ def parseJSON2Score(payload, verbose=False, intro=True):
 
     if intro:
         score.get_intro_video(payload.get("id_video"))
+    else:
+        score.infos["intro_video_url"] = get_dedi_video()
 
     return score
 

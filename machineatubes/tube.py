@@ -44,6 +44,50 @@ song_structure = [
     ("intro", 240, 244, 4),
 ]
 
+intro_subs_did = {
+    1: "And there you go, another hit composed quickly and efficiently! It's called: {song_title} and it was written especially for: {user_name}. I’ve tried to match the {song_style} energy you were into. Shall we listen? Here we go!",
+    2: "Hello! Let's hope there are no bugs this time. If all goes well, we’ll be able to listen to: {song_title}. It was written based on the suggestions of: {user_name}. It's a beautiful song with some {song_style} accents. Let’s get started!",
+    3: "Hello! The next song is called: {song_title}. I composed it for: {user_name}, who seemed to want a song with some {song_style} notes. Let’s see how it turns out. Ha ha ha. Kisses, {user_name}.",
+    4: "All set, I'm ready! Watch out, {user_name}, the next one is for you! It's called: {song_title}. To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. Now we just have to hope you like it. 3, 2, 1, go!",
+    5: "Dear {user_name}, I’ve worked hard to complete the writing of {song_title}, just as you envisioned. Notes of {song_style} music with lyrics that I hope will resonate with you. Here it is. Enjoy! Watch out, {user_name}, I'm starting the machine now. Bye-bye.",
+    6: "The next song is for you, {user_name}! It's called: {song_title}, and I wrote it as best as I could, but I was a bit rushed. Don’t hold it against me if it’s not great. Kisses, {user_name}.",
+    7: "I don’t mean to brag, but I think the next song is a stroke of genius! I wrote it for: {user_name} and it's called: {song_title}. Honestly, I think it’s pretty good. {user_name}, get ready!",
+    8: "Well, it wasn’t easy, but I’ve finally finished writing {song_title}. Especially for {user_name}. A song that's a bit {song_style}, which I hope will hit the mark. Let’s give it a listen."
+}
+
+intro_subs_bugs = {
+    "1_long.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: {user_name}. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
+    "1_short.mp4": "And there you go, another hit composed quickly and efficiently! |It's called: '{song_title}' |and it was written especially for: {user_name}. |I’ve tried to match the {song_style} energy you were into. |Shall we listen? Here we go!",
+    
+    "2_long.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: {user_name}. |It's a beautiful song with some {song_style} accents. Let’s get started!",
+    "2_short.mp4": "Hello! Let's hope there are no bugs this time. |If all goes well, we’ll be able to listen to: '{song_title}'. |It was written based on the suggestions of: {user_name}. |It's a beautiful song with some {song_style} accents. Let’s get started!",
+    
+    "3_long.mp4": "Hello! The next song is called: |'{song_title}'.|I composed it for: {user_name}, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, {user_name}.",
+    "3_short.mp4": "Hello! The next song is called: |'{song_title}'. |I composed it for: {user_name}, |who seemed to want a song with some {song_style} notes. |Let’s see how it turns out. Ha ha ha. Kisses, {user_name}.",
+    
+    "4_long.mp4": "All set, I'm ready! |Watch out, {user_name}, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
+    "4_short.mp4": "All set, I'm ready! |Watch out, {user_name}, the next one is for you! |It's called: '{song_title}'. |To write this beautiful song, I combined your wishes with my inspirations, set to a music in a {song_style} style. |Now we just have to hope you like it. 3, 2, 1, go!",
+    
+    "5_long.mp4": "Dear {user_name}, I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, {user_name}, I'm starting the machine now. Bye-bye.",
+    "5_short.mp4": "Dear {user_name}, |I’ve worked hard to complete the writing of |'{song_title}'|Notes of {song_style} music with lyrics that I hope will resonate with you. |Here it is. Enjoy! Watch out, {user_name}, I'm starting the machine now. Bye-bye.",
+    
+    "6_long.mp4": "The next song is for you, {user_name}! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, {user_name}.",
+    "6_short.mp4": "The next song is for you, {user_name}! |It's called: '{song_title}'. |I wrote it as best as I could, but I was a bit rushed. |Don’t hold it against me if it’s not great. |Kisses, {user_name}.",
+    
+    "7_long.mp4": "I don’t mean to brag, |but I think the next song is a stroke of genius! |I wrote it for: {user_name} |and it's called: '{song_title}.' |Honestly, I think it’s pretty good. {user_name}, get ready!",
+    "7_short.mp4": "I don’t mean to brag, |but I think the next song is a stroke of genius! |I wrote it for: {user_name} and it's called: '{song_title}'. |Honestly, I think it’s pretty good. {user_name}, get ready!",
+
+    "8_long.mp4": "Well, it wasn’t easy, but I’ve finally finished writing |'{song_title}', especially for {user_name}.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
+    "8_short.mp4": "Well, it wasn’t easy, |but I’ve finally finished writing |'{song_title}', especially for {user_name}.' |A song that's a bit {song_style}, which I hope will hit the mark. |Let’s give it a listen.",
+
+    "Bug1.mp4": "BUG 1|bug 1| beug1",
+    "Bug2.mp4": "BUG 2|bug 2| beug2",
+    "Bug3.mp4": "BUG 3|bug 3| beug3",
+    "Bug4.mp4": "BUG 4|bug 4| beug4",
+    "Bug5.mp4": "BUG 5|bug 5| beug5",
+    "Bug6.mp4": "BUG 6|bug 6| beug6",
+}
+    
 presets_arp = [ int(i) for i in range(48, 68) ]
 
 presets_pss = [ 24, 29, 31, 33, 34, 38, 41, 42 ]
@@ -84,6 +128,11 @@ def get_bug_video():
         [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "bug").glob('*.' + vext) ]
     )
 
+def get_dedi_video():
+    return random.choice(
+        [ str(PurePosixPath(vid.relative_to(relpath))) for vid in (videospath / "machine" / "Dedicace").glob('*.' + vext) ]
+    )
+
 def initsleep():
     global t
     t = time.perf_counter()
@@ -121,8 +170,7 @@ class Tube():
         self.infos = {}
         self.intro_video_url = None
         self.videos = []
-        self.infos["intro_video_url"] = get_bug_video()
-
+    
     def duration(self):
         '''
         Duration in seconds
@@ -169,7 +217,7 @@ class Tube():
             if part["type"] == "notes":
                 json_dict["song"][name] = { 
                         "type": part["type"],
-                        "channel": part["channel"],
+                        "channel": part["channel"], 
                         "notes": []
                     }
         
@@ -186,6 +234,17 @@ class Tube():
     def playintro(self):
         #jouer video d'intro
         pass
+
+    def get_intro_subs(self):
+        if self.infos.get("id_dedicace") is not None:
+            return intro_subs_did.get(self.infos.get("id_dedicace"))
+        else:
+            print("get subs", self.infos["intro_video_url"].split("/")[-1])
+            sub = intro_subs_bugs.get(self.infos["intro_video_url"].split("/")[-1])
+            if sub is not None:
+                return sub.format(user_name=self.infos["prenom"], 
+                                  song_title=self.infos["name"],
+                                  song_style=self.infos["style"])
 
     def play(self, window=False, verbose=False):
         try:
@@ -204,7 +263,11 @@ class Tube():
                 if self.infos.get("intro_video_url"):
                     if verbose:
                         print("go intro")
-                    Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
+                    
+                    Tube.window.evaluate_js('gointro("%s", "%s")' % (self.infos["intro_video_url"], self.get_intro_subs() or ""))
+                else:
+                    Tube.window.evaluate_js('loaded();wakeup();')
+                    videoend.set()
             
             self.gomachine()
             print("wait playsong")
@@ -297,7 +360,7 @@ class Tube():
                     i = (i + 1)
 
     def get_intro_video(self, id):
-        print("get video id " + id)
+        self.infos["intro_video_url"] = get_bug_video()
         if id and len(id) > 0:
             if Tube.playing is False:
                 Tube.window.evaluate_js('loading()')
