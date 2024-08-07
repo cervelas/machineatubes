@@ -286,6 +286,7 @@
             </div>
         </div>
     </body> 
+    
     <script>
 
         let video = document.querySelector("#video");
@@ -301,6 +302,7 @@
             elems.forEach(function(e){
                 e.style.display = "flex";
             });
+            "";
         }
 
         var wakeup = function(){
@@ -308,6 +310,7 @@
             elems.forEach(function(e){
                 e.style.display = "none";
             });
+            "";
         }
 
         var loading = function(){
@@ -315,6 +318,7 @@
             elems.forEach(function(e){
                 e.style.display = "flex";
             });
+            "";
         }
 
         var loaded = function(){
@@ -322,6 +326,7 @@
             elems.forEach(function(e){
                 e.style.display = "none";
             });
+            "";
         }
 
         var gointro = function(dedi_url){
@@ -351,6 +356,7 @@
                     window.pywebview.api.videoend();
                 });
             });
+            "";
         };
 
         var gooutro = function(outro_url){
@@ -381,12 +387,14 @@
                     sleep();
                 });
             });
+            "";
         };
 
         var displaylyrics = function(text, pos){
             console.log("display " + text + " @ " + pos);
             lyrics = document.querySelector("#" + pos);
             lyrics.innerHTML = text;
+            "";
         };
         
         var displayinfos = function(name, numero, ambiance, style, bpm, prenom){
@@ -399,6 +407,7 @@
             document.querySelector("#infoprenom").innerHTML = "pour " + prenom;
             document.querySelector("#numtube").innerHTML = "Chanson #" + numero;
             document.querySelector("#infonum").innerHTML = "Chanson #" + numero;
+            "";
         };
 
         var preloadvid = function(source){
@@ -422,6 +431,7 @@
                 vid.play();
                 vid.style.display="none";
             }
+            "";
         }
 
         var clearclipvids = function(){
@@ -432,6 +442,7 @@
                 v.src = "";
                 v.remove();
             });
+            "";
         }
 
         var playvid = function(source){
@@ -443,12 +454,14 @@
                 if(v!==vid) v.style.display = "none";
             });
             vid.style.display = "block";            
-            //vid.play();
+            vid.play();
             //vid.currentTime = 1;
             //setTimeOut( function(){}, 200);
+            "";
         };
 
         sleep();
 
     </script>
+
 </html>

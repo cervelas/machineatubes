@@ -1,10 +1,7 @@
 import json
 from pathlib import Path
-from functools import wraps
 
 from flask import Flask, render_template
-
-import webview
 
 base_dir = Path(__file__).parent.parent
 
@@ -19,14 +16,14 @@ def add_header(response):
     return response
 
 @server.route('/')
-def machine():
+def machine_page():
     """
     Render index.html. Initialization is performed asynchronously in initialize() function
     """
     return render_template('machine.html')
 
 @server.route('/ctrl')
-def ctrl():
+def ctrl_page():
     """
     Render index.html. Initialization is performed asynchronously in initialize() function
     """

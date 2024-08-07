@@ -7,6 +7,8 @@ import threading
 import platform
 from pathlib import Path
 import json
+import webview
+from webview.errors import JavascriptException
 
 import rtmidi2 as rm
 from flask import Flask, render_template, request
@@ -81,50 +83,57 @@ class Machine2:
 machineapi = Machine2()
 
 class Machine:
+
     def __init__(self):
-        self.win = False
-        self.ctrlwin = False
-        self.tubes = [] 
-        self.autoplay = False
-        self.playing = False
-        self.last_tube = None
+        self._win = False
+        self._ctrlwin = False
+        self._tubes = [] 
+        self._autoplay = False
+        self._playing = False
+        self._last_tube = None
+
     def close(self):
         close.set()
 
     def start(self):
-        self.win.show()
+        self._win.show()
         if len(screens) > 1:
             if is_mac():
-                self.win.resize(screens[1].width, screens[1].height)
-                self.win.move(screens[0].width, 0)
+                self._win.resize(screens[1].width, screens[1].height)
+                self._win.move(screens[0].width, 0)
             if is_win():
-                self.win.move(screens[1].width + 500, 0)
-                self.win.toggle_fullscreen()
+                self._win.move(screens[1].width + 500, 0)
+                self._win.toggle_fullscreen()
                 time.sleep(0.2)
-                self.win.toggle_fullscreen()
+                self._win.toggle_fullscreen()
                 time.sleep(0.2)
-                self.win.toggle_fullscreen()
+                self._win.toggle_fullscreen()
 
     def __play(self):
         playing.set()
-        if len(self.tubes) == 0 and self.last_tube:
-            self.last_tube.play(self.win, args.verbose)
-            self.last_tube.stop()
+        if len(self._tubes) == 0 and self._last_tube:
+            self._last_tube.play(self._win, args.verbose)
+            self._last_tube.stop()
 
-        while len(self.tubes) > 0 and not abort.is_set():
-            if len(self.tubes) > 0 and Tube.playing is False:
-                playlist = "<br> Playing %s (%s)" % (self.tubes[0].name, self.tubes[0].infos["numero"])
-                playlist = "<br> Next Song ".join([ "%s (%s)" % (t.name, t.infos["numero"]) for t in self.tubes[1:] ])
-                self.ctrlwin.evaluate_js('uplist("%s")' % playlist)
+        while len(self._tubes) > 0 and not abort.is_set():
+            if len(self._tubes) > 0 and Tube.playing is False:
+                playlist = "<br> Playing %s (%s)" % (self._tubes[0].name, self._tubes[0].infos["numero"])
+                playlist = "<br> Next Song ".join([ "%s (%s)" % (t.name, t.infos["numero"]) for t in self._tubes[1:] ])
+                try:
+                    self._ctrlwin.evaluate_js('uplist("%s")' % playlist)
+                except JavascriptException as e:
+                    print('js except in uplist(): ', e)
+                
                 abort.clear()
-                self.tubes[0].play(self.win, args.verbose)
-                self.tubes[0].stop()
-                self.last_tube = self.tubes[0]
-                self.tubes.pop(0)
+                self._tubes[0].play(self._win, args.verbose)
+                self._tubes[0].stop()
+                self._last_tube = self._tubes[0]
+                self._tubes.pop(0)
         
-        if len(self.tubes) > 0:
-            self.tubes[0].stop()
+        if len(self._tubes) > 0:
+            self._tubes[0].stop()
         playing.clear()
+        abort.clear()
 
     def play(self):
         if not playing.is_set():
@@ -133,20 +142,24 @@ class Machine:
 
     def stop(self):
         abort.set()
-        if len(self.tubes) > 0:
-            self.tubes[0].stop()
+        if len(self._tubes) > 0:
+            self._tubes[0].stop()
 
     def log(self, txt):
-        self.ctrlwin.evaluate_js("log('%s')" % txt)
+        try:
+            self._ctrlwin.evaluate_js('log("%s")' % txt)
+        except JavascriptException as e:
+            print('js except in log():', e)
+            print("msg was", txt)
 
     def load_tube(self, payload):
         t = threading.Thread(target=self.__load_tube, args=(payload,))
         t.start()
 
     def __load_tube(self, payload):
-        self.tubes.append(parseJSON2Score(payload, args.verbose))
+        self._tubes.append(parseJSON2Score(payload, args.verbose))
 
-        t = self.tubes[-1]
+        t = self._tubes[-1]
         
         if args.verbose:
             for k, v in t.infos.items():
@@ -157,19 +170,19 @@ class Machine:
         self.log("Received the song %s !" % t.name)
         self.log("num %s, ambiance %s, style %s, prenom %s" % ( t.infos["numero"], t.infos["ambiance"], 
                                              t.infos["style"], t.infos["prenom"]))
-        self.log("de-id: %s" % t.infos["intro_video_url"].split("/")[-1])
+        self.log("d-id: %s" % t.infos["intro_video_url"].split("/")[-1])
 
         self.play()
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
 
-        result = self.ctrlwin.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
+        result = self._ctrlwin.create_file_dialog(webview.OPEN_DIALOG, allow_multiple=False, file_types=file_types)
         
         if result:
-            self.tubes.append(parseFile2Score(result[0], args.verbose))
+            self._tubes.append(parseFile2Score(result[0], args.verbose))
             self.log("loaded file " + result[0])
-            t = self.tubes[-1]
+            t = self._tubes[-1]
         
             if args.verbose:
                 self.log("parts:")
@@ -181,15 +194,10 @@ class Machine:
                 self.log("%s measures" % t.measures)
                 self.log("duration %s s" % t.duration())
             self.log("Press P to play")
-        if self.autoplay:
+        if self._autoplay:
             self.play()
 
 machine = Machine()
-
-
-from flask import Flask
-
-import webview
 
 playserver = Flask("playserver")
 
@@ -218,16 +226,18 @@ def playtube():
 playsrv.start()
 
 def webview_cb():
-    machine.win.hide()
-    time.sleep(2)
+    
+    machine._ctrlwin.load_url("/ctrl")
+    machine._win.hide()
+    time.sleep(0.1)
     machine.start()
     while not close.wait(1):
         pass
     machine.stop()
     time.sleep(0.1)
     # add check
-    machine.ctrlwin.destroy()
-    machine.win.destroy()
+    machine._ctrlwin.destroy()
+    machine._win.destroy()
 
 def main():
     '''
@@ -262,18 +272,19 @@ def main():
 
         score.play()
     else:
-        print(screens)
 
-        window = webview.create_window('Machine à Tubes', server, js_api=machineapi, width=1000, height=700, frameless=is_mac(), focus=False)
+        window = webview.create_window('Machine à Tubes', url=server, js_api=machineapi, width=1000, height=700, frameless=is_mac(), focus=False)
         window.events.closing += machine.close
-        ctrlwindow = webview.create_window('Control Room', url="/ctrl", js_api=machine, width=800, height=600, frameless=True)
 
-        machine.win = window
-        machine.ctrlwin = ctrlwindow
+        machine._win = window
         Tube.window = window
         VideoNote.window = window
         LyricsNote.window = window
-        webview.start(webview_cb, debug=True, private_mode=False)
+
+        ctrlwindow = webview.create_window('Control Room', server, js_api=machine, width=800, height=600, frameless=True)
+        machine._ctrlwin = ctrlwindow
+
+        webview.start(webview_cb, debug=True, private_mode=False, gui="edgechromium")
         exit(0)
 
 if __name__ == "__main__":

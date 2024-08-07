@@ -5,6 +5,7 @@ import pprint
 import random
 import requests
 from pathlib import Path, PurePosixPath
+from webview.errors import JavascriptException
 
 import rtmidi2 as rm
 
@@ -120,6 +121,7 @@ class Tube():
         self.infos = {}
         self.intro_video_url = None
         self.videos = []
+        self.infos["intro_video_url"] = get_bug_video()
 
     def duration(self):
         '''
@@ -186,50 +188,59 @@ class Tube():
         pass
 
     def play(self, window=False, verbose=False):
-        Tube.window.load_url('/')
-        videoend.clear()
-        Tube.playing = True
-        for v in self.videos:
-            Tube.window.evaluate_js("preloadvid('%s')" % (v))
-        if Tube.window:
-            Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
-                                    (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-            if self.infos.get("intro_video_url"):
-                Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
-        
-        self.gomachine()
-        print("wait playsong")
-        videoend.wait(30)
-        print("playsong !")
-        # send bpm control
-        self.stop()
-        self.setbpm()
-        self.stop()
-        self.rnd_preset()
-        self.start_time = time.perf_counter()
-        initsleep()
-        for b, notes in self.notes.items():
-            if abort.is_set():
-                print("aborting play...")
-                break
-            for note in notes:
-                note.play(b, verbose)
-            if verbose:
-                if len(notes) == 0:
-                    print(b)
-            nanosleep( ( 60 / self.bpm ) )
-        videoend.clear()
-        self.stop()
-        self.applause()
-        
-        Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
-        print("END")
-        videoend.wait(30)
-        #attente
-        time.sleep(5)
-        self.stop()
+        try:
+            videoend.clear()
+            Tube.playing = True
+            print("play")
+            if Tube.window:
+                for v in self.videos:
+                    if verbose:
+                        print("preload %s" % v)
+                    Tube.window.evaluate_js("preloadvid('%s')" % (v))
+                if verbose:
+                    print("display infos")            
+                Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
+                                        (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
+                if self.infos.get("intro_video_url"):
+                    if verbose:
+                        print("go intro")
+                    Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
+            
+            self.gomachine()
+            print("wait playsong")
+            videoend.wait(30)
+            print("playsong !")
+            # send bpm control
+            self.stop()
+            self.setbpm()
+            self.stop()
+            self.rnd_preset()
+            self.start_time = time.perf_counter()
+            initsleep()
+            for b, notes in self.notes.items():
+                if abort.is_set():
+                    print("aborting play...")
+                    break
+                for note in notes:
+                    note.play(b, verbose)
+                if verbose:
+                    if len(notes) == 0:
+                        print(b)
+                nanosleep( ( 60 / self.bpm ) )
+            videoend.clear()
+            self.stop()
+            self.applause()
+            
+            Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
+            print("END")
+            videoend.wait(30)
+            #attente
+            time.sleep(5)
+            self.stop()
 
-        Tube.playing = False
+            Tube.playing = False
+        except JavascriptException as e:
+            print('Javascript exception occured: ', e)
 
     def rnd_preset(self):
         n = random.choice(presets_arp)
@@ -286,8 +297,6 @@ class Tube():
                     i = (i + 1)
 
     def get_intro_video(self, id):
-        import random
-        self.infos["intro_video_url"] = get_bug_video()
         print("get video id " + id)
         if id and len(id) > 0:
             if Tube.playing is False:
@@ -300,11 +309,10 @@ class Tube():
 
             try:
                 retry = 1
-                while retry <= 10:
-                    print("trying d-id %s" % url)
-                    time.sleep(retry+1)
+                while retry <= 3:
+                    print("try #%s (%s)..." % (retry, url))
+                    
                     response = requests.get(url, headers=headers)
-
                     response = response.json()
 
                     if response.get("result_url"):
@@ -324,8 +332,8 @@ class Tube():
                     else:
                         pprint.pprint(response)
 
-                    print("retrying... %s" % retry)
                     retry += 1
+                    time.sleep(retry+1)
 
             except Exception as e:
                 print("INTRO VIDEO ERROR")
