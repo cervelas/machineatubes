@@ -224,8 +224,7 @@
         }
 
         #subtitles {
-            border: 1px solid red;
-            display: flex;
+            display: none;
             align-content: center;
             align-items: center;
             text-align: center;
@@ -240,7 +239,6 @@
             transform-origin: 50% 50%;
             transform: rotate(-90deg) translate(0, 50%);
             text-transform: none;
-            padding: 60px;
             word-wrap: break-word;
             z-index: 20000;
         }
@@ -250,6 +248,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
             border: 3px solid #5000FF;
+            padding: 30px;
         }
 
         .sleep img, .loading img, .jingle img{
@@ -332,6 +331,7 @@
         jingle_outro.load();
         let outro_video = document.querySelector("#outrovideo");
         let dedi_video = document.querySelector("#dedicacevideo");
+        let subtitles_container = document.querySelector("#subtitles");
         let subtitles = document.querySelector("#subtitles > span");
 
         var sleep = function(){
@@ -399,6 +399,7 @@
                     dedi_video.style.display = "none";
                     window.pywebview.api.videoend();
                     subtitles.innerHTML = "";
+                    subtitles_container.style.display = "none";
                     if(subs.length > 0){
                         clearInterval(subanim);
                     }
@@ -407,6 +408,7 @@
                 if(subs.length > 0){
                     cur = 0;
                     subtitles.innerHTML = subs[cur];
+                    subtitles_container.style.display = "flex";
                     subanim = setInterval(function(){
                         cur++;
                         if(cur < subs.length){
