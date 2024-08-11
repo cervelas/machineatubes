@@ -87,7 +87,17 @@ intro_subs_bugs = {
     "Bug5.mp4": "Well, it wasn’t easy, but I’ve just finished writing this beautiful song just for you! Chords, melody, lyrics. A hit tailored to your choices and desires. You better love it. Ready? Go!",
     "Bug6.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
 }
-    
+
+outro_subs = {
+    "outro_1_1.mp4": "And there you go! It wasn’t easy, but I’ve written a beautiful song just as you wanted! I hope you’ll like it; I think it’s going to be great. Ready, three, four!",
+    "outro_2_1.mp4": "Hey! I worked really fast! Here’s a new song, composed according to your wishes. Will it become your favorite song now? I’m not sure, but I put all my love into it. Let’s go!",
+    "outro_3_1.mp4": "Hi! I’m back with an amazing new song! Maybe the most beautiful one ever written. Well, I say that, but I haven’t heard it yet. In any case, it was composed just for you! Hopefully, you’ll like it. At least a little. Ready, here we go!",
+    "outro_4_1.mp4": "Boom! A new hit just for you! Composed as closely as possible to your wishes, this song full of sincerity and truth should particularly move you. Let me know what you think! Ready? Three, four!",
+    "outro_5_1.mp4": "Well, it wasn’t easy, but I’ve just finished writing this beautiful song just for you! Chords, melody, lyrics. A hit tailored to your choices and desires. You better love it. Ready? Go!",
+    "outro_6_1.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
+    "outro_7_1.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
+}
+
 presets_arp = [ int(i) for i in range(48, 68) ]
 
 presets_pss = [ 24, 29, 31, 33, 34, 38, 41, 42 ]
@@ -246,6 +256,9 @@ class Tube():
                                   song_title=self.infos["name"],
                                   song_style=self.infos["style_text"])
 
+    def get_outro_subs(self, file):
+        return outro_subs.get(file.split("/")[-1])
+
     def play(self, window=False, verbose=False):
         try:
             videoend.clear()
@@ -293,8 +306,8 @@ class Tube():
             videoend.clear()
             self.stop()
             self.applause()
-            
-            Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
+            out = get_outro_video()
+            Tube.window.evaluate_js('gooutro("%s", "%s")' % (out, self.get_outro_subs(out) or ""))
             print("END")
             videoend.wait(30)
             #attente

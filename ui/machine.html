@@ -422,7 +422,7 @@
             "";
         };
 
-        var gooutro = function(outro_url){
+        var gooutro = function(outro_url, sub="test1|test2|test3"){
             const vids = document.querySelectorAll('video');
             vids.forEach(function(v){
                 v.style.display = "none";
@@ -432,10 +432,17 @@
             jingle_outro.style.display = "block";
             outro_video.src = outro_url;
             outro_video.load();
+            let subs = []
+            if(sub.length > 0){
+                subs = sub.split("|");
+            }
+            let cur=0;
+            let subanim = null;
             const elems = document.querySelectorAll('.jingle');
             elems.forEach(function(e){
                 e.style.display = "flex";
             });
+
             jingle_outro.addEventListener("ended", function(v){
                 jingle_outro.style.display = "none";
                 outro_video.play();
@@ -447,8 +454,26 @@
                     });
                     outro_video.style.display = "none";
                     window.pywebview.api.videoend();
+                    subtitles.innerHTML = "";
+                    subtitles_container.style.display = "none";
+                    if(subs.length > 0){
+                        clearInterval(subanim);
+                    }
                     sleep();
                 });
+                if(subs.length > 0){
+                    cur = 0;
+                    subtitles.innerHTML = subs[cur];
+                    subtitles_container.style.display = "flex";
+                    subanim = setInterval(function(){
+                        cur++;
+                        if(cur < subs.length){
+                            subtitles.innerHTML = subs[cur];
+                        }else{
+                            subtitles.innerHTML = "";
+                        }
+                    }, (outro_video.duration/subs.length)*1000);
+                }
             });
             "";
         };
