@@ -7,6 +7,7 @@ $song_keyword = $keywords_eng[$_SESSION['song_title_id'] - 1];
 
 $json = '{
     "name":"'.$_SESSION['song_title_eng'].'",
+    "name_fr":"'.$_SESSION['song_title'].'",
     "tempo": '.$_SESSION['song_tempo'].',
     "keyword": "'.$song_keyword.'",
     "ambiance": "'.$mood_names_eng[$_SESSION['song_mood']].'",
