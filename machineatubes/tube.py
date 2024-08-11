@@ -249,8 +249,10 @@ class Tube():
                     Tube.window.evaluate_js("preloadvid('%s')" % (v))
                 if verbose:
                     print("display infos")            
-                Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s","%s")' % 
-                                        (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style_text"], self.bpm, self.infos["prenom"]))
+                print(self.infos)
+                Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s","%s","%s")' % 
+                                        (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style_text"], self.bpm, self.infos["prenom"], str(self.infos["name_fr"])))
+                
                 if self.infos.get("intro_video_url"):
                     if verbose:
                         print("go intro")
