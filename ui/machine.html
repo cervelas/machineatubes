@@ -388,7 +388,8 @@
             if(sub.length > 0){
                 subs = sub.split("|");
             }
-            let cur=0;
+            let cur = 0;
+            jingle_intro.removeEventListener
             jingle_intro.addEventListener("ended", function(v){
                 const elems = document.querySelectorAll('.jingle');
                 elems.forEach(function(e){
@@ -409,7 +410,7 @@
                         clearInterval(subanim);
                         subanim = null;
                     }
-                });
+                }, { once: true });
 
                 if(subs.length > 0){
                     cur = 0;
@@ -429,7 +430,7 @@
                     clearInterval(subanim);
                     subanim = null;
                 }
-            });
+            }, { once: true });
             "";
         };
 
@@ -471,7 +472,7 @@
                         clearInterval(subanim);
                     }
                     sleep();
-                });
+                }, { once: true });
                 if(subs.length > 0){
                     cur = 0;
                     subtitles_container.style.display = "flex";
@@ -486,7 +487,7 @@
                         }
                     }, (outro_video.duration/subs.length)*1000);
                 }
-            });
+            }, { once: true });
             "";
         };
 
