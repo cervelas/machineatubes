@@ -90,6 +90,14 @@
             padding-right: 50px;
         }
 
+        #titre #tradtitre{
+            font-family: 'NippDo-580';
+            font-size: 1.3em;
+            line-height: 1.1em;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
         #titre #infoprenom{
             font-size: 0.8em;
         }
@@ -310,6 +318,7 @@
                     <div class="headertitre"><img src="assets/img/logotitre.png" width="616px" height="51px"><div id="numtube">tube #47</div></div>
                     <div>
                         <div id="grostitre">"UNE DANSE MYSTÉRIEUSE, UNE DANSE MYSTÉRIEUSE"</div>
+                        <div id="tradtitre"></div>
                         <div id="infoprenom">pour prenom</div>
                     </div>
                     <div class="footer"><img src="assets/img/footertitle.png"></div>
@@ -498,10 +507,11 @@
             "";
         };
         
-        var displayinfos = function(name, numero, keyword, ambiance, style, bpm, prenom){
+        var displayinfos = function(name, numero, keyword, ambiance, style, bpm, prenom, name_trad){
             console.log(prenom)
             document.querySelector("#infotitre").innerHTML = name;
             document.querySelector("#grostitre").innerHTML = name;
+            document.querySelector("#tradtitre").innerHTML = name_trad;
             document.querySelector("#infokeyword").innerHTML = keyword;
             document.querySelector("#infoambiance").innerHTML = ambiance;
             document.querySelector("#infostyle").innerHTML = style;
