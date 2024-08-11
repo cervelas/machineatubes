@@ -169,7 +169,7 @@ class Machine:
 
         self.log("Received the song %s !" % t.name)
         self.log("num %s, ambiance %s, style %s, prenom %s" % ( t.infos["numero"], t.infos["ambiance"], 
-                                             t.infos["style"], t.infos["prenom"]))
+                                             t.infos["style_text"], t.infos["prenom"]))
         self.log("d-id: %s" % t.infos["intro_video_url"].split("/")[-1])
 
         self.play()

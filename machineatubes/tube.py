@@ -244,7 +244,7 @@ class Tube():
             if sub is not None:
                 return sub.format(user_name=self.infos["prenom"], 
                                   song_title=self.infos["name"],
-                                  song_style=self.infos["style"])
+                                  song_style=self.infos["style_text"])
 
     def play(self, window=False, verbose=False):
         try:
@@ -259,7 +259,7 @@ class Tube():
                 if verbose:
                     print("display infos")            
                 Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s")' % 
-                                        (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
+                                        (self.name, self.infos["numero"], self.infos["ambiance"], self.infos["style_text"], self.bpm, self.infos["prenom"]))
                 if self.infos.get("intro_video_url"):
                     if verbose:
                         print("go intro")

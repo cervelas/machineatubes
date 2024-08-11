@@ -35,6 +35,7 @@ def parseJSON2Score(payload, verbose=False, intro=True):
     score.infos = {
         "name": payload.get("name"),
         "ambiance": payload.get("ambiance"),
+        "style_text": payload.get("style_text"),
         "style": payload.get("style").split("_")[0],
         "prenom": payload.get("prenom"),
         "numero": payload.get("numero"),
