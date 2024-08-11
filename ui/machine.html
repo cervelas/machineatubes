@@ -290,6 +290,9 @@
                     <div class="header"><span>>Title</span></div>
                     <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
                     
+                    <div class="header"><span>>Keyword</span></div>
+                    <div  class="info"><span id="infokeyword">mot-clé</span></div>
+
                     <div class="header"><span>>Mood</span></div>
                     <div  class="info"><span id="infoambiance">Joyeuse</span></div>
                     
@@ -410,13 +413,13 @@
                 if(subs.length > 0){
                     cur = 0;
                     subtitles.innerHTML = subs[cur];
-                    subtitles_container.style.display = "flex";
                     subanim = setInterval(function(){
                         cur++;
                         if(cur < subs.length){
+                            subtitles_container.style.display = "flex";
                             subtitles.innerHTML = subs[cur];
                         }else{
-                            subtitles.innerHTML = "";
+                            subtitles_container.style.display = "none";
                         }
                     }, (dedi_video.duration/subs.length)*1000);
                 }
@@ -466,13 +469,13 @@
                 if(subs.length > 0){
                     cur = 0;
                     subtitles.innerHTML = subs[cur];
-                    subtitles_container.style.display = "flex";
                     subanim = setInterval(function(){
                         cur++;
                         if(cur < subs.length){
+                            subtitles_container.style.display = "flex";
                             subtitles.innerHTML = subs[cur];
                         }else{
-                            subtitles.innerHTML = "";
+                            subtitles_container.style.display = "none";
                         }
                     }, (outro_video.duration/subs.length)*1000);
                 }
@@ -487,13 +490,14 @@
             "";
         };
         
-        var displayinfos = function(name, numero, ambiance, style, bpm, prenom){
+        var displayinfos = function(name, numero, keyword, ambiance, style, bpm, prenom){
             console.log(prenom)
             document.querySelector("#infotitre").innerHTML = name;
             document.querySelector("#grostitre").innerHTML = name;
+            document.querySelector("#infokeyword").innerHTML = keyword;
             document.querySelector("#infoambiance").innerHTML = ambiance;
             document.querySelector("#infostyle").innerHTML = style;
-            document.querySelector("#infobpm").innerHTML = bpm;
+            document.querySelector("#infobpm").innerHTML = bpm + " BPM";
             document.querySelector("#infoprenom").innerHTML = "for " + prenom;
             document.querySelector("#numtube").innerHTML = "Song #" + numero;
             document.querySelector("#infonum").innerHTML = "Song #" + numero;
