@@ -227,7 +227,9 @@ class Tube():
         if self.bug_intro is False:
             sub = intro_subs_did.get(self.infos.get("id_dedicace"))
         else:
-            sub = intro_subs_bugs.get(self.infos["intro_video_url"].split("/")[-1])
+            bug = self.infos["intro_video_url"].split("/")[-1]
+            print(bug)
+            sub = intro_subs_bugs.get(bug)
         if sub is not None:
             return sub.format(user_name=self.infos["prenom"], 
                                 song_title=self.infos["name"],
