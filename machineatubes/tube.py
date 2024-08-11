@@ -58,20 +58,20 @@ intro_subs_did = {
 intro_subs_bugs = {
     "bug1.mp4": "Hi!<br>I’m back with an amazing new song!|Maybe the best one ever written.|Well, I say that, but I haven’t heard it yet.|It was composed just for you,<br>I hope you’ll like it!|Ready, here we go!",
     "bug2.mp4": "It wasn’t easy,<br>but I wrote a nice song just as you wanted!|I hope you’ll like it.|I think it’s going to be great.|Ready, three, four!",
-    "bug3.mp4": "Boom!<br>A new hit just for you!|This song full of sincerity and truth should particularly move you.|Let me know what you think!|Ready?<br>Three, four!",
-    "bug4.mp4": "It wasn’t easy but I finished writing this nice song just for you!|A hit tailored to your choices and desires!|You better love it.|Ready?<br>Go!",
-    "bug5.mp4": "Hey!<br>I worked really fast!|Here’s a new song,<br>composed according to your wishes.|Will it become your favorite song now?  <br>I put all my love into it.<br>Let’s go!",
+    "bug3.mp4": "Boom!<br>A new hit just for you!|This song full of sincerity and truth should particularly move you.|Let me know what you think!<br>Ready? Three, four!",
+    "bug4.mp4": "It wasn’t easy but I finished writing this nice song just for you!|A hit tailored to your choices and desires!|You better love it.<br>Ready? Go!",
+    "bug5.mp4": "Hey!<br>I worked really fast!|Here’s a new song,<br>composed according to your wishes.|Will it become your favorite song now?<br>I put all my love into it.<br>Let’s go!",
     "bug6.mp4": "Hey damn!<br>I forgot your name and the title of your song!|But I’m sure the machine will get it right.|That’s what machines are for, isn’t it?|Ready?<br>Three, four!",
 }
 
 outro_subs = {
     "outro_1_1.mp4": "Hey!<br>time to applaud!|Did you like it?<br>I found it incredible,<br>another great hit!|Alright,<br>I have to go.|Thousands of other fans are waiting for their turn!<br>Bye!",
-    "outro_2_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|Alright, I need to continue writing for all the other fans|Hugs!",
-    "outro_3_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|Alright, I need to continue writing for all the other fans|Hugs!",
-    "outro_4_1.mp4": "What a wonder, it was beautiful!|Well,<br>I’m going back to writing!|I’ve got other things to do!|Ciao-ciao!",
-    "outro_5_1.mp4": "All good!<br>You can applaud!|It was nice, wasn’t it?|I need to go back to writing a bunch of hits for others!|So bye for now!",
-    "outro_6_1.mp4": "Hey, it was good!<br>I hope you liked it!|I found it quite successful.|Sorry, I have to run, still have a ton of hits to compose.|Bye!",
-    "outro_7_1.mp4": "There you go!<br>Did you like it?|I had a lot of fun writing this great song.|Well, have to go.<br>I have a million more to write.|Hugs!",
+    "outro_2_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me!|Alright, I need to continue writing for all the other fans.<br>Hugs!",
+    "outro_3_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|!Alright, I need to continue writing for all the other fans<br>Hugs!",
+    "outro_4_1.mp4": "What a wonder, it was beautiful!|Well,<br>I’m going back to writing!|I’ve got other things to do!<br>Ciao-ciao!",
+    "outro_5_1.mp4": "All good!<br>You can applaud!|It was nice, wasn’t it?|I need to go back to writing a bunch of hits for others!<br>So bye for now!",
+    "outro_6_1.mp4": "Hey, it was good!<br>I hope you liked it!|I found it quite successful.<br>Sorry, I have to run.|I still have a ton of hits to compose.<br>Bye!",
+    "outro_7_1.mp4": "There you go!<br>Did you like it?|I had a lot of fun writing this great song.|Well, have to go.<br>I have a million more to write.<br>Hugs!",
 }
 
 presets_arp = [ int(i) for i in range(48, 68) ]
