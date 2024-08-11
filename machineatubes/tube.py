@@ -67,11 +67,11 @@ intro_subs_bugs = {
 outro_subs = {
     "outro_1_1.mp4": "Hey!<br>time to applaud!|Did you like it?<br>I found it incredible,<br>another great hit!|Alright,<br>I have to go.|Thousands of other fans are waiting for their turn!<br>Bye!",
     "outro_2_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me!|Alright, I need to continue writing for all the other fans.<br>Hugs!",
-    "outro_3_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|!Alright, I need to continue writing for all the other fans<br>Hugs!",
+    "outro_3_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me!|Alright, I need to continue writing for all the other fans.<br>Hugs!",
     "outro_4_1.mp4": "What a wonder, it was beautiful!|Well,<br>I’m going back to writing!|I’ve got other things to do!<br>Ciao-ciao!",
     "outro_5_1.mp4": "All good!<br>You can applaud!|It was nice, wasn’t it?|I need to go back to writing a bunch of hits for others!<br>So bye for now!",
     "outro_6_1.mp4": "Hey, it was good!<br>I hope you liked it!|I found it quite successful.<br>Sorry, I have to run.|I still have a ton of hits to compose.<br>Bye!",
-    "outro_7_1.mp4": "There you go!<br>Did you like it?|I had a lot of fun writing this great song.|Well, have to go.<br>I have a million more to write.<br>Hugs!",
+    "outro_7_1.mp4": "There you go!<br>Did you like it?|I had a lot of fun writing this beautiful song.|Well, have to go.<br>I have a million more to write.<br>Hugs!",
 }
 
 presets_arp = [ int(i) for i in range(48, 68) ]
@@ -249,8 +249,8 @@ class Tube():
                     Tube.window.evaluate_js("preloadvid('%s')" % (v))
                 if verbose:
                     print("display infos")            
-                Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s","%s","%s")' % 
-                                        (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style_text"], self.bpm, self.infos["prenom"], self.infos["name_fr"]))
+                Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s","%s")' % 
+                                        (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style_text"], self.bpm, self.infos["prenom"]))
                 if self.infos.get("intro_video_url"):
                     if verbose:
                         print("go intro")
