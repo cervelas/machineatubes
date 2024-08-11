@@ -3,10 +3,12 @@
 include_once('cereproc_dedicace.php');
 include_once('texts_dedicace.php');
 
+$song_keyword = $keywords_eng[$_SESSION['song_title_id'] - 1];
+
 $json = '{
-    "name":"'.$_SESSION['song_title'].'",
+    "name":"'.$_SESSION['song_title_eng'].'",
     "tempo": '.$_SESSION['song_tempo'].',
-    "ambiance": "'.$_SESSION['song_mood_name'].'",
+    "ambiance": "'.$song_keyword.'",
     "style_text": "'.$style[$_SESSION['song_style']].'",
     "style": "'.$_SESSION['song_style'].'_'.$_SESSION['variant'].'",
     "prenom": "'.$_SESSION['user_name'].'",
