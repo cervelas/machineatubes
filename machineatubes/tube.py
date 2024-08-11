@@ -394,6 +394,7 @@ class Tube():
             except Exception as e:
                 print("INTRO VIDEO ERROR")
                 print(e)
+                Tube.window.evaluate_js('loaded()')
 
 class Note():
     def play(self, i, verbose=False):
