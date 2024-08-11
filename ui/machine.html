@@ -370,6 +370,7 @@
             });
             "";
         }
+        var subanim = null;
 
         var gointro = function(dedi_url, sub="test1|test2|test3"){
             loaded();
@@ -388,7 +389,6 @@
                 subs = sub.split("|");
             }
             let cur=0;
-            let subanim = null;
             jingle_intro.addEventListener("ended", function(v){
                 const elems = document.querySelectorAll('.jingle');
                 elems.forEach(function(e){
@@ -425,6 +425,9 @@
                             subtitles.innerHTML = "";
                         }
                     }, (dedi_video.duration/subs.length)*1000);
+                }else{
+                    clearInterval(subanim);
+                    subanim = null;
                 }
             });
             "";
