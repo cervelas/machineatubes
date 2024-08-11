@@ -45,7 +45,7 @@ song_structure = [
 ]
 
 intro_subs_did = {
-    0: "Another hit composed quickly and efficiently!<br><br>|<br>It's called:<br>'{song_title}'<br><br>|<br>I wrote it<br>especially for:<br><span style='text-transform:uppercase;'>{user_name}</span>.<br><br>|<br>I tried to match the {song_style} energy you requested.<br><br>Here we go!<br><br>",
+    0: "Another hit composed quickly and efficiently!|It's called:<br>'{song_title}'|I wrote it<br>especially for:<br><span style='text-transform:uppercase;'>{user_name}</span>.|I tried to match the {song_style} energy you requested.<br>Here we go!",
     1: "Let's hope<br>there are no bugs<br>this time.|We should be<br>able to listen to:<br>'{song_title}'.|I wrote it<br>based on the suggestions of:<br><span style='text-transform:uppercase;'>{user_name}</span>.|It's a nice song with {song_style} accents.<br>Let’s get started!",
     2: "Hey!<br>The next song is called:<br>'{song_title}'.|I composed it for:<br><span style='text-transform:uppercase;'>{user_name}</span>|You wanted a song with some {song_style} notes, right?|Let’s see how it turns out. Haha.<br><br>Kisses, <span style='text-transform:uppercase;'>{user_name}</span>.",
     3: "Watch out <br><span style='text-transform:uppercase;'>{user_name}</span>!<br><br>The next one<br>is for you!|It's called:<br>'{song_title}'.|I combined your wishes with my inspirations, set to a music in a {song_style} style.|Let's see if you like it.<br><br>3, 2, 1, go!",
