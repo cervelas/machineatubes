@@ -222,15 +222,15 @@ class Tube():
         pass
 
     def get_intro_subs(self):
+        sub = None
         if self.infos.get("id_dedicace") is not None:
-            return intro_subs_did.get(self.infos.get("id_dedicace"))
+            sub = intro_subs_did.get(self.infos.get("id_dedicace"))
         else:
-            print("get subs", self.infos["intro_video_url"].split("/")[-1])
             sub = intro_subs_bugs.get(self.infos["intro_video_url"].split("/")[-1])
-            if sub is not None:
-                return sub.format(user_name=self.infos["prenom"], 
-                                  song_title=self.infos["name"],
-                                  song_style=self.infos["style_text"])
+        if sub is not None:
+            return sub.format(user_name=self.infos["prenom"], 
+                                song_title=self.infos["name"],
+                                song_style=self.infos["style_text"])
 
     def get_outro_subs(self, file):
         return outro_subs.get(file.split("/")[-1])
