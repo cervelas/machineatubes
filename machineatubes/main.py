@@ -136,13 +136,16 @@ class Machine:
         abort.clear()
 
     def play(self):
+        
         if not playing.is_set():
+            abort.clear()
             t = threading.Thread(target=self.__play)
             t.start()
 
     def stop(self):
-        abort.set()
         if len(self._tubes) > 0:
+            playing.clear()
+            abort.set()
             self._tubes[0].stop()
 
     def log(self, txt):
