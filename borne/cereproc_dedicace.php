@@ -3,7 +3,17 @@
 require_once("texts_dedicace.php");
 require_once("cereprocs_logins.php");
 
+
 $random_dedicace_id = array_rand($texts_dedicace);
+
+if($_SESSION['last_dedicace_id']){
+    while($random_dedicace_id == $_SESSION['last_dedicace_id']){
+        $random_dedicace_id = array_rand($texts_dedicace);
+    }
+}else{
+    $_SESSION["last_dedicace_id"] = $random_dedicace_id;
+
+}
 
 $_SESSION["dedicace_id"] = $random_dedicace_id;
 
