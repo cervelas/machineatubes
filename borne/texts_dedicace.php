@@ -3,7 +3,7 @@
 $style = array(
     "bossa"=>"tropical",
     "pop"=>"pop",
-    "16beat"=>"urban",
+    "16beat"=>"groovy",
     "disco"=>"disco"
 );
 
