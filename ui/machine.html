@@ -370,7 +370,6 @@
             });
             "";
         }
-        var subanim = null;
 
         var gointro = function(dedi_url, sub="test1|test2|test3"){
             loaded();
@@ -389,6 +388,7 @@
                 subs = sub.split("|");
             }
             let cur = 0;
+            let subanim = null;
             jingle_intro.removeEventListener
             jingle_intro.addEventListener("ended", function(v){
                 const elems = document.querySelectorAll('.jingle');
