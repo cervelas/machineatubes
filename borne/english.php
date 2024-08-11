@@ -1,5 +1,11 @@
 <?php
 
+$mood_names_eng = array(
+    'D'=>'Joyful',
+    'Ab'=>'Stable',
+    'C'=>'Melancholic'
+);
+
 $keywords_eng = array(
     "Fan",
     "Hope",
