@@ -80,22 +80,22 @@ intro_subs_bugs = {
     "8_long.mp4": "It wasn’t easy,<br>but I finished writing<br>'{song_title}'|I wrote it<br>especially for<br><span style='text-transform:uppercase;'>{user_name}</span>.|A song that's a bit {song_style}, I hope will hit the mark.|Alright, let’s give it a listen!",
     "8_short.mp4": "It wasn’t easy,<br>but I finished writing<br>'{song_title}'|I wrote it<br>especially for<br><span style='text-transform:uppercase;'>{user_name}</span>.|A song that's a bit {song_style}, I hope will hit the mark.|Alright, let’s give it a listen!",
 
-    "Bug1.mp4": "And there you go! It wasn’t easy, but I’ve written a beautiful song just as you wanted! I hope you’ll like it; I think it’s going to be great. Ready, three, four!",
-    "Bug2.mp4": "Hey! I worked really fast! Here’s a new song, composed according to your wishes. Will it become your favorite song now? I’m not sure, but I put all my love into it. Let’s go!",
-    "Bug3.mp4": "Hi! I’m back with an amazing new song! Maybe the most beautiful one ever written. Well, I say that, but I haven’t heard it yet. In any case, it was composed just for you! Hopefully, you’ll like it. At least a little. Ready, here we go!",
-    "Bug4.mp4": "Boom! A new hit just for you! Composed as closely as possible to your wishes, this song full of sincerity and truth should particularly move you. Let me know what you think! Ready? Three, four!",
-    "Bug5.mp4": "Well, it wasn’t easy, but I’ve just finished writing this beautiful song just for you! Chords, melody, lyrics. A hit tailored to your choices and desires. You better love it. Ready? Go!",
-    "Bug6.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
+    "bug1.mp4": "Hi!<br>I’m back with an amazing new song!|Maybe the best one ever written.|Well, I say that, but I haven’t heard it yet.|It was composed just for you,<br>I hope you’ll like it!|Ready, here we go!",
+    "bug2.mp4": "It wasn’t easy,<br>but I wrote a nice song just as you wanted!|I hope you’ll like it.|I think it’s going to be great.|Ready, three, four!",
+    "bug3.mp4": "Boom!<br>A new hit just for you!|This song full of sincerity and truth should particularly move you.|Let me know what you think!|Ready?<br>Three, four!",
+    "bug4.mp4": "It wasn’t easy but I finished writing this nice song just for you!|A hit tailored to your choices and desires!|You better love it.|Ready?<br>Go!",
+    "bug5.mp4": "Hey!<br>I worked really fast!|Here’s a new song,<br>composed according to your wishes.|Will it become your favorite song now?  <br>I put all my love into it.<br>Let’s go!",
+    "bug6.mp4": "Hey damn!<br>I forgot your name and the title of your song!|But I’m sure the machine will get it right.|That’s what machines are for, isn’t it?|Ready?<br>Three, four!",
 }
 
 outro_subs = {
-    "outro_1_1.mp4": "And there you go! It wasn’t easy, but I’ve written a beautiful song just as you wanted! I hope you’ll like it; I think it’s going to be great. Ready, three, four!",
-    "outro_2_1.mp4": "Hey! I worked really fast! Here’s a new song, composed according to your wishes. Will it become your favorite song now? I’m not sure, but I put all my love into it. Let’s go!",
-    "outro_3_1.mp4": "Hi! I’m back with an amazing new song! Maybe the most beautiful one ever written. Well, I say that, but I haven’t heard it yet. In any case, it was composed just for you! Hopefully, you’ll like it. At least a little. Ready, here we go!",
-    "outro_4_1.mp4": "Boom! A new hit just for you! Composed as closely as possible to your wishes, this song full of sincerity and truth should particularly move you. Let me know what you think! Ready? Three, four!",
-    "outro_5_1.mp4": "Well, it wasn’t easy, but I’ve just finished writing this beautiful song just for you! Chords, melody, lyrics. A hit tailored to your choices and desires. You better love it. Ready? Go!",
-    "outro_6_1.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
-    "outro_7_1.mp4": "Hey damn, I forgot your name and the title of your song, but I’m sure the machine will get it right; that’s what machines are for, isn’t it?",
+    "outro_1_1.mp4": "Hey!<br>time to applaud!|Did you like it?<br>I found it incredible,<br>another great hit!|Alright,<br>I have to go.|Thousands of other fans are waiting for their turn!<br>Bye!",
+    "outro_2_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|Alright, I need to continue writing for all the other fans|Hugs!",
+    "outro_3_1.mp4": "Oh, it was really a nice song!|I’m amazed!<br>Kudos to me|Alright, I need to continue writing for all the other fans|Hugs!",
+    "outro_4_1.mp4": "What a wonder, it was beautiful!|Well,<br>I’m going back to writing!|I’ve got other things to do!|Ciao-ciao!",
+    "outro_5_1.mp4": "All good!<br>You can applaud!|It was nice, wasn’t it?|I need to go back to writing a bunch of hits for others!|So bye for now!",
+    "outro_6_1.mp4": "Hey, it was good!<br>I hope you liked it!|I found it quite successful.|Sorry, I have to run, still have a ton of hits to compose.|Bye!",
+    "outro_7_1.mp4": "There you go!<br>Did you like it?|I had a lot of fun writing this great song.|Well, have to go.<br>I have a million more to write.|Hugs!",
 }
 
 presets_arp = [ int(i) for i in range(48, 68) ]
