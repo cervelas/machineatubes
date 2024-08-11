@@ -18,19 +18,4 @@ $texts_dedicace = array(
     "Bon, c’était pas facile, mais j’ai finalement terminé l’écriture de ".$_SESSION['song_title'].". Spécialement pour ".$_SESSION['user_name'].". Une chanson un peu ".$style[$_SESSION['song_style']]." qui j’espère saura faire mouche. Allez, on écoute."
 );
 
-
-$texts_dedicace_eng = array(
-    "And there you go, another hit composed quickly and efficiently! It's called: ".$_SESSION['song_title']." and it was written especially for: ".$_SESSION['user_name'].". I’ve tried to match the ".$style[$_SESSION['song_style']] . "energy you were into. Shall we listen? Here we go!",
-    "Hello! Let's hope there are no bugs this time. If all goes well, we’ll be able to listen to: ".$_SESSION['song_title'].". It was written based on the suggestions of: ".$_SESSION['user_name'].". It's a beautiful song with some ". $_SESSION['song_style'] . " accents. Let’s get started!",
-    "Hello! The next song is called: ".$_SESSION['song_title'].". I composed it for: ".$_SESSION['user_name'].", who seemed to want a song with some ".$style[$_SESSION['song_style']]." notes. Let’s see how it turns out. Ha ha ha. Kisses, ".$_SESSION['user_name'].".",
-    "All set, I'm ready! Watch out, ".$_SESSION['user_name'].", the next one is for you! It's called: ".$_SESSION['song_title'].". To write this beautiful song, I combined your wishes with my inspirations, set to a music in a ".$style[$_SESSION['song_style']]." style. Now we just have to hope you like it. 3, 2, 1, go!",
-    
-    "Dear ".$_SESSION['user_name'].", I’ve worked hard to complete the writing of ".$_SESSION['song_title'].", just as you envisioned. Notes of ".$style[$_SESSION['song_style']]." music with lyrics that I hope will resonate with you. Here it is. Enjoy! Watch out, ".$_SESSION['user_name'].", I'm starting the machine now. Bye-bye.",
-    "The next song is for you, ".$_SESSION['user_name']."! It's called: ".$_SESSION['song_title'].", and I wrote it as best as I could, but I was a bit rushed. Don’t hold it against me if it’s not great. Kisses, ".$_SESSION['user_name'].".",
-    
-    "I don’t mean to brag, but I think the next song is a stroke of genius! I wrote it for: ".$_SESSION['user_name']." and it's called: ".$_SESSION['song_title'].". Honestly, I think it’s pretty good. ".$_SESSION['user_name'].", get ready!",
-    
-    "Well, it wasn’t easy, but I’ve finally finished writing ".$_SESSION['song_title'].". Especially for ".$_SESSION['user_name'].". A song that's a bit ".$style[$_SESSION['song_style']].", which I hope will hit the mark. Let’s give it a listen."
-);
-
 ?>
