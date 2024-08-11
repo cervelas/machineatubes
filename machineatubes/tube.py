@@ -156,6 +156,7 @@ class Tube():
         self.infos = {}
         self.intro_video_url = None
         self.videos = []
+        self.bug_intro = True
     
     def duration(self):
         '''
@@ -223,7 +224,7 @@ class Tube():
 
     def get_intro_subs(self):
         sub = None
-        if self.infos.get("id_dedicace") is not None:
+        if self.bug_intro is False:
             sub = intro_subs_did.get(self.infos.get("id_dedicace"))
         else:
             sub = intro_subs_bugs.get(self.infos["intro_video_url"].split("/")[-1])
@@ -350,6 +351,7 @@ class Tube():
 
     def get_intro_video(self, id):
         self.infos["intro_video_url"] = get_bug_video()
+        self.bug_intro = True
         if id and len(id) > 0:
             if Tube.playing is False:
                 Tube.window.evaluate_js('loading()')
@@ -374,6 +376,7 @@ class Tube():
                         if response.status_code == 200:
                             print("result ok from d-id !")
                             self.infos["intro_video_url"] = video_url
+                            self.bug_intro = False
                         else:
                             print("bad response from d-id: %s" % response.status_code)
                             print(response)
