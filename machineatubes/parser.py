@@ -14,7 +14,7 @@ def parseFile2Score(filepath, verbose=False):
         with open(filepath, 'r', encoding='utf-8-sig') as f:
             struct = json.load(f)
         print("Loaded JSON MAT File %s" % filepath)
-        return parseJSON2Score(struct, verbose, False)
+        return parseJSON2Score(struct, verbose, True)
 
 def parseJSON2Score(payload, verbose=False, intro=True):
     '''
@@ -117,8 +117,6 @@ def parseJSON2Score(payload, verbose=False, intro=True):
 
     if intro:
         score.get_intro_video(payload.get("id_video"))
-    else:
-        score.infos["intro_video_url"] = get_dedi_video()
 
     return score
 
