@@ -161,5 +161,5 @@ cython_debug/
 .DS_Store
 vendor
 
-cereprocs_logins.php
-did_key*
+borne/cereprocs_logins.php
+borne/did_key.php
