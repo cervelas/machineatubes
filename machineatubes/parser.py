@@ -32,7 +32,7 @@ def parseJSON2Score(payload, verbose=False, intro=True):
 
     score.style_flavor = payload.get("style").split("_")[1] or "1"
 
-    score.infos = {
+    score.infos.update( {
         "name": payload.get("name"),
         "ambiance": payload.get("ambiance"),
         "style": payload.get("style").split("_")[0],
@@ -40,7 +40,7 @@ def parseJSON2Score(payload, verbose=False, intro=True):
         "keyword": payload.get("keyword"),
         "numero": payload.get("numero"),
         "id_video": payload.get("id_video"),
-    }
+    })
     
     pprint.pprint(score.infos)
 
