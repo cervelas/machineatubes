@@ -6,6 +6,7 @@ $json = '{
     "name":"'.$_SESSION['song_title'].'",
     "tempo": '.$_SESSION['song_tempo'].',
     "ambiance": "'.$_SESSION['song_mood_name'].'",
+    "keyword": "'.$_SESSION['keyword'].'",
     "style": "'.$_SESSION['song_style'].'_'.$_SESSION['variant'].'",
     "prenom": "'.$_SESSION['user_name'].'",
     "numero": '.$_SESSION['song_id'].',

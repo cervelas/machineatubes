@@ -31,6 +31,7 @@ if(!$_GET['init']){
     $_SESSION['song_id'] = $song_id;
     $_SESSION['user_id'] = $user_id;
     $_SESSION['song_title'] = $song_title;
+    $_SESSION['keyword'] =  $tube->getSongInfo($song_title_id)['keyword'];
 
     include_once('create_tube.php');
 
