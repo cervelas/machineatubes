@@ -37,6 +37,7 @@ def parseJSON2Score(payload, verbose=False, intro=True):
         "ambiance": payload.get("ambiance"),
         "style": payload.get("style").split("_")[0],
         "prenom": payload.get("prenom"),
+        "keyword": payload.get("keyword"),
         "numero": payload.get("numero"),
         "id_video": payload.get("id_video"),
         "intro_video_url": "assets/videos/machine/bug.mp4",

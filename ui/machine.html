@@ -254,6 +254,9 @@
                     <div class="header"><span>>Titre</span></div>
                     <div class="info"><span id="infotitre">Lorem Ipsum Dolor Sit Amet</span></div>
                     
+                    <div class="header"><span>>Thème</span></div>
+                    <div  class="info"><span id="infokeyword">mot-clé</span></div>
+
                     <div class="header"><span>>Humeur</span></div>
                     <div  class="info"><span id="infoambiance">Joyeuse</span></div>
                     
@@ -397,13 +400,14 @@
             "";
         };
         
-        var displayinfos = function(name, numero, ambiance, style, bpm, prenom){
+        var displayinfos = function(name, numero, keyword, ambiance, style, bpm, prenom){
             console.log(prenom)
             document.querySelector("#infotitre").innerHTML = name;
             document.querySelector("#grostitre").innerHTML = name;
+            document.querySelector("#infokeyword").innerHTML = keyword;
             document.querySelector("#infoambiance").innerHTML = ambiance;
             document.querySelector("#infostyle").innerHTML = style;
-            document.querySelector("#infobpm").innerHTML = bpm;
+            document.querySelector("#infobpm").innerHTML = bpm + " BPM";
             document.querySelector("#infoprenom").innerHTML = "pour " + prenom;
             document.querySelector("#numtube").innerHTML = "Chanson #" + numero;
             document.querySelector("#infonum").innerHTML = "Chanson #" + numero;
