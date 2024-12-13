@@ -187,7 +187,7 @@ class Tube():
         #jouer video d'intro
         pass
 
-    def play(self, window=False, verbose=False):
+    def play(self, window=False, verbose=False, nointro=False):
         try:
             videoend.clear()
             Tube.playing = True
@@ -201,15 +201,16 @@ class Tube():
                     print("display infos")            
                 Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s", "%s")' % 
                                         (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-                if self.infos.get("intro_video_url"):
+                if not nointro and self.infos.get("intro_video_url"):
                     if verbose:
                         print("go intro")
                     Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
             
             self.gomachine()
-            print("wait playsong")
-            videoend.wait(30)
-            print("playsong !")
+            if not nointro:
+                print("wait intro")
+                videoend.wait(30)
+            print("play !")
             # send bpm control
             self.stop()
             self.setbpm()
