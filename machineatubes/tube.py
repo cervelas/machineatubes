@@ -187,7 +187,7 @@ class Tube():
         #jouer video d'intro
         pass
 
-    def play(self, window=False, verbose=False, nointro=False):
+    def play(self, window=False, verbose=False, recplay=False):
         try:
             videoend.clear()
             Tube.playing = True
@@ -201,20 +201,27 @@ class Tube():
                     print("display infos")            
                 Tube.window.evaluate_js('displayinfos("%s","%s","%s","%s","%s","%s", "%s")' % 
                                         (self.name, self.infos["numero"], self.infos["keyword"], self.infos["ambiance"], self.infos["style"], self.bpm, self.infos["prenom"]))
-                if not nointro and self.infos.get("intro_video_url"):
+                if not recplay:
                     if verbose:
                         print("go intro")
                     Tube.window.evaluate_js('gointro("%s")' % (self.infos["intro_video_url"]))
+                else:
+                    Tube.window.evaluate_js('loaded(); wakeup();')
+
             
             self.gomachine()
-            if not nointro:
+            if not recplay:
                 print("wait intro")
                 videoend.wait(30)
-            print("play !")
-            # send bpm control
-            self.stop()
-            self.setbpm()
-            self.stop()
+                print("play !")
+                # send bpm control
+                self.stop()
+                self.setbpm()
+                self.stop()
+            else:
+                self.stop()
+                self.setbpm()
+                self.rec()
             self.rnd_preset()
             self.start_time = time.perf_counter()
             initsleep()
@@ -230,13 +237,14 @@ class Tube():
                 nanosleep( ( 60 / self.bpm ) )
             videoend.clear()
             self.stop()
-            self.applause()
-            
-            Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
+            if not recplay:
+                self.applause()
+                Tube.window.evaluate_js('gooutro("%s")' % get_outro_video())
+                
+                videoend.wait(30)
+                #attente
+                time.sleep(5)
             print("END")
-            videoend.wait(30)
-            #attente
-            time.sleep(5)
             self.stop()
 
             Tube.playing = False
@@ -281,6 +289,11 @@ class Tube():
         out.send_noteoff(0, 109)
         out.send_noteoff(0, 110)
         out.send_noteoff(0, 111)
+
+    def rec(self):
+        out.send_noteon(0, 11, 127)
+        time.sleep(0.2)
+        out.send_noteoff(0, 11)
 
     def mix_videos(self):
         path = Path(str(self.bpm)) / self.infos["style"] / self.style_flavor

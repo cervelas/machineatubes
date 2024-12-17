@@ -71,6 +71,8 @@ parser.add_argument('--out', type=str, help="No-UI Only: Export to json")
 
 parser.add_argument('--bpm', type=int, help="No-UI Only: BPM Override")
 
+parser.add_argument('--recplay',  action="store_true", help="Do not play intro and outro")
+
 parser.add_argument('-np', '--noplay', action="store_true", help="No-UI Only: Wait enter for play")
 
 args = parser.parse_args()
@@ -112,7 +114,7 @@ class Machine:
     def __play(self):
         playing.set()
         if len(self._tubes) == 0 and self._last_tube:
-            self._last_tube.play(self._win, args.verbose)
+            self._last_tube.play(self._win, args.verbose, args.recplay)
             self._last_tube.stop()
 
         while len(self._tubes) > 0 and not abort.is_set():
@@ -125,7 +127,7 @@ class Machine:
                     print('js except in uplist(): ', e)
                 
                 abort.clear()
-                self._tubes[0].play(self._win, args.verbose)
+                self._tubes[0].play(self._win, args.verbose, args.recplay)
                 self._tubes[0].stop()
                 self._last_tube = self._tubes[0]
                 self._tubes.pop(0)
@@ -172,7 +174,7 @@ class Machine:
                                              t.infos["style"], t.infos["prenom"]))
         self.log("d-id: %s" % t.infos["intro_video_url"].split("/")[-1])
 
-        self.play()
+        self.play(False, args.verbose, args.recplay)
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
