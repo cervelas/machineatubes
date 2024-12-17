@@ -174,7 +174,7 @@ class Machine:
                                              t.infos["style"], t.infos["prenom"]))
         self.log("d-id: %s" % t.infos["intro_video_url"].split("/")[-1])
 
-        self.play(False, args.verbose, args.recplay)
+        self.play()
 
     def load_score_file(self):
         file_types = (' JSON Files (*.json)', 'MXML Files (*.xml;*.mxml;*.musicxml)')
