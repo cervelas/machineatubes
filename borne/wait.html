@@ -1,0 +1,30 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <title>La Machine à Tubes</title>
+</head>
+<body>
+<div id="last_screen" class="bluebg">
+<h2 class="section_title">MY NAME IS FUZZY</h2>
+    <img src="imgs/lamachine.png" />
+    <p>Fuzzy se repose<br /><br /> 
+    Merci d'attendre</p>
+    <p class="big_number" id="counter"></p>
+    <p>secondes</p>
+
+    <script>
+        let counter = document.getElementById("counter");
+        let count = 30;
+        counter.innerText = count;
+        setInterval(function() {
+            if (count > 0) {
+                count--;
+                counter.innerText = count;
+            }else{
+                window.location = "interface/init.php";
+            }
+        }, 1000);
+    </script>
+    </div>
+    </body>
+    </html>

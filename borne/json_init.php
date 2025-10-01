@@ -50,7 +50,7 @@ echo '
     echo '<script>
     setTimeout(isFinished, 10000); 
     function isFinished(){
-        window.location = "interface/init.php";
+        window.location = "wait.html";
     }
     </script>
     </div>
