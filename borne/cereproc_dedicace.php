@@ -6,7 +6,7 @@ require_once("cereprocs_logins.php");
 
 $random_dedicace_id = array_rand($texts_dedicace);
 
-if($_SESSION['last_dedicace_id']){
+if(array_key_exists("last_dedicace_id",$_SESSION)){
     while($random_dedicace_id == $_SESSION['last_dedicace_id']){
         $random_dedicace_id = array_rand($texts_dedicace);
     }

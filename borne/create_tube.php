@@ -26,16 +26,17 @@ include "song_format.php";
 include "json_init.php";
 
 $url = 'http://192.168.2.20:23456/play';
-fwrite($e, "avant");
-fwrite($e, $json);
+//fwrite($e, "avant");
+//fwrite($e, $json);
 $json = json_encode(json_decode($json));
 
 if(json_last_error() > 0){
-    echo "ERROR in JSON: " . json_last_error_msg();
-    var_dump($json);
+    error_log("ERROR in JSON: " . json_last_error_msg());
+    error_log( print_r($json, true)  );
+    //var_dump($json);
 }
-fwrite($e, "apres");
-fwrite($e, $json);
+//fwrite($e, "apres");
+//fwrite($e, $json);
 
 // use key 'http' even if you send the request to https://...
 $options = [

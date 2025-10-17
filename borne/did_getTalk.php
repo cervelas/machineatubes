@@ -23,6 +23,11 @@ $server_output_arr = json_decode($server_output, true);
 
 curl_close ($ch);
 
+if(!array_key_exists("url", $server_output_arr)){
+        error_log("D-ID AUDIO ERROR: " . print_r($server_output_arr, true));
+        error_log("DATA SENT. " . print_r(['audio'=>$file], true));
+    }
+    
 $audio_tmp_link = $server_output_arr['url'];
 $img_url = "https://lamachine.mynameisfuzzy.ch/imgs_did/DID_".strtoupper($_SESSION['song_style'])."_".$_SESSION['variant'].".jpg";
 
@@ -47,13 +52,6 @@ if($audio_tmp_link!==''){
     "audio_url": "'.$audio_tmp_link.'"
   },
   "config": {
-     "logo": {
-      "position": [
-        0,
-        0
-      ],
-      "url": "https://lamachine.mynameisfuzzy.ch/imgs_did/nologo.png"
-    },
     "fluent": "false",
     "pad_audio": "0.0",
     "stitch":"true"
@@ -73,7 +71,11 @@ if($audio_tmp_link!==''){
     curl_close ($ch);
 
     //echo '<p style="text-transform: none;">'.$server_output.'</p>';
-
+    
+    if(!array_key_exists("id", $server_output_arr)){
+        error_log("D-ID VIDEO ERROR: " . print_r($server_output_arr, true));
+        error_log("DATA SENT. " . print_r($data, true));
+    }
     $talk_id = $server_output_arr['id'];
 
 }

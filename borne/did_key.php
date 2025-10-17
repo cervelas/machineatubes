@@ -1,3 +1,3 @@
 <?php
 
-    $did_key = "bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:wHsiZJvzWnrHLFaJoyh2B";
+    $did_key = "bWFjaGluZUBteW5hbWVpc2Z1enp5LmNo:GqWXrqI6KUhN0aRCCYT7Z";
